@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Drift Demo — Revenue Acceleration</title>
+    <link rel="icon" href="https://mk0drift0ho9g7wbfexi.kinstacdn.com/wp-content/uploads/2020/06/cropped-2003-Drift-Bolt-gry-sq-reg-01-32x32.png" sizes="32x32" />
+    <link rel="icon" href="https://mk0drift0ho9g7wbfexi.kinstacdn.com/wp-content/uploads/2020/06/cropped-2003-Drift-Bolt-gry-sq-reg-01-192x192.png" sizes="192x192" />
+    <link rel="apple-touch-icon" href="https://mk0drift0ho9g7wbfexi.kinstacdn.com/wp-content/uploads/2020/06/cropped-2003-Drift-Bolt-gry-sq-reg-01-180x180.png" />
+    <meta name="msapplication-TileImage" content="https://mk0drift0ho9g7wbfexi.kinstacdn.com/wp-content/uploads/2020/06/cropped-2003-Drift-Bolt-gry-sq-reg-01-270x270.png" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css"
+          integrity="sha512-NmLkDIU1C/C88wi324HBc+S2kLhi08PN5GDeUVVVC/BVt/9Izdsc9SVeVfA1UZbY3sHUlDSyRXhCzHfr6hmPPw=="
+          crossorigin="anonymous"/>
+    <link rel="stylesheet" href="css/style.css"/>
+    <link rel="stylesheet" href="css/tagify.css"/>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"
+            integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+</head>
+<body>
+<div class="container"></div>
+<div class="settings">
+    <div class="panel">
+        <span class="inputLabel">Prospect URL: <span class="inputHint">Must include "https://" or "https://" (ie. https://google.com)</span></span>
+        <input type="text" name="urlInput" id="urlInput">
+        <span class="inputLabel">Bot targeting: <span class="inputHint">To build a custom bot, add a URL parameter targeting condition to your bot (ie. playbook=prospectBot) and type "prospectBot" below. If you leave this blank, we'll use the default bots.</span></span>
+        <input type="text" name="botsInput" id="botsInput">
+        <input type="checkbox" name="aiInput" id="aiInput" value="ai"><label for="aiInput">AI Bot</label><br>
+        <input type="checkbox" name="abmInput" id="abmInput" value="abm"><label for="abmInput">ABM Bot</label><br>
+        <!--<input type="checkbox" name="dualInput" id="dualInput" value="dual"><label for="dualInput">Side-by-Side Demo</label><br>-->
+        <span class="inputLabel">Bot Color: <span class="inputHint">The color of the widget. Hint: Use darker colors as the overlay text will be white. (default: Dodger Blue)</span></span><br>
+        <input type="color" name="botColorInput" id="botColorInput" value="#005A9C"><br>
+        <span class="inputLabel">ABM Account: <span class="inputHint">The company name of yours prospects' key account (default: Slack)</span></span>
+        <input type="text" name="abmCompanyInput" id="abmCompanyInput">
+        <span class="inputLabel">ABM Contact: <span class="inputHint">The name of yours prospects' key buyer (default: Joshua Perk)</span></span>
+        <input type="text" name="abmTitleInput" id="abmTitleInput">
+        <span class="inputLabel">ABM Page: <span
+                class="inputHint">A relevant site page (default: Pricing Page)</span></span>
+        <input type="text" name="abmPageInput" id="abmPageInput">
+        <span class="inputLabel">ABM Rep Name: <span class="inputHint">The name of the rep if showing an ABM playbook (default: Joshua Perk)</span></span>
+        <input type="text" name="abmRepInput" id="abmRepInput">
+        <span class="inputLabel">ABM Rep Photo: <span class="inputHint">The URL to a hosted image of the rep if showing an ABM playbook. Hint: right-click and copy link address of an image on LinkedIn. (default: a two year-old photo of Joshua Perk)</span></span>
+        <input type="text" name="abmPhotoInput" id="abmPhotoInput">
+        <span class="inputLabel">ABM Message: <span class="inputHint">The message if showing an ABM playbook (default: Hey, Slack! We've worked with companies like Microsoft Teams to drive more leads and accelerate revenue. Would you like me to show you how?)</span></span>
+        <input type="text" name="abmMessageInput" id="abmMessageInput">
+        <span class="inputLabel">ABM CTA: <span class="inputHint">The CTA if showing an ABM playbook (default: Book a Meeting)</span></span>
+        <input type="text" name="abmCTAInput" id="abmCTAInput">
+        <span class="inputLabel">Widget ID: <span class="inputHint">By default this, this will load bots from the SC teams' account. If you want to load your own bots (and/or use the custom bots above), enter your own widget ID found in the install settings.</span></span>
+        <input type="text" name="idInput" id="idInput">
+        <button id="generate">Save + Launch</button>
+        <span class="inputLabel">Pro Tip: <span class="inputHint">This generates a unique bot experience that can be bookmarked and shared with prospects.</span></span>
+    </div>
+</div>
+<div class="settingsToggle"></div>
+<div class="notificationToggle"></div>
+<div class="notification">
+    <div class="message">
+        <img class="icons" src="img/chrome.png" alt="">
+        <div class="text">
+            <p>🎯 <span class="abmCompany">Slack</span> - <span class="abmTitle">Joshua Perk</span></p>
+            <p>app.drift.com</p>
+            <p>is on <span class="abmPage">Enterprise Communications</span> page</p>
+        </div>
+        <img class="icons" src="img/drift.png" alt="">
+    </div>
+    <div class="actions">
+        <div class="close">Close</div>
+        <div>More</div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/@yaireo/tagify@3.14.3/dist/tagify.min.js"
+        integrity="sha256-AHcUjcxf0KMCCzb0wTOSl1aPxJbJqEnxIXVOmcg4RLU=" crossorigin="anonymous"></script>
+<script type="module" src="js/main.js"></script>
+</body>
+</html>

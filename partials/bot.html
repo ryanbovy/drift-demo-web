@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+</head>
+<body>
+<script>
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const driftID = urlParams.get('driftID');
+    const abmCompany = urlParams.get('abmCompany');
+    const abmTitle = urlParams.get('abmTitle');
+    const botColor = urlParams.get('botColor');
+
+    function uuidv4() {
+        return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, (c) => {
+            const r = (window.crypto.getRandomValues(new Uint32Array(1))[0] * Math.pow(2, -32) * 16) | 0;
+            const v = c === "x" ? r : (r & 0x3) | 0x8;
+            return v.toString(16);
+        });
+    }
+
+    "use strict";
+
+    !function () {
+        var t = window.driftt = window.drift = window.driftt || [];
+        if (!t.init) {
+            if (t.invoked) return void (window.console && console.error && console.error("Drift snippet included twice."));
+            t.invoked = !0, t.methods = ["identify", "config", "track", "reset", "debug", "show", "ping", "page", "hide", "off", "on"],
+                t.factory = function (e) {
+                    return function () {
+                        var n = Array.prototype.slice.call(arguments);
+                        return n.unshift(e), t.push(n), t;
+                    };
+                }, t.methods.forEach(function (e) {
+                t[e] = t.factory(e);
+            }), t.load = function (t) {
+                var e = 3e5, n = Math.ceil(new Date() / e) * e, o = document.createElement("script");
+                o.type = "text/javascript", o.async = !0, o.crossorigin = "anonymous", o.src = "https://js.driftt.com/include/" + n + "/" + t + ".js";
+                console.log("https://js.driftt.com/include/" + n + "/" + t + ".js");
+                var i = document.getElementsByTagName("script")[0];
+                i.parentNode.insertBefore(o, i);
+            };
+        }
+    }();
+    drift.SNIPPET_VERSION = '0.3.1';
+    if (botColor && botColor != null && botColor != 'null') {
+        drift.config({
+          backgroundColor: '#' + botColor,
+          foregroundColor: '#ffffff',
+          activeColor: '#' + botColor,
+          textColor: '#ffffff'
+        });
+    }
+    drift.load(`${driftID}`);
+    drift.on('ready', function() {
+        drift.identify(uuidv4()); // This is how we seperate the instances so they don't interact with each other
+        if (abmCompany && abmCompany != null && abmCompany != 'null') {
+            drift.api.setUserAttributes({
+                employment_name: abmCompany
+            });
+        }
+        if (abmTitle && abmTitle != null && abmTitle != 'null') {
+            drift.api.setUserAttributes({
+                first_name: abmTitle
+            });
+        }
+        window.history.replaceState(null, null, "#driftRace");
+        drift.page();
+    });
+</script>
+</body>
+</html>
