@@ -273,6 +273,7 @@ $(function () {
         }).catch(error => {
             console.warn('Error: ', error);
         });
+    }
 
     if (overrideUrl) {
         $('#overrideUrlInput').val(overrideUrl);
