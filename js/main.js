@@ -274,11 +274,13 @@ $(function () {
             }).catch(error => {
                 console.warn('Error: ', error);
             });
-        } else {
-            $('#overrideUrlInput').val(overrideUrl);
-            $('.frame.bot').css('background-image', `url('${overrideUrl}')`);
-            $('.frame.abm').css('background-image', `url('${overrideUrl}')`);
         }
+    }
+
+    if (overrideUrl) {
+        $('#overrideUrlInput').val(overrideUrl);
+        $('.frame.bot').css('background-image', `url('${overrideUrl}')`);
+        $('.frame.abm').css('background-image', `url('${overrideUrl}')`);
     }
 
     if (ai) {
