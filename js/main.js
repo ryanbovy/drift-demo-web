@@ -265,7 +265,7 @@ $(function () {
         }
     );
 
-    if (url) {
+    if (url && !overrideUrl) {
         $('#urlInput').val(url);
         getScreenshot(url).then(screenshotData => {
             $('.frame.bot').css('background-image', `url('${screenshotData.url}')`);
@@ -273,7 +273,6 @@ $(function () {
         }).catch(error => {
             console.warn('Error: ', error);
         });
-    }
 
     if (overrideUrl) {
         $('#overrideUrlInput').val(overrideUrl);
