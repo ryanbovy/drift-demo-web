@@ -54,6 +54,7 @@ $(function () {
     const bots = urlParams.get('bots');
     let driftID = urlParams.get('driftID');
     const abm = urlParams.get('abm');
+    const overrideUrl = urlParams.get('overrideUrl');
     const ai = urlParams.get('ai');
     const dual = urlParams.get('dual');
     const abmCompany = urlParams.get('abmCompany');
@@ -274,6 +275,12 @@ $(function () {
         });
     }
 
+    if (overrideUrl) {
+        $('#overrideUrlInput').val(overrideUrl);
+        $('.frame.bot').css('background-image', `url('${overrideUrl}')`);
+        $('.frame.abm').css('background-image', `url('${overrideUrl}')`);
+    }
+
     if (ai) {
         $('#aiInput').prop('checked', true);
         if (!$('.container').children().length) {
@@ -318,6 +325,9 @@ $(function () {
         let urlArray = [];
         if ($('#urlInput').val()) {
             urlArray.push('url=' + $('#urlInput').val());
+        }
+        if ($('#overrideUrlInput').val()) {
+            urlArray.push('overrideUrl=' + $('#overrideUrlInput').val());
         }
         if ($('#botsInput').val()) {
             const botsJSON = JSON.parse($('#botsInput').val());
