@@ -265,20 +265,20 @@ $(function () {
         }
     );
 
-    if (url && !overrideUrl) {
+    if (url) {
         $('#urlInput').val(url);
-        getScreenshot(url).then(screenshotData => {
-            $('.frame.bot').css('background-image', `url('${screenshotData.url}')`);
-            $('.frame.abm').css('background-image', `url('${screenshotData.url}')`);
-        }).catch(error => {
-            console.warn('Error: ', error);
-        });
-    }
-
-    if (overrideUrl) {
-        $('#overrideUrlInput').val(overrideUrl);
-        $('.frame.bot').css('background-image', `url('${overrideUrl}')`);
-        $('.frame.abm').css('background-image', `url('${overrideUrl}')`);
+        if (!overrideUrl) {
+            getScreenshot(url).then(screenshotData => {
+                $('.frame.bot').css('background-image', `url('${screenshotData.url}')`);
+                $('.frame.abm').css('background-image', `url('${screenshotData.url}')`);
+            }).catch(error => {
+                console.warn('Error: ', error);
+            });
+        } else {
+            $('#overrideUrlInput').val(overrideUrl);
+            $('.frame.bot').css('background-image', `url('${overrideUrl}')`);
+            $('.frame.abm').css('background-image', `url('${overrideUrl}')`);
+        }
     }
 
     if (ai) {
