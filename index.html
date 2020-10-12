@@ -20,6 +20,7 @@
     <div class="container"></div>
     <div class="settings">
         <div class="panel">
+            <div class="settingsToggle closeSettings">&times;</div>
             <span class="inputLabel">Prospect URL: <span class="inputHint">Must include "https://" or "https://" (ie. https://google.com)</span></span>
             <input type="text" name="urlInput" id="urlInput">
             <span class="inputLabel">Override Image: <span class="inputHint">If the automatic screenshot generator isn't working properly with your prospect, take a screenshot of their site, host it with Imgur of imgBB and copy the URL of the hosted image here.</span></span>
@@ -32,7 +33,7 @@
             <input type="checkbox" name="abmInput" id="abmInput" value="abm"><label for="abmInput">ABM Bot</label><br>
             <!--<input type="checkbox" name="dualInput" id="dualInput" value="dual"><label for="dualInput">Side-by-Side Demo</label><br>-->
             <fieldset id="abmFields">
-               <legend>ABM Details</legend>
+                <legend>ABM Details</legend>
                 <span class="inputLabel">ABM Account: <span class="inputHint">The company name of yours prospects' key account (default: Slack)</span></span>
                 <input type="text" name="abmCompanyInput" id="abmCompanyInput">
                 <span class="inputLabel">ABM Contact: <span class="inputHint">The name of yours prospects' key buyer (default: Joshua Perk)</span></span>

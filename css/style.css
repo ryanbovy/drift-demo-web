@@ -4,7 +4,8 @@
     --botColor: #005A9C;
 }
 
-html, body {
+html,
+body {
     font-family: 'Roboto', sans-serif;
     font-weight: 900;
 }
@@ -75,12 +76,13 @@ iframe {
     overflow: scroll;
 }
 
-fieldset{
+fieldset {
     padding: 25px 15px;
     border: 1px solid #ccc;
     margin-bottom: 25px;
 }
-legend{
+
+legend {
     padding: 0px 15px
 }
 
@@ -91,7 +93,8 @@ legend{
     margin-bottom: 10px;
 }
 
-.panel input[type=checkbox], .panel input[type=color] {
+.panel input[type=checkbox],
+.panel input[type=color] {
     margin: 10px 5px 20px 0;
 }
 
@@ -119,6 +122,19 @@ legend{
     left: -40px;
     top: -40px;
     opacity: 1;
+}
+
+.settingsToggle.closeSettings {
+    position: relative;
+    top: -10px;
+    left: 0px;
+    width: auto;
+    height: auto;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+    text-align: right;
+    font-size: 24px;
 }
 
 .notificationToggle {
@@ -248,7 +264,7 @@ legend{
     bottom: 35px;
     width: 400px;
     border-radius: 5px;
-    box-shadow: 0 4px 23px 0 rgba(0,0,0,.09);
+    box-shadow: 0 4px 23px 0 rgba(0, 0, 0, .09);
     transition: 0.7s ease all;
     display: flex;
     flex-direction: column;
