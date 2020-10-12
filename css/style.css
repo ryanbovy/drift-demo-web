@@ -75,6 +75,15 @@ iframe {
     overflow: scroll;
 }
 
+fieldset{
+    padding: 25px 15px;
+    border: 1px solid #ccc;
+    margin-bottom: 25px;
+}
+legend{
+    padding: 0px 15px
+}
+
 .panel input[type=text] {
     border: 1px solid #d5d5d5;
     width: calc(100% - 1.65em);
