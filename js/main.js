@@ -406,19 +406,15 @@ $(function () {
 
     // Run abmFieldVis on change to abmInput
     $('#abmInput').change(function () {
-        console.log('ABM Change')
         abmFieldVis();
     });
     
     // Function to show/hide ABM fields from menu
     function abmFieldVis() {
-        console.log('ABM Field Vis running')
         var abmCheckbox = $('#abmInput')[0].checked;
         if (abmCheckbox) {
-            console.log('Visible');
             $('#abmFields').removeClass('hidden');
         } else {
-            console.log('Invsible');
             $('#abmFields').addClass('hidden');
         }
     }
