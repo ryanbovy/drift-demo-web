@@ -54,6 +54,7 @@ $(function () {
     const bots = urlParams.get('bots');
     let driftID = urlParams.get('driftID');
     const abm = urlParams.get('abm');
+    const abmOnly = urlParams.get('abmOnly');
     const overrideUrl = urlParams.get('overrideUrl');
     const ai = urlParams.get('ai');
     const dual = urlParams.get('dual');
@@ -136,7 +137,7 @@ $(function () {
         }
     }
 
-    if (bots) {
+    if (bots && !abmOnly) {
         try {
             const botsJSON = JSON.parse(bots);
             $.each(botsJSON, function (index, bot) {
@@ -158,8 +159,9 @@ $(function () {
         } catch (e) {
             console.log(e)
         }
-    } else {
-        $('.container').append(`
+    } else if (!abmOnly) {
+        {
+            $('.container').append(`
             <div class="frame bot stretch">
                 <iframe src="partials/bot.html?playbook=homeBot&driftID=${driftID}&abmCompany=${abmCompany}&abmTitle=${abmTitle}&botColor=${botColor}" frameborder="0"></iframe>
             </div>
@@ -167,6 +169,7 @@ $(function () {
                 <iframe src="partials/bot.html?playbook=intelBot&driftID=${driftID}&abmCompany=${abmCompany}&abmTitle=${abmTitle}&botColor=${botColor}" frameborder="0"></iframe>
             </div>
         `);
+        }
     }
 
     if (abm) {
@@ -353,6 +356,9 @@ $(function () {
         }
         if ($('#abmInput').prop('checked')) {
             urlArray.push('abm=true');
+        }
+        if ($('#abmOnlyInput').prop('checked')) {
+            urlArray.push('abmOnly=true');
         }
         if ($('#abmCompanyInput').val()) {
             urlArray.push('abmCompany=' + $('#abmCompanyInput').val());
