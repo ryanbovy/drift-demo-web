@@ -23,7 +23,7 @@ body {
 .frame {
     flex-grow: 0;
     width: 10%;
-    opacity: 0.3;
+    opacity: 1;
     background-image: url("../img/site.png");
     background-repeat: no-repeat;
     background-size: cover;
@@ -330,5 +330,5 @@ legend {
 }
 
 .abmBottom:hover {
-    opacity: 0.8;
+    opacity: 1;
 }
