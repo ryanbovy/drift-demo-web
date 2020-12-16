@@ -1,9 +1,11 @@
 export let clearCookies = () => {
     document.cookie = "drift_aid=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-    document.cookie = "drift_campaign_refresh=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
     document.cookie = "driftt_aid=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    document.cookie = "drift_campaign_refresh=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
     document.cookie = "driftt_sid=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    document.cookie = "driftt_wmd=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
     document.cookie = "DFTT_END_USER_PREV_BOOTSTRAPPED=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    document.cookie = "DFTT_LEAD_HAS_PREV_IDENTIFIED=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
 }
 
 export let getScreenshot = (url) => {
