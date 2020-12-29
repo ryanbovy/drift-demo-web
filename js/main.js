@@ -1,6 +1,8 @@
 export let clearCookies = () => {
     document.cookie = "drift_aid=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
     document.cookie = "driftt_aid=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    document.cookie = "drift_eid=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    document.cookie = "driftt_eid=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
     document.cookie = "drift_campaign_refresh=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
     document.cookie = "driftt_sid=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
     document.cookie = "driftt_wmd=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
@@ -50,6 +52,7 @@ export let closeNotification = () => {
 }
 
 $(function () {
+    clearCookies();
     let settingsOpen = false;
     let notificationOpen = false;
     const queryString = window.location.search;
@@ -70,7 +73,6 @@ $(function () {
     const abmMessage = urlParams.get('abmMessage');
     const abmCTA = urlParams.get('abmCTA');
     const botColor = urlParams.get('botColor');
-    clearCookies();
 
     $('.settingsToggle').click(function () {
         if (settingsOpen) {
