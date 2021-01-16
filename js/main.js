@@ -1,4 +1,4 @@
-export let clearCookies = () => {
+export let clearStorage = () => {
     document.cookie = "drift_aid=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
     document.cookie = "driftt_aid=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
     document.cookie = "drift_eid=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
@@ -8,6 +8,8 @@ export let clearCookies = () => {
     document.cookie = "driftt_wmd=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
     document.cookie = "DFTT_END_USER_PREV_BOOTSTRAPPED=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
     document.cookie = "DFTT_LEAD_HAS_PREV_IDENTIFIED=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    localStorage.clear();
+    sessionStorage.clear();
 }
 
 export let getScreenshot = (url) => {
@@ -52,7 +54,7 @@ export let closeNotification = () => {
 }
 
 $(function () {
-    clearCookies();
+    clearStorage();
     let settingsOpen = false;
     let notificationOpen = false;
     const queryString = window.location.search;
@@ -61,6 +63,7 @@ $(function () {
     const bots = urlParams.get('bots');
     const firstName = urlParams.get('firstName');
     const lastName = urlParams.get('lastName');
+    const email = urlParams.get('email');
     let driftID = urlParams.get('driftID');
     const abm = urlParams.get('abm');
     const abmOnly = urlParams.get('abmOnly');
@@ -153,13 +156,13 @@ $(function () {
                 if (!index) {
                     $('.container').append(`
                     <div class="frame bot stretch">
-                        <iframe src="partials/bot.html?playbook=${bot}&driftID=${driftID}&abmCompany=${abmCompany}&abmTitle=${abmTitle}&firstName=${firstName}&lastName=${lastName}&botColor=${botColor}" frameborder="0"></iframe>
+                        <iframe src="partials/bot.html?playbook=${bot}&driftID=${driftID}&abmCompany=${abmCompany}&abmTitle=${abmTitle}&firstName=${firstName}&lastName=${lastName}&email=${email}&botColor=${botColor}" frameborder="0"></iframe>
                     </div>
                 `);
                 } else {
                     $('.container').append(`
                      <div class="frame bot">
-                        <iframe src="partials/bot.html?playbook=${bot}&driftID=${driftID}&abmCompany=${abmCompany}&abmTitle=${abmTitle}&firstName=${firstName}&lastName=${lastName}&botColor=${botColor}" frameborder="0"></iframe>
+                        <iframe src="partials/bot.html?playbook=${bot}&driftID=${driftID}&abmCompany=${abmCompany}&abmTitle=${abmTitle}&firstName=${firstName}&lastName=${lastName}&email=${email}&botColor=${botColor}" frameborder="0"></iframe>
                     </div>
                 `);
                 }
@@ -171,10 +174,10 @@ $(function () {
         {
             $('.container').append(`
             <div class="frame bot stretch">
-                <iframe src="partials/bot.html?playbook=homeBot&driftID=${driftID}&abmCompany=${abmCompany}&abmTitle=${abmTitle}&firstName=${firstName}&lastName=${lastName}&botColor=${botColor}" frameborder="0"></iframe>
+                <iframe src="partials/bot.html?playbook=homeBot&driftID=${driftID}&abmCompany=${abmCompany}&abmTitle=${abmTitle}&firstName=${firstName}&lastName=${lastName}&email=${email}&botColor=${botColor}" frameborder="0"></iframe>
             </div>
              <div class="frame bot">
-                <iframe src="partials/bot.html?playbook=intelBot&driftID=${driftID}&abmCompany=${abmCompany}&abmTitle=${abmTitle}&firstName=${firstName}&lastName=${lastName}&botColor=${botColor}" frameborder="0"></iframe>
+                <iframe src="partials/bot.html?playbook=intelBot&driftID=${driftID}&abmCompany=${abmCompany}&abmTitle=${abmTitle}&firstName=${firstName}&lastName=${lastName}&email=${email}&botColor=${botColor}" frameborder="0"></iframe>
             </div>
         `);
         }
@@ -247,6 +250,10 @@ $(function () {
 
     if (lastName) {
         $('#lastNameInput').val(lastName);
+    }
+
+    if (email) {
+        $('#emailInput').val(email);
     }
 
     if (abmRep) {
@@ -381,6 +388,9 @@ $(function () {
         }
         if ($('#lastNameInput').val()) {
             urlArray.push('lastName=' + $('#lastNameInput').val());
+        }
+        if ($('#emailInput').val()) {
+            urlArray.push('email=' + $('#emailInput').val());
         }
         if ($('#abmCompanyInput').val()) {
             urlArray.push('abmCompany=' + $('#abmCompanyInput').val());

@@ -15,6 +15,7 @@
     const botColor = urlParams.get('botColor');
     const firstName = urlParams.get('firstName');
     const lastName = urlParams.get('lastName');
+    const email = urlParams.get('email');
 
     function uuidv4() {
         return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, (c) => {
@@ -79,26 +80,61 @@
           textColor: '#ffffff'
         });
     }
-    if (firstName && firstName != null && firstName != 'null' && lastName && lastName != null && lastName != 'null') {
-        drift.identify(uuidv4(),{
-            first_name: firstName,
-            last_name: lastName
-        });
-    } else if (firstName && firstName != null && firstName != 'null') {
-        drift.identify(uuidv4(),{
-            first_name: firstName,
-            last_name: generateName('last')
-        });
-    } else if (lastName && lastName != null && lastName != 'null') {
-        drift.identify(uuidv4(),{
-            first_name: generateName('first'),
-            last_name: lastName
-        });
+    if (email && email != null && email != 'null') {
+        if (firstName && firstName != null && firstName != 'null' && lastName && lastName != null && lastName != 'null') {
+            drift.identify(uuidv4(),{
+                first_name: firstName,
+                last_name: lastName,
+                email: email
+            });
+            console.log('a');
+        } else if (firstName && firstName != null && firstName != 'null') {
+            drift.identify(uuidv4(),{
+                first_name: firstName,
+                last_name: generateName('last'),
+                email: email
+            });
+            console.log('b');
+        } else if (lastName && lastName != null && lastName != 'null') {
+            drift.identify(uuidv4(),{
+                first_name: generateName('first'),
+                last_name: lastName,
+                email: email
+            });
+            console.log('c');
+        } else {
+            drift.identify(uuidv4(),{
+                first_name: generateName('first'),
+                last_name: generateName('last'),
+                email: email
+            });
+            console.log('d');
+        }
     } else {
-        drift.identify(uuidv4(),{
-            first_name: generateName('first'),
-            last_name: generateName('last')
-        });
+        if (firstName && firstName != null && firstName != 'null' && lastName && lastName != null && lastName != 'null') {
+            drift.identify(uuidv4(),{
+                first_name: firstName,
+                last_name: lastName
+            });
+            console.log('e');
+        } else if (firstName && firstName != null && firstName != 'null') {
+            drift.identify(uuidv4(),{
+                first_name: firstName,
+                last_name: generateName('last')
+            });
+        } else if (lastName && lastName != null && lastName != 'null') {
+            drift.identify(uuidv4(),{
+                first_name: generateName('first'),
+                last_name: lastName
+            });
+            console.log('f');
+        } else {
+            drift.identify(uuidv4(),{
+                first_name: generateName('first'),
+                last_name: generateName('last')
+            });
+            console.log('g');
+        }
     }
     drift.load(`${driftID}`);
     drift.on('ready', function() {
