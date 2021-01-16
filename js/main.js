@@ -78,6 +78,7 @@ $(function () {
     const abmMessage = urlParams.get('abmMessage');
     const abmCTA = urlParams.get('abmCTA');
     const botColor = urlParams.get('botColor');
+    const googleUrl = urlParams.get('googleUrl');
 
     $('.settingsToggle').click(function () {
         if (settingsOpen) {
@@ -342,6 +343,10 @@ $(function () {
         $('.abmTitle').html(abmTitle);
     }
 
+    if (googleUrl) {
+        $('#googleInput').val(googleUrl);
+    }
+
     $('.frame').hover(
         function () {
             $('.stretch').removeClass('stretch');
@@ -419,6 +424,9 @@ $(function () {
         if ($('#idInput').val()) {
             urlArray.push('driftID=' + $('#idInput').val());
         }
+        if ($('#googleInput').val()) {
+            urlArray.push('googleUrl=' + $('#googleInput').val());
+        }
         if (urlArray.length < 1) {
             window.location.href = window.location.origin + window.location.pathname;
         } else {
@@ -429,7 +437,18 @@ $(function () {
                 }
                 urlString += value;
             })
-            window.location.href = urlString;
+            if ($('#googleInput').val()) {
+                const clipboardValue = `${window.location.origin}/google/?img=${$('#googleInput').val()}&link=${encodeURIComponent(urlString)}`;
+                navigator.clipboard.writeText(clipboardValue).then(function() {
+                    /* clipboard successfully set */
+                    window.location.href = urlString;
+                }, function() {
+                    /* clipboard write failed */
+                    window.location.href = urlString;
+                });
+            } else {
+                window.location.href = urlString;
+            }
         }
     });
 
