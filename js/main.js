@@ -59,6 +59,8 @@ $(function () {
     const urlParams = new URLSearchParams(queryString);
     const url = urlParams.get('url');
     const bots = urlParams.get('bots');
+    const firstName = urlParams.get('firstName');
+    const lastName = urlParams.get('lastName');
     let driftID = urlParams.get('driftID');
     const abm = urlParams.get('abm');
     const abmOnly = urlParams.get('abmOnly');
@@ -151,13 +153,13 @@ $(function () {
                 if (!index) {
                     $('.container').append(`
                     <div class="frame bot stretch">
-                        <iframe src="partials/bot.html?playbook=${bot}&driftID=${driftID}&abmCompany=${abmCompany}&abmTitle=${abmTitle}&botColor=${botColor}" frameborder="0"></iframe>
+                        <iframe src="partials/bot.html?playbook=${bot}&driftID=${driftID}&abmCompany=${abmCompany}&abmTitle=${abmTitle}&firstName=${firstName}&lastName=${lastName}&botColor=${botColor}" frameborder="0"></iframe>
                     </div>
                 `);
                 } else {
                     $('.container').append(`
                      <div class="frame bot">
-                        <iframe src="partials/bot.html?playbook=${bot}&driftID=${driftID}&abmCompany=${abmCompany}&abmTitle=${abmTitle}&botColor=${botColor}" frameborder="0"></iframe>
+                        <iframe src="partials/bot.html?playbook=${bot}&driftID=${driftID}&abmCompany=${abmCompany}&abmTitle=${abmTitle}&firstName=${firstName}&lastName=${lastName}&botColor=${botColor}" frameborder="0"></iframe>
                     </div>
                 `);
                 }
@@ -169,10 +171,10 @@ $(function () {
         {
             $('.container').append(`
             <div class="frame bot stretch">
-                <iframe src="partials/bot.html?playbook=homeBot&driftID=${driftID}&abmCompany=${abmCompany}&abmTitle=${abmTitle}&botColor=${botColor}" frameborder="0"></iframe>
+                <iframe src="partials/bot.html?playbook=homeBot&driftID=${driftID}&abmCompany=${abmCompany}&abmTitle=${abmTitle}&firstName=${firstName}&lastName=${lastName}&botColor=${botColor}" frameborder="0"></iframe>
             </div>
              <div class="frame bot">
-                <iframe src="partials/bot.html?playbook=intelBot&driftID=${driftID}&abmCompany=${abmCompany}&abmTitle=${abmTitle}&botColor=${botColor}" frameborder="0"></iframe>
+                <iframe src="partials/bot.html?playbook=intelBot&driftID=${driftID}&abmCompany=${abmCompany}&abmTitle=${abmTitle}&firstName=${firstName}&lastName=${lastName}&botColor=${botColor}" frameborder="0"></iframe>
             </div>
         `);
         }
@@ -237,6 +239,14 @@ $(function () {
                 </div>
             `);
         }
+    }
+
+    if (firstName) {
+        $('#firstNameInput').val(firstName);
+    }
+
+    if (lastName) {
+        $('#lastNameInput').val(lastName);
     }
 
     if (abmRep) {
@@ -365,6 +375,12 @@ $(function () {
         }
         if ($('#abmOnlyInput').prop('checked')) {
             urlArray.push('abmOnly=true');
+        }
+        if ($('#firstNameInput').val()) {
+            urlArray.push('firstName=' + $('#firstNameInput').val());
+        }
+        if ($('#lastNameInput').val()) {
+            urlArray.push('lastName=' + $('#lastNameInput').val());
         }
         if ($('#abmCompanyInput').val()) {
             urlArray.push('abmCompany=' + $('#abmCompanyInput').val());

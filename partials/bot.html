@@ -13,6 +13,8 @@
     const abmCompany = urlParams.get('abmCompany');
     const abmTitle = urlParams.get('abmTitle');
     const botColor = urlParams.get('botColor');
+    const firstName = urlParams.get('firstName');
+    const lastName = urlParams.get('lastName');
 
     function uuidv4() {
         return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, (c) => {
@@ -77,20 +79,32 @@
           textColor: '#ffffff'
         });
     }
-    drift.load(`${driftID}`);
-    drift.on('ready', function() {
+    if (firstName && firstName != null && firstName != 'null' && lastName && lastName != null && lastName != 'null') {
+        drift.identify(uuidv4(),{
+            first_name: firstName,
+            last_name: lastName
+        });
+    } else if (firstName && firstName != null && firstName != 'null') {
+        drift.identify(uuidv4(),{
+            first_name: firstName,
+            last_name: generateName('last')
+        });
+    } else if (lastName && lastName != null && lastName != 'null') {
+        drift.identify(uuidv4(),{
+            first_name: generateName('first'),
+            last_name: lastName
+        });
+    } else {
         drift.identify(uuidv4(),{
             first_name: generateName('first'),
             last_name: generateName('last')
-        }); // This is how we seperate the instances so they don't interact with each other
+        });
+    }
+    drift.load(`${driftID}`);
+    drift.on('ready', function() {
         if (abmCompany && abmCompany != null && abmCompany != 'null') {
             drift.api.setUserAttributes({
                 employment_name: abmCompany
-            });
-        }
-        if (abmTitle && abmTitle != null && abmTitle != 'null') {
-            drift.api.setUserAttributes({
-                first_name: abmTitle
             });
         }
         window.history.replaceState(null, null, "#driftRace");
