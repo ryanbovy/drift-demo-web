@@ -384,7 +384,6 @@ $(function () {
         }
         if ($('#abmInput').prop('checked')) {
             urlArray.push('abm=true');
-            urlArray.push('abmOnly=true');
         }
         if ($('#abmOnlyInput').prop('checked')) {
             urlArray.push('abmOnly=true');
@@ -472,8 +471,10 @@ $(function () {
         var abmCheckbox = $('#abmInput')[0].checked;
         if (abmCheckbox) {
             $('#abmFields').removeClass('hidden');
+            $('#abmOnlyInput').prop('checked',true);
         } else {
             $('#abmFields').addClass('hidden');
+            $('#abmOnlyInput').prop('checked',false);
         }
     }
 
