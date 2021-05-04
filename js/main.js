@@ -384,6 +384,7 @@ $(function () {
         }
         if ($('#abmInput').prop('checked')) {
             urlArray.push('abm=true');
+            urlArray.push('abmOnly=true');
         }
         if ($('#abmOnlyInput').prop('checked')) {
             urlArray.push('abmOnly=true');
