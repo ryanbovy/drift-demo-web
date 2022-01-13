@@ -117,6 +117,7 @@ $(function () {
     let tagify = new Tagify(tagifyInput, {
         whitelist: [
             'homeBot',
+            'supportBot',
             'intelBot',
             'formBot',
             'adBot',
