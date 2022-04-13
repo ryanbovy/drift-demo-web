@@ -1,7 +1,9 @@
 <template>
   <main class="font-balto">
     <!-- MAIN WINDOW CONTENT -->
-
+    <div>
+      <img :src="imageUrl">
+    </div>
     <!-- END MAIN WINDOW CONTENT -->
     <!-- SIDEBAR MENU -->
     <div
@@ -136,28 +138,27 @@
                 </div>
                 <!-- END SETTINGS DIVIDER -->
 
+                <!-- PLAYBOOK NAME INPUT-->
                 <div class="space-y-2">
                   <div
                     class="border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-drift-indigo focus-within:border-drift-indigo"
                   >
-                    <label for="name" class="block text-xs font-medium text-gray-900">Playbook</label>
+                    <label for="playbookName" class="block text-xs font-medium text-gray-900">Playbook // {{ playbookId }}</label>
                     <select
-                      id="name"
+                      id="playbookName"
+                      v-model="playbookName"
                       type="text"
-                      name="name"
+                      name="playbookName"
                       class="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm"
                     >
-                      <option value="volvo">
-                        Volvo
+                      <option value="Fastlane">
+                        Fastlane
                       </option>
-                      <option value="saab">
-                        Saab
+                      <option value="Skip the Form" default>
+                        Skip the Form
                       </option>
-                      <option value="mercedes">
-                        Mercedes
-                      </option>
-                      <option value="audi">
-                        Audi
+                      <option value="Support Bot">
+                        Support Bot
                       </option>
                     </select>
                   </div>
@@ -168,10 +169,12 @@
                     <label for="name" class="block text-xs font-medium text-gray-900">Background</label>
                     <input
                       id="name"
+                      v-model="imageUrl"
                       type="text"
                       name="name"
                       class="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm"
                       placeholder="Insert website or path to hosted image"
+                      value="https://screenshotapi-dot-net.storage.googleapis.com/www_drift_com__cd817069080e.png"
                     >
                   </div>
                   <!-- NAME INPUT-->
@@ -185,6 +188,20 @@
                       name="name"
                       class="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm"
                       placeholder="Jane Doe"
+                    >
+                  </div>
+                  <!-- WIDGET INPUT-->
+                  <div
+                    class="border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-drift-indigo focus-within:border-drift-indigo"
+                  >
+                    <label for="widgetId" class="block text-xs font-medium text-gray-900">Widget ID</label>
+                    <input
+                      id="widgetId"
+                      v-model="widgetId"
+                      type="text"
+                      name="widgetId"
+                      class="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm"
+                      placeholder="Insert Widget ID"
                     >
                   </div>
                 </div>
@@ -223,9 +240,12 @@ export default {
   name: 'Home',
   data () {
     return {
-      widgetId: 'bra3fivwpda4', // The default widgetId (can be overridden)
+      widgetId: '23x3bmcifbhe', // The default widgetId (can be overridden)
       isMenuOpen: true,
-      menuHotKeys: ['shift', 'z']
+      menuHotKeys: ['shift', 'z'],
+      imageUrl: 'https://screenshotapi-dot-net.storage.googleapis.com/www_drift_com__9efae73eb9a4.png',
+      playbookName: 'Skip the Form',
+      playbookId: 309059
     }
   },
   head () {
@@ -233,9 +253,22 @@ export default {
       title: 'Home'
     }
   },
+  watch: {
+    widgetId (newId, oldId) {
+      console.log('widget change')
+      this.loadDrift()
+      this.firePlaybook()
+    },
+    playbookName (newPlaybook, oldPlaybook) {
+      console.log('playbook change')
+      this.loadDrift()
+      this.firePlaybook()
+    }
+  },
   mounted () {
     // Mounted runs when the page is ready (kind of like onload)
     this.loadDrift()
+    this.firePlaybook()
   },
   methods: {
     // This is where we'll put all our functions to make our code organized
@@ -272,7 +305,59 @@ export default {
       // Afterwards we should be able to access elements in the iFrame like this: https://stackoverflow.com/questions/26630519/queryselector-for-web-elements-inside-iframe
       drift.config({
         iframeSandbox: 'allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-forms'
-      })
+      });
+      /* eslint-enable */
+    },
+    firePlaybook () {
+      // A function to fire the desired playbook
+      // Drift's install code doesn't cooperate well with our linter, so turning that off here
+      /*eslint-disable */
+
+      // Choose selected playbook
+      switch (this.playbookName) {
+        case 'Fastlane':
+        // deploy fastlane on body click
+          this.playbookId = 2527830
+          /* document.querySelector('body').click(
+          console.log('body click')
+          function(){
+            drift('collectFormData', {
+                fname: 'Ryan',
+                lname: 'Bovy',
+                email: 'rbovy@drift.com',
+                companyName: 'Drift',
+                title: 'SC'
+              }, {
+                campaignId: this.playbookId
+              })
+          }); */
+          break
+        case 'Conversational Landing Page':
+        // deploy CLP
+          break
+        default:
+        // deploy regular playbook
+          switch (this.playbookName) {
+            case 'Skip the Form':
+              this.playbookId = 309059
+              break
+            case 'Support Bot':
+              this.playbookId = 309512
+              break
+            default:
+              // default is Skip the Form
+              this.playbookId = 309059
+          }
+      }
+      // Fire selected playbook
+      drift.on('ready', function (api, payload) {
+        console.log('drift ready');
+        drift.api.startInteraction({
+          interactionId: this.playbookId,
+          goToConversation: false,
+          replaceActiveConversation: true
+        });
+      });
       /* eslint-enable */
     },
     toggleMenu () {
