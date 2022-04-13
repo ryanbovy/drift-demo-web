@@ -161,7 +161,7 @@
                       </option>
                     </select>
                   </div>
-
+                  <!-- BACKGROUND INPUT-->
                   <div
                     class="border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-drift-indigo focus-within:border-drift-indigo"
                   >
@@ -174,7 +174,7 @@
                       placeholder="Insert website or path to hosted image"
                     >
                   </div>
-
+                  <!-- NAME INPUT-->
                   <div
                     class="border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-drift-indigo focus-within:border-drift-indigo"
                   >
