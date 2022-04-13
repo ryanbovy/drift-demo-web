@@ -1,0 +1,26 @@
+@font-face {
+    font-family: "Balto";
+    src: url("../fonts/baltotrial-black.otf");
+    font-weight: bold;
+}
+
+@font-face {
+    font-family: "Balto";
+    src: url("../fonts/baltotrial-thin.otf");
+    font-weight: lighter;
+}
+
+@font-face {
+    font-family: "Balto";
+    src: url("../fonts/baltotrial-medium.otf");
+}
+
+html, body {
+    color: #111;
+    font-weight: normal !important;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    @apply uppercase;
+    font-weight: bold !important;
+}

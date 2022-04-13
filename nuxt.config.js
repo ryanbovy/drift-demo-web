@@ -29,15 +29,14 @@ export default {
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
-    // '@/assets/scss/theme',
-    // '@/assets/scss/style',
-    // '@/assets/fonts/feather/feather'
+    '@/assets/scss/main',
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
     // { src: '~/plugins/vue-debounce.js' },
     // { src: '~/plugins/vue-data-object-path.js' }
+    { src: '~/plugins/vue-shortkey.js', mode: 'client' }
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
