@@ -2,7 +2,7 @@
   <main class="font-balto">
     <!-- MAIN WINDOW CONTENT -->
     <div>
-      <img :src="imageUrl">
+      <img :src="backgroundUrl">
     </div>
     <!-- END MAIN WINDOW CONTENT -->
     <!-- SIDEBAR MENU -->
@@ -169,7 +169,7 @@
                     <label for="name" class="block text-xs font-medium text-gray-900">Background</label>
                     <input
                       id="name"
-                      v-model="imageUrl"
+                      v-model="backgroundInput"
                       type="text"
                       name="name"
                       class="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm"
@@ -243,7 +243,10 @@ export default {
       widgetId: '23x3bmcifbhe', // The default widgetId (can be overridden)
       isMenuOpen: true,
       menuHotKeys: ['shift', 'z'],
-      imageUrl: 'https://screenshotapi-dot-net.storage.googleapis.com/www_drift_com__9efae73eb9a4.png',
+      backgroundInput: null, // The textbox for bkgd: can be either an image file or a URL to be screenshotted
+      backgroundUrl: 'https://screenshotapi-dot-net.storage.googleapis.com/www_drift_com__9efae73eb9a4.png', // The image to be used for background (will be either backgroundInput or an image from the screenshot API)
+      backgroundDefault: 'https://screenshotapi-dot-net.storage.googleapis.com/www_drift_com__9efae73eb9a4.png', // The default background when input is blank
+      backgroundFormats: ['.png', '.jpeg', '.jpg'],
       playbookName: 'Skip the Form',
       playbookId: 309059
     }
@@ -259,6 +262,9 @@ export default {
     },
     playbookName (newPlaybook, oldPlaybook) {
       this.firePlaybook()
+    },
+    backgroundInput () {
+      this.calculateBackground()
     }
   },
   mounted () {
@@ -355,6 +361,30 @@ export default {
     },
     toggleMenu () {
       this.isMenuOpen = !this.isMenuOpen
+    },
+    async calculateBackground () {
+      // Check to see if the text input is empty. If so, load the default image again
+      if (this.backgroundInput === null || this.backgroundInput === '') {
+        this.backgroundUrl = this.backgroundDefault
+      } else {
+        // Otherwise, check to see if the input ends in an image file format. If so, load the image directly
+        let isImage = false
+        this.backgroundFormats.forEach((format) => {
+          if (this.backgroundInput.includes(format)) {
+            isImage = true
+            this.backgroundUrl = this.backgroundInput
+          }
+        })
+
+        // If not, make a request to the screenshot generator
+        // TODO: Need to debounce
+        if (!isImage) {
+          console.log('get the pictureeee')
+          // TODO: need to finish this URL string
+          const response = await this.$axios.$get('https://api.apiflash.com/v1/urltoimage?access_key=50c864cc62ee4df69a23f65c15eea431&url=https%3A%2F%2Fnytimes.com&format=jpeg&full_page=true&quality=100&scroll_page=true&response_type=json&no_cookie_banners=true&no_tracking=true')
+          this.backgroundInput = response.url
+        }
+      }
     }
   }
 }
