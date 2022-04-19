@@ -271,6 +271,7 @@ export default {
     // Mounted runs when the page is ready (kind of like onload)
     this.loadDrift()
     this.firePlaybook()
+    this.swapLogo()
   },
   methods: {
     // This is where we'll put all our functions to make our code organized
@@ -356,6 +357,13 @@ export default {
           goToConversation: false,
           replaceActiveConversation: true
         });
+      });
+      /* eslint-enable */
+    },
+    swapLogo () {
+      /*eslint-disable */
+      drift.on('ready', (api, payload) => {
+        document.querySelector('.drift-widget-default-bot-avatar').innerHTML = '<div style="background-image:url(https://logos-world.net/wp-content/uploads/2020/06/Adobe-Emblem.png);background-size:cover;max-width:100%;background-color:#ffffff;display:block;height:100%;background-position:center center;"></div>'
       });
       /* eslint-enable */
     },
