@@ -169,12 +169,12 @@
                   <div
                     class="border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-drift-indigo focus-within:border-drift-indigo"
                   >
-                    <label for="name" class="block text-xs font-medium text-gray-900">Background</label>
+                    <label for="backgroundInput" class="block text-xs font-medium text-gray-900">Background</label>
                     <input
-                      id="name"
+                      id="backgroundInput"
                       v-model="backgroundInput"
                       type="text"
-                      name="name"
+                      name="backgroundInput"
                       class="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm"
                       placeholder="Insert website or path to hosted image"
                       value="https://screenshotapi-dot-net.storage.googleapis.com/www_drift_com__cd817069080e.png"
@@ -184,13 +184,14 @@
                   <div
                     class="border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-drift-indigo focus-within:border-drift-indigo"
                   >
-                    <label for="name" class="block text-xs font-medium text-gray-900">Name</label>
+                    <label for="fname" class="block text-xs font-medium text-gray-900">First Name // {{ fname }} </label>
                     <input
-                      id="name"
+                      id="fname"
+                      v-model="fname"
                       type="text"
-                      name="name"
+                      name="fname"
                       class="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm"
-                      placeholder="Jane Doe"
+                      placeholder="Jane"
                     >
                   </div>
                   <!-- WIDGET INPUT-->
@@ -250,8 +251,10 @@ export default {
       backgroundUrl: 'https://screenshotapi-dot-net.storage.googleapis.com/www_drift_com__9efae73eb9a4.png', // The image to be used for background (will be either backgroundInput or an image from the screenshot API)
       backgroundDefault: 'https://screenshotapi-dot-net.storage.googleapis.com/www_drift_com__9efae73eb9a4.png', // The default background when input is blank
       backgroundFormats: ['.png', '.jpeg', '.jpg'],
-      playbookName: 'Skip the Form',
-      playbookId: 309059
+      playbookName: 'Skip the Form', // name of the playbook
+      playbookId: 309059, // id of the playbook
+      fname: '', // visitor name
+      userId: '' // store generated userId
     }
   },
   head () {
@@ -266,7 +269,7 @@ export default {
     playbookName (newPlaybook, oldPlaybook) {
       this.firePlaybook()
     },
-    backgroundInput () {
+    backgroundInput (newBackground, oldBackground) {
       this.calculateBackground()
     }
   },
