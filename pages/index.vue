@@ -160,6 +160,9 @@
                       <option value="Support Bot">
                         Support Bot
                       </option>
+                      <option value="Return Bot">
+                        Return Bot
+                      </option>
                     </select>
                   </div>
                   <!-- BACKGROUND INPUT-->
@@ -342,6 +345,9 @@ export default {
               break
             case 'Support Bot':
               this.playbookId = 309512
+              break
+            case 'Return Bot':
+              this.playbookId = 308477
               break
             default:
               // default is Skip the Form
