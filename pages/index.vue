@@ -184,14 +184,14 @@
                   <div
                     class="border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-drift-indigo focus-within:border-drift-indigo"
                   >
-                    <label for="fname" class="block text-xs font-medium text-gray-900">First Name // {{ fname }} </label>
+                    <label for="email" class="block text-xs font-medium text-gray-900">Email</label>
                     <input
-                      id="fname"
-                      v-model="fname"
+                      id="email"
+                      v-model="email"
                       type="text"
-                      name="fname"
+                      name="email"
                       class="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm"
-                      placeholder="Jane"
+                      placeholder="Jane.Doe@example.com"
                     >
                   </div>
                   <!-- WIDGET INPUT-->
@@ -209,6 +209,21 @@
                     >
                   </div>
                 </div>
+
+                <!-- USER OUTPUTS -->
+                <div class="relative mt-6 mb-2">
+                  <div class="absolute inset-0 flex items-center" aria-hidden="true">
+                    <div class="w-full border-t border-gray-200" />
+                  </div>
+                  <div class="relative flex justify-start">
+                    <span class="pr-2 bg-white text-xs uppercase font-bold"> Web Vistor </span>
+                  </div>
+                </div>
+                <div class="text-xs text-drift-grey">
+                  GUID: <span class="text-drift-violet">{{ guid }}</span><br>
+                  Email: <span class="text-drift-violet">{{ email }}</span>
+                </div>
+                <!-- END USER OUTPUTS -->
 
                 <!-- METRICS DIVIDER -->
                 <div class="relative mt-6 mb-2">
@@ -253,13 +268,21 @@ export default {
       backgroundFormats: ['.png', '.jpeg', '.jpg'],
       playbookName: 'Skip the Form', // name of the playbook
       playbookId: 309059, // id of the playbook
-      fname: '', // visitor name
-      userId: '' // store generated userId
+      email: '' // visitor name
     }
   },
   head () {
     return {
       title: 'Home'
+    }
+  },
+  computed: {
+    guid () {
+      return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
+        const r = (window.crypto.getRandomValues(new Uint32Array(1))[0] * Math.pow(2, -32) * 16) | 0
+        const v = c === 'x' ? r : (r & 0x3) | 0x8
+        return v.toString(16)
+      })
     }
   },
   watch: {
@@ -316,6 +339,16 @@ export default {
       });
       /* eslint-enable */
     },
+    generateVisitor () {
+      /* eslint-disable */
+      drift.identify(this.guid, {
+        first_name: 'First',
+        last_name: 'Last',
+        email: this.email
+      });
+      console.log(this.email);
+      /* eslint-enable */
+    },
     firePlaybook () {
       // A function to fire the desired playbook
       // Choose selected playbook
@@ -360,7 +393,7 @@ export default {
       // Fire selected playbook
       /*eslint-disable */
       drift.on('ready', (api, payload) => {
-        console.log('drift ready');
+        this.generateVisitor();
         drift.api.startInteraction({
           interactionId: this.playbookId,
           goToConversation: false,
