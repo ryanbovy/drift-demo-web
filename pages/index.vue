@@ -154,7 +154,7 @@
                       <option value="Fastlane">
                         Fastlane
                       </option>
-                      <option value="Skip the Form" default>
+                      <option value="Skip the Form">
                         Skip the Form
                       </option>
                       <option value="Support Bot">
@@ -267,8 +267,9 @@ export default {
       backgroundDefault: 'https://screenshotapi-dot-net.storage.googleapis.com/www_drift_com__9efae73eb9a4.png', // The default background when input is blank
       backgroundFormats: ['.png', '.jpeg', '.jpg'],
       playbookName: 'Skip the Form', // name of the playbook
-      playbookId: 309059, // id of the playbook
-      email: '' // visitor name
+      playbookId: null, // id of the playbook
+      email: '', // visitor name
+      guid: ''
     }
   },
   head () {
@@ -277,19 +278,22 @@ export default {
     }
   },
   computed: {
-    guid () {
-      return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
-        const r = (window.crypto.getRandomValues(new Uint32Array(1))[0] * Math.pow(2, -32) * 16) | 0
-        const v = c === 'x' ? r : (r & 0x3) | 0x8
-        return v.toString(16)
-      })
-    }
+
   },
   watch: {
+    email (newEmail, oldEmail) {
+      this.createGuid()
+      this.generateVisitor()
+      this.clearStorage()
+      this.firePlaybook()
+    },
     widgetId (newId, oldId) {
       this.firePlaybook()
     },
     playbookName (newPlaybook, oldPlaybook) {
+      this.createGuid()
+      this.generateVisitor()
+      this.clearStorage()
       this.firePlaybook()
     },
     backgroundInput (newBackground, oldBackground) {
@@ -300,10 +304,32 @@ export default {
     // Mounted runs when the page is ready (kind of like onload)
     this.loadDrift()
     this.firePlaybook()
-    this.swapLogo()
   },
   methods: {
     // This is where we'll put all our functions to make our code organized
+    createGuid () {
+      function value () {
+        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
+          const r = (window.crypto.getRandomValues(new Uint32Array(1))[0] * Math.pow(2, -32) * 16) | 0
+          const v = c === 'x' ? r : (r & 0x3) | 0x8
+          return v.toString(16)
+        })
+      }
+      this.guid = value()
+    },
+    clearStorage () {
+      document.cookie = 'drift_aid=; expires=Thu, 01 Jan 1970 00:00:01 GTM; path=/;'
+      document.cookie = 'driftt_aid=; expires=Thu, 01 Jan 1970 00:00:01 GTM; path=/;'
+      document.cookie = 'drift_eid=; expires=Thu, 01 Jan 1970 00:00:01 GTM; path=/;'
+      document.cookie = 'driftt_eid=; expires=Thu, 01 Jan 1970 00:00:01 GTM; path=/;'
+      document.cookie = 'drift_campaign_refresh=; expires=Thu, 01 Jan 1970 00:00:01 GTM; path=/;'
+      document.cookie = 'driftt_sid=; expires=Thu, 01 Jan 1970 00:00:01 GTM; path=/;'
+      document.cookie = 'driftt_wmd=; expires=Thu, 01 Jan 1970 00:00:01 GTM; path=/;'
+      document.cookie = 'DFTT_END_USER_PREV_BOOTSTRAPPED=; expires=Thu, 01 Jan 1970 00:00:01 GTM; path=/;'
+      document.cookie = 'DFTT_LEAD_HAS_PREV_IDENTIFIED=; expires=Thu, 01 Jan 1970 00:00:01 GTM; path=/;'
+      localStorage.clear()
+      sessionStorage.clear()
+    },
     loadDrift () {
       // A function to run the standard install code. The widgetId variable can be set (otherwise uses a default value)
       /*eslint-disable */
@@ -346,7 +372,6 @@ export default {
         last_name: 'Last',
         email: this.email
       });
-      console.log(this.email);
       /* eslint-enable */
     },
     firePlaybook () {
@@ -399,13 +424,6 @@ export default {
           goToConversation: false,
           replaceActiveConversation: true
         });
-      });
-      /* eslint-enable */
-    },
-    swapLogo () {
-      /*eslint-disable */
-      drift.on('ready', (api, payload) => {
-        document.querySelector('.drift-widget-default-bot-avatar').innerHTML = '<div style="background-image:url(https://logos-world.net/wp-content/uploads/2020/06/Adobe-Emblem.png);background-size:cover;max-width:100%;background-color:#ffffff;display:block;height:100%;background-position:center center;"></div>'
       });
       /* eslint-enable */
     },
