@@ -163,6 +163,9 @@
                       <option value="Return Bot">
                         Return Bot
                       </option>
+                      <option value="ABM Bot">
+                        ABM Bot
+                      </option>
                     </select>
                   </div>
                   <!-- BACKGROUND INPUT-->
@@ -302,7 +305,9 @@ export default {
   },
   mounted () {
     // Mounted runs when the page is ready (kind of like onload)
+    this.createGuid()
     this.loadDrift()
+    this.generateVisitor()
     this.firePlaybook()
   },
   methods: {
@@ -318,6 +323,8 @@ export default {
       this.guid = value()
     },
     clearStorage () {
+      localStorage.clear()
+      sessionStorage.clear()
       document.cookie = 'drift_aid=; expires=Thu, 01 Jan 1970 00:00:01 GTM; path=/;'
       document.cookie = 'driftt_aid=; expires=Thu, 01 Jan 1970 00:00:01 GTM; path=/;'
       document.cookie = 'drift_eid=; expires=Thu, 01 Jan 1970 00:00:01 GTM; path=/;'
@@ -327,8 +334,11 @@ export default {
       document.cookie = 'driftt_wmd=; expires=Thu, 01 Jan 1970 00:00:01 GTM; path=/;'
       document.cookie = 'DFTT_END_USER_PREV_BOOTSTRAPPED=; expires=Thu, 01 Jan 1970 00:00:01 GTM; path=/;'
       document.cookie = 'DFTT_LEAD_HAS_PREV_IDENTIFIED=; expires=Thu, 01 Jan 1970 00:00:01 GTM; path=/;'
-      localStorage.clear()
-      sessionStorage.clear()
+    },
+    unloadDrift () {
+      /*eslint-disable */
+      drift.unload()
+      /* eslint-enable */
     },
     loadDrift () {
       // A function to run the standard install code. The widgetId variable can be set (otherwise uses a default value)
@@ -360,16 +370,15 @@ export default {
       // but it appears the following config is going to be needed access Drift via JS/CSS selectors to do some
       // of the fancy stuff we were doing via console (https://devdocs.drift.com/docs/securing-drift-on-your-site-with-an-iframe#required-attributes)
       // Afterwards we should be able to access elements in the iFrame like this: https://stackoverflow.com/questions/26630519/queryselector-for-web-elements-inside-iframe
-      drift.config({
+      /*drift.config({
         iframeSandbox: 'allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-forms'
-      });
+      });*/
       /* eslint-enable */
     },
     generateVisitor () {
       /* eslint-disable */
+      this.clearStorage()
       drift.identify(this.guid, {
-        first_name: 'First',
-        last_name: 'Last',
         email: this.email
       });
       /* eslint-enable */
@@ -410,6 +419,9 @@ export default {
             case 'Return Bot':
               this.playbookId = 308477
               break
+            case 'ABM Bot':
+              this.playbookId = 2468933
+              break
             default:
               // default is Skip the Form
               this.playbookId = 309059
@@ -418,7 +430,6 @@ export default {
       // Fire selected playbook
       /*eslint-disable */
       drift.on('ready', (api, payload) => {
-        this.generateVisitor();
         drift.api.startInteraction({
           interactionId: this.playbookId,
           goToConversation: false,
