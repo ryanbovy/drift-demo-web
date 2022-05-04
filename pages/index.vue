@@ -286,17 +286,13 @@ export default {
   watch: {
     email (newEmail, oldEmail) {
       this.createGuid()
-      this.generateVisitor()
-      this.clearStorage()
+      // this.generateVisitor()
       this.firePlaybook()
     },
     widgetId (newId, oldId) {
       this.firePlaybook()
     },
     playbookName (newPlaybook, oldPlaybook) {
-      this.createGuid()
-      this.generateVisitor()
-      this.clearStorage()
       this.firePlaybook()
     },
     backgroundInput (newBackground, oldBackground) {
@@ -430,11 +426,19 @@ export default {
       // Fire selected playbook
       /*eslint-disable */
       drift.on('ready', (api, payload) => {
+        console.log(this.email)
+        this.clearStorage()
+          drift.identify(this.guid, {
+            email: this.email
+          });
+
         drift.api.startInteraction({
           interactionId: this.playbookId,
           goToConversation: false,
           replaceActiveConversation: true
         });
+        window.history.replaceState(null, null, "#driftRace");
+        drift.page();
       });
       /* eslint-enable */
     },
@@ -458,6 +462,7 @@ export default {
         // If not, make a request to the screenshot generator
         // TODO: Need to debounce
         if (!isImage) {
+          // eslint-disable-next-line no-console
           console.log('get the pictureeee')
           // TODO: need to finish this URL string
           const response = await this.$axios.$get('https://api.apiflash.com/v1/urltoimage?access_key=50c864cc62ee4df69a23f65c15eea431&url=https%3A%2F%2Fnytimes.com&format=jpeg&full_page=true&quality=100&scroll_page=true&response_type=json&no_cookie_banners=true&no_tracking=true')
