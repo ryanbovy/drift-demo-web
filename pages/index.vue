@@ -20,12 +20,16 @@
           aria-hidden="true"
           :class="[isMenuOpen ? 'opacity-100' : 'opacity-0']"
         />
-        <div class="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10">
+        <div
+          class="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10"
+        >
           <div
             class="pointer-events-auto w-screen max-w-md transform transition ease-in-out duration-500 sm:duration-700"
             :class="[isMenuOpen ? 'translate-x-0' : 'translate-x-full']"
           >
-            <div class="flex h-full flex-col overflow-y-scroll bg-white py-6 shadow-xl">
+            <div
+              class="flex h-full flex-col overflow-y-scroll bg-white py-6 shadow-xl"
+            >
               <div class="px-4 sm:px-6">
                 <div class="flex items-start justify-between">
                   <h2 id="slide-over-title" class="text-lg font-medium">
@@ -60,80 +64,19 @@
               </div>
               <div class="relative mt-6 flex-1 px-4 sm:px-6">
                 <!-- SIDEBAR MENU CONTENT -->
-                <!-- PROFILE -->
-                <div class="flex items-center">
-                  <span class="inline-flex items-center justify-center h-10 w-10 rounded-full bg-drift-magenta">
-                    <span class="font-medium leading-none text-white">JP</span>
-                  </span>
-                  <div class="ml-3">
-                    <p class="text-sm">
-                      Joshua Perk
-                    </p>
-                    <span class="text-xs text-drift-grey mr-4">
-                      Edit
-                    </span>
-                    <span class="text-xs text-drift-grey">
-                      Logout
-                    </span>
-                  </div>
-                </div>
-                <!-- END PROFILE -->
 
                 <!-- SETTINGS DIVIDER -->
                 <div class="relative mt-6 mb-2">
-                  <div class="absolute inset-0 flex items-center" aria-hidden="true">
-                    <div class="w-full border-t border-gray-200" />
-                  </div>
-                  <div class="relative flex justify-start">
-                    <span class="pr-2 bg-white text-xs uppercase font-bold"> Scenes </span>
-                  </div>
-                </div>
-                <!-- END SETTINGS DIVIDER -->
-
-                <div
-                  class="border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-drift-indigo focus-within:border-drift-indigo"
-                >
-                  <label for="name" class="block text-xs font-medium text-gray-900">Load previously saved scenes</label>
-                  <select
-                    id="name"
-                    type="text"
-                    name="name"
-                    class="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm"
+                  <div
+                    class="absolute inset-0 flex items-center"
+                    aria-hidden="true"
                   >
-                    <option value="volvo">
-                      Elastic ABM bot
-                    </option>
-                    <option value="saab">
-                      Saab
-                    </option>
-                    <option value="mercedes">
-                      Mercedes
-                    </option>
-                    <option value="audi">
-                      Audi
-                    </option>
-                  </select>
-                </div>
-
-                <div class="px-3">
-                  <span class="text-xs text-drift-grey mr-4">
-                    Rename
-                  </span>
-                  <span class="text-xs text-drift-grey mr-4">
-                    Clone
-                  </span>
-                  <span class="text-xs text-drift-orange">
-                    Delete
-                  </span>
-                </div>
-
-                <!-- SETTINGS DIVIDER -->
-                <div class="relative mt-6 mb-2">
-                  <div class="absolute inset-0 flex items-center" aria-hidden="true">
                     <div class="w-full border-t border-gray-200" />
                   </div>
                   <div class="relative flex justify-start">
-                    <span class="pr-2 bg-white text-xs uppercase font-bold"> Settings </span>
+                    <span class="pr-2 bg-white text-xs uppercase font-bold">
+                      Settings
+                    </span>
                   </div>
                 </div>
                 <!-- END SETTINGS DIVIDER -->
@@ -143,7 +86,10 @@
                   <div
                     class="border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-drift-indigo focus-within:border-drift-indigo"
                   >
-                    <label for="playbookName" class="block text-xs font-medium text-gray-900">Playbook // {{ playbookId }}</label>
+                    <label
+                      for="playbookName"
+                      class="block text-xs font-medium text-gray-900"
+                    >Playbook // {{ playbookId }}</label>
                     <select
                       id="playbookName"
                       v-model="playbookName"
@@ -172,7 +118,10 @@
                   <div
                     class="border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-drift-indigo focus-within:border-drift-indigo"
                   >
-                    <label for="backgroundInput" class="block text-xs font-medium text-gray-900">Background</label>
+                    <label
+                      for="backgroundInput"
+                      class="block text-xs font-medium text-gray-900"
+                    >Background</label>
                     <input
                       id="backgroundInput"
                       v-model="backgroundInput"
@@ -187,7 +136,10 @@
                   <div
                     class="border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-drift-indigo focus-within:border-drift-indigo"
                   >
-                    <label for="email" class="block text-xs font-medium text-gray-900">Email</label>
+                    <label
+                      for="email"
+                      class="block text-xs font-medium text-gray-900"
+                    >Email</label>
                     <input
                       id="email"
                       v-model="email"
@@ -201,7 +153,10 @@
                   <div
                     class="border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-drift-indigo focus-within:border-drift-indigo"
                   >
-                    <label for="widgetId" class="block text-xs font-medium text-gray-900">Widget ID</label>
+                    <label
+                      for="widgetId"
+                      class="block text-xs font-medium text-gray-900"
+                    >Widget ID</label>
                     <input
                       id="widgetId"
                       v-model="widgetId"
@@ -215,11 +170,16 @@
 
                 <!-- USER OUTPUTS -->
                 <div class="relative mt-6 mb-2">
-                  <div class="absolute inset-0 flex items-center" aria-hidden="true">
+                  <div
+                    class="absolute inset-0 flex items-center"
+                    aria-hidden="true"
+                  >
                     <div class="w-full border-t border-gray-200" />
                   </div>
                   <div class="relative flex justify-start">
-                    <span class="pr-2 bg-white text-xs uppercase font-bold"> Web Vistor </span>
+                    <span class="pr-2 bg-white text-xs uppercase font-bold">
+                      Web Vistor
+                    </span>
                   </div>
                 </div>
                 <div class="text-xs text-drift-grey">
@@ -230,20 +190,31 @@
 
                 <!-- METRICS DIVIDER -->
                 <div class="relative mt-6 mb-2">
-                  <div class="absolute inset-0 flex items-center" aria-hidden="true">
+                  <div
+                    class="absolute inset-0 flex items-center"
+                    aria-hidden="true"
+                  >
                     <div class="w-full border-t border-gray-200" />
                   </div>
-                  <div class="relative flex justify-start">
-                    <span class="pr-2 bg-white text-xs uppercase font-bold"> Metrics </span>
-                  </div>
-                </div>
-                <div class="text-xs text-drift-grey">
-                  Page Views: <span class="text-drift-violet">17</span>
                 </div>
                 <!-- END METRICS DIVIDER -->
 
-                <button type="button" class="mt-6 w-full items-center px-6 py-3 border border-transparent rounded-md shadow-sm bg-drift-lime hover:bg-drift-cyan focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-drift-indigo font-bold uppercase">
+                <!-- SAVE BUTTON -->
+                <button
+                  type="button"
+                  class="mt-6 w-full items-center px-6 py-3 border border-transparent rounded-md shadow-sm bg-drift-lime hover:bg-drift-cyan focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-drift-indigo font-bold uppercase"
+                  @click="saveSettings()"
+                >
                   ⚡️ Save
+                </button>
+
+                <!-- REFRESH BUTTON -->
+                <button
+                  type="button"
+                  class="mt-6 w-full items-center px-6 py-3 border border-transparent rounded-md shadow-sm bg-drift-lime hover:bg-drift-cyan focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-drift-indigo font-bold uppercase"
+                  @click="clearSettings()"
+                >
+                  ⚡️ Clear Settings
                 </button>
 
                 <!-- END OF SIDEBAR MENU CONTENT -->
@@ -266,13 +237,16 @@ export default {
       isMenuOpen: true,
       menuHotKeys: ['shift', 'z'],
       backgroundInput: null, // The textbox for bkgd: can be either an image file or a URL to be screenshotted
-      backgroundUrl: 'https://screenshotapi-dot-net.storage.googleapis.com/www_drift_com__9efae73eb9a4.png', // The image to be used for background (will be either backgroundInput or an image from the screenshot API)
-      backgroundDefault: 'https://screenshotapi-dot-net.storage.googleapis.com/www_drift_com__9efae73eb9a4.png', // The default background when input is blank
+      backgroundUrl:
+        'https://screenshotapi-dot-net.storage.googleapis.com/www_drift_com__9efae73eb9a4.png', // The image to be used for background (will be either backgroundInput or an image from the screenshot API)
+      backgroundDefault:
+        'https://screenshotapi-dot-net.storage.googleapis.com/www_drift_com__9efae73eb9a4.png', // The default background when input is blank
       backgroundFormats: ['.png', '.jpeg', '.jpg'],
-      playbookName: 'Skip the Form', // name of the playbook
-      playbookId: null, // id of the playbook
-      email: '', // visitor name
-      guid: ''
+      playbookName: localStorage.getItem('playbookName'), // name of the playbook
+      playbookId: localStorage.getItem('playbookId'), // id of the playbook
+      email: localStorage.getItem('email'), // visitor name
+      guid: localStorage.getItem('guid'), // unique user id
+      driftLoaded: false
     }
   },
   head () {
@@ -280,38 +254,37 @@ export default {
       title: 'Home'
     }
   },
-  computed: {
-
-  },
+  computed: {},
   watch: {
-    email (newEmail, oldEmail) {
-      this.createGuid()
-      // this.generateVisitor()
-      this.firePlaybook()
-    },
-    widgetId (newId, oldId) {
-      this.firePlaybook()
-    },
-    playbookName (newPlaybook, oldPlaybook) {
-      this.firePlaybook()
-    },
     backgroundInput (newBackground, oldBackground) {
       this.calculateBackground()
     }
   },
   mounted () {
     // Mounted runs when the page is ready (kind of like onload)
-    this.createGuid()
+    this.clearStorage()
     this.loadDrift()
     this.generateVisitor()
     this.firePlaybook()
   },
   methods: {
     // This is where we'll put all our functions to make our code organized
+    clearSettings () {
+      localStorage.clear()
+      this.playbookName = ''
+      this.playbookId = ''
+      this.email = ''
+      this.guid = ''
+      location.reload()
+    },
     createGuid () {
       function value () {
         return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
-          const r = (window.crypto.getRandomValues(new Uint32Array(1))[0] * Math.pow(2, -32) * 16) | 0
+          const r =
+            (window.crypto.getRandomValues(new Uint32Array(1))[0] *
+              Math.pow(2, -32) *
+              16) |
+            0
           const v = c === 'x' ? r : (r & 0x3) | 0x8
           return v.toString(16)
         })
@@ -319,64 +292,96 @@ export default {
       this.guid = value()
     },
     clearStorage () {
-      localStorage.clear()
+      document.cookie =
+        'drift_aid=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
+      document.cookie =
+        'driftt_aid=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
+      document.cookie =
+        'drift_eid=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
+      document.cookie =
+        'driftt_eid=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
+      document.cookie =
+        'drift_campaign_refresh=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
+      document.cookie =
+        'driftt_sid=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
+      document.cookie =
+        'driftt_wmd=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
+      document.cookie =
+        'DFTT_END_USER_PREV_BOOTSTRAPPED=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
+      document.cookie =
+        'DFTT_LEAD_HAS_PREV_IDENTIFIED=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
+      localStorage.removeItem('DRIFT_visitCounts')
+      localStorage.removeItem('DRIFT_isChatFrameOpen')
+      localStorage.removeItem('DRIFT_openTabs')
       sessionStorage.clear()
-      document.cookie = 'drift_aid=; expires=Thu, 01 Jan 1970 00:00:01 GTM; path=/;'
-      document.cookie = 'driftt_aid=; expires=Thu, 01 Jan 1970 00:00:01 GTM; path=/;'
-      document.cookie = 'drift_eid=; expires=Thu, 01 Jan 1970 00:00:01 GTM; path=/;'
-      document.cookie = 'driftt_eid=; expires=Thu, 01 Jan 1970 00:00:01 GTM; path=/;'
-      document.cookie = 'drift_campaign_refresh=; expires=Thu, 01 Jan 1970 00:00:01 GTM; path=/;'
-      document.cookie = 'driftt_sid=; expires=Thu, 01 Jan 1970 00:00:01 GTM; path=/;'
-      document.cookie = 'driftt_wmd=; expires=Thu, 01 Jan 1970 00:00:01 GTM; path=/;'
-      document.cookie = 'DFTT_END_USER_PREV_BOOTSTRAPPED=; expires=Thu, 01 Jan 1970 00:00:01 GTM; path=/;'
-      document.cookie = 'DFTT_LEAD_HAS_PREV_IDENTIFIED=; expires=Thu, 01 Jan 1970 00:00:01 GTM; path=/;'
-    },
-    unloadDrift () {
-      /*eslint-disable */
-      drift.unload()
-      /* eslint-enable */
     },
     loadDrift () {
       // A function to run the standard install code. The widgetId variable can be set (otherwise uses a default value)
       /*eslint-disable */
-      'use strict'
+      "use strict";
       !(function () {
-        const t = window.driftt = window.drift = window.driftt || []
+        const t = (window.driftt = window.drift = window.driftt || []);
         if (!t.init) {
-          if (t.invoked) { return void (window.console && console.error && console.error('Drift snippet included twice.')) }
-          t.invoked = !0, t.methods = ['identify', 'config', 'track', 'reset', 'debug', 'show', 'ping', 'page', 'hide', 'off', 'on'],
-          t.factory = function (e) {
-            return function () {
-              const n = Array.prototype.slice.call(arguments)
-              return n.unshift(e), t.push(n), t
-            }
-          }, t.methods.forEach(function (e) {
-            t[e] = t.factory(e)
-          }), t.load = function (t) {
-            const e = 3e5; const n = Math.ceil(new Date() / e) * e; const o = document.createElement('script')
-            o.type = 'text/javascript', o.async = !0, o.crossorigin = 'anonymous', o.src = 'https://js.driftt.com/include/' + n + '/' + t + '.js'
-            const i = document.getElementsByTagName('script')[0]
-            i.parentNode.insertBefore(o, i)
+          if (t.invoked) {
+            return void (
+              window.console &&
+              console.error &&
+              console.error("Drift snippet included twice.")
+            );
           }
+          (t.invoked = !0),
+            (t.methods = [
+              "identify",
+              "config",
+              "track",
+              "reset",
+              "debug",
+              "show",
+              "ping",
+              "page",
+              "hide",
+              "off",
+              "on",
+            ]),
+            (t.factory = function (e) {
+              return function () {
+                const n = Array.prototype.slice.call(arguments);
+                return n.unshift(e), t.push(n), t;
+              };
+            }),
+            t.methods.forEach(function (e) {
+              t[e] = t.factory(e);
+            }),
+            (t.load = function (t) {
+              const e = 3e5;
+              const n = Math.ceil(new Date() / e) * e;
+              const o = document.createElement("script");
+              (o.type = "text/javascript"),
+                (o.async = !0),
+                (o.crossorigin = "anonymous"),
+                (o.src =
+                  "https://js.driftt.com/include/" + n + "/" + t + ".js");
+              const i = document.getElementsByTagName("script")[0];
+              i.parentNode.insertBefore(o, i);
+            });
         }
-      }())
-      drift.SNIPPET_VERSION = '0.3.1'
-      drift.load(this.widgetId)
+      })();
+      drift.SNIPPET_VERSION = "0.3.1";
+      drift.load(this.widgetId);
+      this.driftLoaded = true;
       // TODO: Drift config is currently broken (https://drift.slack.com/archives/CHK7L9AB1/p1649777796544179)
       // but it appears the following config is going to be needed access Drift via JS/CSS selectors to do some
       // of the fancy stuff we were doing via console (https://devdocs.drift.com/docs/securing-drift-on-your-site-with-an-iframe#required-attributes)
       // Afterwards we should be able to access elements in the iFrame like this: https://stackoverflow.com/questions/26630519/queryselector-for-web-elements-inside-iframe
       /*drift.config({
-        iframeSandbox: 'allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-forms'
-      });*/
+      iframeSandbox: 'allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-forms'
+    });*/
       /* eslint-enable */
     },
     generateVisitor () {
       /* eslint-disable */
-      this.clearStorage()
-      drift.identify(this.guid, {
-        email: this.email
-      });
+      this.clearStorage();
+      this.createGuid();
       /* eslint-enable */
     },
     firePlaybook () {
@@ -384,27 +389,27 @@ export default {
       // Choose selected playbook
       switch (this.playbookName) {
         case 'Fastlane':
-        // deploy fastlane on body click
+          // deploy fastlane on body click
           this.playbookId = 2527830
           /* document.querySelector('body').click(
-          console.log('body click')
-          function(){
-            drift('collectFormData', {
-                fname: 'Ryan',
-                lname: 'Bovy',
-                email: 'rbovy@drift.com',
-                companyName: 'Drift',
-                title: 'SC'
-              }, {
-                campaignId: this.playbookId
-              })
-          }); */
+        console.log('body click')
+        function(){
+          drift('collectFormData', {
+              fname: 'Ryan',
+              lname: 'Bovy',
+              email: 'rbovy@drift.com',
+              companyName: 'Drift',
+              title: 'SC'
+            }, {
+              campaignId: this.playbookId
+            })
+        }); */
           break
         case 'Conversational Landing Page':
-        // deploy CLP
+          // deploy CLP
           break
         default:
-        // deploy regular playbook
+          // deploy regular playbook
           switch (this.playbookName) {
             case 'Skip the Form':
               this.playbookId = 309059
@@ -420,27 +425,36 @@ export default {
               break
             default:
               // default is Skip the Form
-              this.playbookId = 309059
+              this.playbookId = ''
           }
       }
       // Fire selected playbook
       /*eslint-disable */
-      drift.on('ready', (api, payload) => {
-        console.log(this.email)
-        this.clearStorage()
-          drift.identify(this.guid, {
-            email: this.email
-          });
+      drift.on("ready", (api, payload) => {
+        drift.api.setUserAttributes({
+          email: this.email,
+        });
 
         drift.api.startInteraction({
           interactionId: this.playbookId,
           goToConversation: false,
-          replaceActiveConversation: true
+          replaceActiveConversation: true,
         });
-        window.history.replaceState(null, null, "#driftRace");
+        //window.history.replaceState(null, null, "#driftRace");
         drift.page();
+        
+        this.isMenuOpen = false
       });
       /* eslint-enable */
+    },
+    saveSettings () {
+      // persist settings on refresh
+      localStorage.setItem('guid', this.guid)
+      localStorage.setItem('email', this.email)
+      localStorage.setItem('playbookName', this.playbookName)
+      localStorage.setItem('playbookId', this.playbookId)
+
+      location.reload()
     },
     toggleMenu () {
       this.isMenuOpen = !this.isMenuOpen
@@ -465,7 +479,9 @@ export default {
           // eslint-disable-next-line no-console
           console.log('get the pictureeee')
           // TODO: need to finish this URL string
-          const response = await this.$axios.$get('https://api.apiflash.com/v1/urltoimage?access_key=50c864cc62ee4df69a23f65c15eea431&url=https%3A%2F%2Fnytimes.com&format=jpeg&full_page=true&quality=100&scroll_page=true&response_type=json&no_cookie_banners=true&no_tracking=true')
+          const response = await this.$axios.$get(
+            'https://api.apiflash.com/v1/urltoimage?access_key=50c864cc62ee4df69a23f65c15eea431&url=https%3A%2F%2Fnytimes.com&format=jpeg&full_page=true&quality=100&scroll_page=true&response_type=json&no_cookie_banners=true&no_tracking=true'
+          )
           this.backgroundInput = response.url
         }
       }
@@ -474,5 +490,4 @@ export default {
 }
 </script>
 
-<style scoped lang="scss">
-</style>
+<style scoped lang="scss"></style>
