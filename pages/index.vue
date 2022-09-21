@@ -236,7 +236,7 @@ export default {
       widgetId: '23x3bmcifbhe', // The default widgetId (can be overridden)
       isMenuOpen: true,
       menuHotKeys: ['shift', 'z'],
-      backgroundInput: null, // The textbox for bkgd: can be either an image file or a URL to be screenshotted
+      backgroundInput: localStorage.getItem('backgroundInput'), // The textbox for bkgd: can be either an image file or a URL to be screenshotted
       backgroundUrl:
         'https://screenshotapi-dot-net.storage.googleapis.com/www_drift_com__9efae73eb9a4.png', // The image to be used for background (will be either backgroundInput or an image from the screenshot API)
       backgroundDefault:
@@ -275,6 +275,7 @@ export default {
       this.playbookId = ''
       this.email = ''
       this.guid = ''
+      this.backgroundInput = ''
       location.reload()
     },
     createGuid () {
@@ -310,6 +311,8 @@ export default {
         'DFTT_END_USER_PREV_BOOTSTRAPPED=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
       document.cookie =
         'DFTT_LEAD_HAS_PREV_IDENTIFIED=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
+      document.cookie =
+        'playbook=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
       localStorage.removeItem('DRIFT_visitCounts')
       localStorage.removeItem('DRIFT_isChatFrameOpen')
       localStorage.removeItem('DRIFT_openTabs')
@@ -421,7 +424,8 @@ export default {
               this.playbookId = 308477
               break
             case 'ABM Bot':
-              this.playbookId = 2468933
+              this.playbookId = null
+              this.setCookie('playbook', 'abmBot', 7)
               break
             default:
               // default is Skip the Form
@@ -440,12 +444,20 @@ export default {
           goToConversation: false,
           replaceActiveConversation: true,
         });
-        //window.history.replaceState(null, null, "#driftRace");
+        // window.history.replaceState(null, null, "#driftRace");
         drift.page();
-        
-        this.isMenuOpen = false
+        this.isMenuOpen = false;
       });
       /* eslint-enable */
+    },
+    setCookie (name, value, days) {
+      let expires = ''
+      if (days) {
+        const date = new Date()
+        date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000)
+        expires = '; expires=' + date.toUTCString()
+      }
+      document.cookie = name + '=' + (value || '') + expires + '; path=/'
     },
     saveSettings () {
       // persist settings on refresh
@@ -454,10 +466,18 @@ export default {
       localStorage.setItem('playbookName', this.playbookName)
       localStorage.setItem('playbookId', this.playbookId)
 
+      this.calculateBackground()
+      localStorage.setItem('backgroundInput', this.backgroundInput)
+
       location.reload()
     },
     toggleMenu () {
       this.isMenuOpen = !this.isMenuOpen
+      if (this.isMenuOpen) {
+        /* eslint-disable */
+        drift.hideChat();
+        /* eslint-enable */
+      }
     },
     async calculateBackground () {
       // Check to see if the text input is empty. If so, load the default image again
