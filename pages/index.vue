@@ -7,6 +7,7 @@
     <!-- END MAIN WINDOW CONTENT -->
     <!-- SIDEBAR MENU -->
     <div
+      id="app"
       v-shortkey="menuHotKeys"
       class="fixed inset-0 overflow-hidden"
       aria-labelledby="slide-over-title"
@@ -65,7 +66,7 @@
               <div class="relative mt-6 flex-1 px-4 sm:px-6">
                 <!-- SIDEBAR MENU CONTENT -->
 
-                <!-- SETTINGS DIVIDER -->
+                <!-- BOT SETTINGS DIVIDER -->
                 <div class="relative mt-6 mb-2">
                   <div
                     class="absolute inset-0 flex items-center"
@@ -75,14 +76,52 @@
                   </div>
                   <div class="relative flex justify-start">
                     <span class="pr-2 bg-white text-xs uppercase font-bold">
-                      Settings
+                      Bot Settings
                     </span>
                   </div>
                 </div>
-                <!-- END SETTINGS DIVIDER -->
+                <!-- END BOT SETTINGS DIVIDER -->
 
-                <!-- PLAYBOOK NAME INPUT-->
+                <!-- BOT SETTINGS OPTIONS -->
                 <div class="space-y-2">
+                  <div
+                    class="flex border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-drift-indigo focus-within:border-drift-indigo"
+                  >
+                    <label
+                      for="botColor"
+                      class="w-3/4 text-xs font-medium text-gray-900"
+                    >Bot Color</label>
+                    <input
+                      id="botColor"
+                      v-model="botColor"
+                      type="color"
+                      name="botColor"
+                      class="w-1/4 border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm"
+                    >
+                    <Chrome :value="colors" @input="updateValue" />
+                  </div>
+                </div>
+                <!-- END BOT SETTINGS OPTIONS -->
+
+                <!-- USER SETTINGS DIVIDER -->
+                <div class="relative mt-6 mb-2">
+                  <div
+                    class="absolute inset-0 flex items-center"
+                    aria-hidden="true"
+                  >
+                    <div class="w-full border-t border-gray-200" />
+                  </div>
+                  <div class="relative flex justify-start">
+                    <span class="pr-2 bg-white text-xs uppercase font-bold">
+                      User Settings
+                    </span>
+                  </div>
+                </div>
+                <!-- END USER SETTINGS DIVIDER -->
+
+                <!-- USER SETTINGS OPTIONS -->
+                <div class="space-y-2">
+                  <!-- PLAYBOOK DROPDOWN-->
                   <div
                     class="border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-drift-indigo focus-within:border-drift-indigo"
                   >
@@ -246,7 +285,7 @@ export default {
       playbookId: localStorage.getItem('playbookId'), // id of the playbook
       email: localStorage.getItem('email'), // visitor name
       guid: localStorage.getItem('guid'), // unique user id
-      driftLoaded: false
+      botColor: localStorage.getItem('botColor') // bot color
     }
   },
   head () {
@@ -269,6 +308,19 @@ export default {
   },
   methods: {
     // This is where we'll put all our functions to make our code organized
+    saveSettings () {
+      // persist settings on refresh
+      localStorage.setItem('guid', this.guid)
+      localStorage.setItem('email', this.email)
+      localStorage.setItem('playbookName', this.playbookName)
+      localStorage.setItem('playbookId', this.playbookId)
+      localStorage.setItem('botColor', this.botColor)
+
+      this.calculateBackground()
+      localStorage.setItem('backgroundInput', this.backgroundInput)
+
+      location.reload()
+    },
     clearSettings () {
       localStorage.clear()
       this.playbookName = ''
@@ -276,6 +328,7 @@ export default {
       this.email = ''
       this.guid = ''
       this.backgroundInput = ''
+      this.botColor = ''
       location.reload()
     },
     createGuid () {
@@ -371,7 +424,11 @@ export default {
       })();
       drift.SNIPPET_VERSION = "0.3.1";
       drift.load(this.widgetId);
-      this.driftLoaded = true;
+
+      drift.config({
+        backgroundColor: this.botColor
+      });
+
       // TODO: Drift config is currently broken (https://drift.slack.com/archives/CHK7L9AB1/p1649777796544179)
       // but it appears the following config is going to be needed access Drift via JS/CSS selectors to do some
       // of the fancy stuff we were doing via console (https://devdocs.drift.com/docs/securing-drift-on-your-site-with-an-iframe#required-attributes)
@@ -458,18 +515,6 @@ export default {
         expires = '; expires=' + date.toUTCString()
       }
       document.cookie = name + '=' + (value || '') + expires + '; path=/'
-    },
-    saveSettings () {
-      // persist settings on refresh
-      localStorage.setItem('guid', this.guid)
-      localStorage.setItem('email', this.email)
-      localStorage.setItem('playbookName', this.playbookName)
-      localStorage.setItem('playbookId', this.playbookId)
-
-      this.calculateBackground()
-      localStorage.setItem('backgroundInput', this.backgroundInput)
-
-      location.reload()
     },
     toggleMenu () {
       this.isMenuOpen = !this.isMenuOpen
