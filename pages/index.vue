@@ -84,6 +84,7 @@
 
                 <!-- BOT SETTINGS OPTIONS -->
                 <div class="space-y-2">
+                  <!-- COLOR SELECTION-->
                   <div
                     class="flex border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-drift-indigo focus-within:border-drift-indigo"
                   >
@@ -98,7 +99,42 @@
                       name="botColor"
                       class="w-1/4 border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm"
                     >
-                    <Chrome :value="colors" @input="updateValue" />
+                  </div>
+                  <!-- PLAYBOOK DROPDOWN-->
+                  <div
+                    class="border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-drift-indigo focus-within:border-drift-indigo"
+                  >
+                    <label
+                      for="playbookName"
+                      class="block text-xs font-medium text-gray-900"
+                    >Playbook // {{ interactionId }}</label>
+                    <select
+                      id="playbookName"
+                      v-model="playbookName"
+                      type="text"
+                      name="playbookName"
+                      class="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm"
+                      placeholder="Select a Playbook"
+                    >
+                      <option value="Engage All">
+                        Engage All
+                      </option>
+                      <option value="ABM Bot">
+                        ABM Bot
+                      </option>
+                      <option value="Support Bot">
+                        Support Bot
+                      </option>
+                      <option value="Skip the Form">
+                        Skip the Form
+                      </option>
+                      <option value="Return Bot">
+                        Return Bot
+                      </option>
+                      <option value="Fastlane">
+                        Fastlane
+                      </option>
+                    </select>
                   </div>
                 </div>
                 <!-- END BOT SETTINGS OPTIONS -->
@@ -121,38 +157,6 @@
 
                 <!-- USER SETTINGS OPTIONS -->
                 <div class="space-y-2">
-                  <!-- PLAYBOOK DROPDOWN-->
-                  <div
-                    class="border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-drift-indigo focus-within:border-drift-indigo"
-                  >
-                    <label
-                      for="playbookName"
-                      class="block text-xs font-medium text-gray-900"
-                    >Playbook // {{ playbookId }}</label>
-                    <select
-                      id="playbookName"
-                      v-model="playbookName"
-                      type="text"
-                      name="playbookName"
-                      class="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm"
-                    >
-                      <option value="Fastlane">
-                        Fastlane
-                      </option>
-                      <option value="Skip the Form">
-                        Skip the Form
-                      </option>
-                      <option value="Support Bot">
-                        Support Bot
-                      </option>
-                      <option value="Return Bot">
-                        Return Bot
-                      </option>
-                      <option value="ABM Bot">
-                        ABM Bot
-                      </option>
-                    </select>
-                  </div>
                   <!-- BACKGROUND INPUT-->
                   <div
                     class="border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-drift-indigo focus-within:border-drift-indigo"
@@ -186,23 +190,6 @@
                       name="email"
                       class="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm"
                       placeholder="Jane.Doe@example.com"
-                    >
-                  </div>
-                  <!-- WIDGET INPUT-->
-                  <div
-                    class="border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-drift-indigo focus-within:border-drift-indigo"
-                  >
-                    <label
-                      for="widgetId"
-                      class="block text-xs font-medium text-gray-900"
-                    >Widget ID</label>
-                    <input
-                      id="widgetId"
-                      v-model="widgetId"
-                      type="text"
-                      name="widgetId"
-                      class="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm"
-                      placeholder="Insert Widget ID"
                     >
                   </div>
                 </div>
@@ -282,8 +269,8 @@ export default {
         'https://screenshotapi-dot-net.storage.googleapis.com/www_drift_com__9efae73eb9a4.png', // The default background when input is blank
       backgroundFormats: ['.png', '.jpeg', '.jpg'],
       playbookName: localStorage.getItem('playbookName'), // name of the playbook
-      playbookId: localStorage.getItem('playbookId'), // id of the playbook
-      email: localStorage.getItem('email'), // visitor name
+      interactionId: localStorage.getItem('interactionId'), // interactionId of the playbook
+      email: localStorage.getItem('email'), // visitor email
       guid: localStorage.getItem('guid'), // unique user id
       botColor: localStorage.getItem('botColor') // bot color
     }
@@ -313,7 +300,7 @@ export default {
       localStorage.setItem('guid', this.guid)
       localStorage.setItem('email', this.email)
       localStorage.setItem('playbookName', this.playbookName)
-      localStorage.setItem('playbookId', this.playbookId)
+      localStorage.setItem('interactionId', this.interactionId)
       localStorage.setItem('botColor', this.botColor)
 
       this.calculateBackground()
@@ -324,7 +311,7 @@ export default {
     clearSettings () {
       localStorage.clear()
       this.playbookName = ''
-      this.playbookId = ''
+      this.interactionId = ''
       this.email = ''
       this.guid = ''
       this.backgroundInput = ''
@@ -426,7 +413,7 @@ export default {
       drift.load(this.widgetId);
 
       drift.config({
-        backgroundColor: this.botColor
+        backgroundColor: this.botColor,
       });
 
       // TODO: Drift config is currently broken (https://drift.slack.com/archives/CHK7L9AB1/p1649777796544179)
@@ -450,7 +437,7 @@ export default {
       switch (this.playbookName) {
         case 'Fastlane':
           // deploy fastlane on body click
-          this.playbookId = 2527830
+          this.interactionId = 2527830
           /* document.querySelector('body').click(
         console.log('body click')
         function(){
@@ -461,7 +448,7 @@ export default {
               companyName: 'Drift',
               title: 'SC'
             }, {
-              campaignId: this.playbookId
+              campaignId: this.interactionId
             })
         }); */
           break
@@ -472,21 +459,24 @@ export default {
           // deploy regular playbook
           switch (this.playbookName) {
             case 'Skip the Form':
-              this.playbookId = 309059
+              this.interactionId = 309059
               break
             case 'Support Bot':
-              this.playbookId = 309512
+              this.interactionId = 309512
               break
             case 'Return Bot':
-              this.playbookId = 308477
+              this.interactionId = 308477
               break
             case 'ABM Bot':
-              this.playbookId = null
-              this.setCookie('playbook', 'abmBot', 7)
+              this.interactionId = 'ABM'
+              this.setCookie('playbook', 'abmBot', 1)
+              break
+            case 'Engage All':
+              this.interactionId = 340714
               break
             default:
-              // default is Skip the Form
-              this.playbookId = ''
+              // default is no playbook
+              this.interactionId = ''
           }
       }
       // Fire selected playbook
@@ -497,7 +487,7 @@ export default {
         });
 
         drift.api.startInteraction({
-          interactionId: this.playbookId,
+          interactionId: this.interactionId,
           goToConversation: false,
           replaceActiveConversation: true,
         });
