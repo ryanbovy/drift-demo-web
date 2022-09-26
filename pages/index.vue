@@ -1,5 +1,13 @@
 <template>
   <main class="font-balto">
+    <div v-if="showLoader" class="fixed flex justify-center items-center inset-0 bg-drift-yellow z-[99999999999] text-3xl gap-4">
+      <div class="w-3/5 flex gap-4 items-center">
+        <div class="loader grow-0 shrink-0" />
+        <div class="uppercase font-bold animate-pulse">
+          {{ loaderMessage || 'Loading your amazing demo.' }}
+        </div>
+      </div>
+    </div>
     <!-- MAIN WINDOW CONTENT -->
     <div>
       <img :src="backgroundUrl">
@@ -262,17 +270,17 @@ export default {
       widgetId: '23x3bmcifbhe', // The default widgetId (can be overridden)
       isMenuOpen: true,
       menuHotKeys: ['shift', 'z'],
-      backgroundInput: localStorage.getItem('backgroundInput'), // The textbox for bkgd: can be either an image file or a URL to be screenshotted
-      backgroundUrl:
-        'https://screenshotapi-dot-net.storage.googleapis.com/www_drift_com__9efae73eb9a4.png', // The image to be used for background (will be either backgroundInput or an image from the screenshot API)
-      backgroundDefault:
-        'https://screenshotapi-dot-net.storage.googleapis.com/www_drift_com__9efae73eb9a4.png', // The default background when input is blank
+      backgroundInput: localStorage.getItem('backgroundInput') || '', // The textbox for bkgd: can be either an image file or a URL to be screenshotted
+      backgroundUrl: 'https://screenshotapi-dot-net.storage.googleapis.com/www_drift_com__9efae73eb9a4.png', // The image to be used for background (will be either backgroundInput or an image from the screenshot API)
+      backgroundDefault: 'https://screenshotapi-dot-net.storage.googleapis.com/www_drift_com__9efae73eb9a4.png', // The default background when input is blank
       backgroundFormats: ['.png', '.jpeg', '.jpg'],
       playbookName: localStorage.getItem('playbookName') || '', // name of the playbook
       interactionId: localStorage.getItem('interactionId') || '', // interactionId of the playbook
       email: localStorage.getItem('email') || '', // visitor email
       guid: localStorage.getItem('guid') || '', // unique user id
-      botColor: localStorage.getItem('botColor') || '' // bot color
+      botColor: localStorage.getItem('botColor') || '', // bot color,
+      showLoader: false,
+      loaderMessage: null
     }
   },
   head () {
@@ -280,17 +288,12 @@ export default {
       title: 'Home'
     }
   },
-  computed: {},
-  watch: {
-    backgroundInput (newBackground, oldBackground) {
-      this.calculateBackground()
-    }
-  },
   mounted () {
     // Mounted runs when the page is ready (kind of like onload)
     this.clearStorage()
     this.loadDrift()
     this.generateVisitor()
+    this.calculateBackground()
     this.firePlaybook()
   },
   methods: {
@@ -302,10 +305,7 @@ export default {
       localStorage.setItem('playbookName', this.playbookName || '')
       localStorage.setItem('interactionId', this.interactionId || '')
       localStorage.setItem('botColor', this.botColor || '')
-
-      this.calculateBackground()
       localStorage.setItem('backgroundInput', this.backgroundInput || '')
-
       location.reload()
     },
     clearSettings () {
@@ -482,9 +482,11 @@ export default {
       // Fire selected playbook
       /*eslint-disable */
       drift.on("ready", (api, payload) => {
-        drift.api.setUserAttributes({
-          email: this.email,
-        });
+        if (this.email) {
+          drift.api.setUserAttributes({
+            email: this.email,
+          });
+        }
 
         drift.api.startInteraction({
           interactionId: this.interactionId,
@@ -515,11 +517,7 @@ export default {
       }
     },
     async calculateBackground () {
-      // Check to see if the text input is empty. If so, load the default image again
-      if (this.backgroundInput === null || this.backgroundInput === '') {
-        this.backgroundUrl = this.backgroundDefault
-      } else {
-        // Otherwise, check to see if the input ends in an image file format. If so, load the image directly
+      if (this.backgroundInput !== null && this.backgroundInput !== '') {
         let isImage = false
         this.backgroundFormats.forEach((format) => {
           if (this.backgroundInput.includes(format)) {
@@ -527,17 +525,26 @@ export default {
             this.backgroundUrl = this.backgroundInput
           }
         })
-
         // If not, make a request to the screenshot generator
-        // TODO: Need to debounce
         if (!isImage) {
-          // eslint-disable-next-line no-console
-          console.log('get the pictureeee')
-          // TODO: need to finish this URL string
-          const response = await this.$axios.$get(
-            'https://api.apiflash.com/v1/urltoimage?access_key=50c864cc62ee4df69a23f65c15eea431&url=https%3A%2F%2Fnytimes.com&format=jpeg&full_page=true&quality=100&scroll_page=true&response_type=json&no_cookie_banners=true&no_tracking=true'
-          )
-          this.backgroundInput = response.url
+          this.showLoader = true
+          this.loaderMessage = 'Loading your background image. This may take a minute but will be faster next time!'
+          try {
+            const response = await this.$axios.$get(
+              `https://api.apiflash.com/v1/urltoimage?access_key=50c864cc62ee4df69a23f65c15eea431&url=${encodeURIComponent(this.backgroundInput)}&format=jpeg&full_page=true&quality=100&scroll_page=true&response_type=json&no_cookie_banners=true&no_tracking=true`
+            )
+            this.backgroundUrl = response.url
+            localStorage.setItem('backgroundInput', response.url || '')
+          } catch (err) {
+            // alert('background failed')
+            await new Promise((resolve) => {
+              this.loaderMessage = 'Something went wrong loading your background image. Make sure it starts with http:// or https://.'
+              setTimeout(resolve, 3000)
+            })
+          } finally {
+            this.showLoader = false
+            this.loaderMessage = null
+          }
         }
       }
     }
@@ -545,4 +552,24 @@ export default {
 }
 </script>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.loader {
+    width: 1em;
+    height: 1em;
+    border: 5px solid #ff8329;
+    border-bottom-color: transparent;
+    border-radius: 50%;
+    display: inline-block;
+    box-sizing: border-box;
+    animation: rotation 1s linear infinite;
+    }
+
+    @keyframes rotation {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+    }
+</style>
