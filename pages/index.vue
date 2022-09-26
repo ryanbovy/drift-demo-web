@@ -240,7 +240,7 @@
                   class="mt-6 w-full items-center px-6 py-3 border border-transparent rounded-md shadow-sm bg-drift-lime hover:bg-drift-cyan focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-drift-indigo font-bold uppercase"
                   @click="clearSettings()"
                 >
-                  ⚡️ Clear Settings
+                  🗑 Clear Settings
                 </button>
 
                 <!-- END OF SIDEBAR MENU CONTENT -->
