@@ -1,10 +1,13 @@
 <template>
   <main class="font-balto">
-    <div v-if="showLoader" class="fixed flex justify-center items-center inset-0 bg-drift-yellow z-[99999999999] text-3xl gap-4">
+    <div
+      v-if="showLoader"
+      class="fixed flex justify-center items-center inset-0 bg-drift-yellow z-[99999999999] text-3xl gap-4"
+    >
       <div class="w-3/5 flex gap-4 items-center">
         <div class="loader grow-0 shrink-0" />
         <div class="uppercase font-bold animate-pulse">
-          {{ loaderMessage || 'Loading your amazing demo.' }}
+          {{ loaderMessage || "Loading your amazing demo." }}
         </div>
       </div>
     </div>
@@ -108,6 +111,24 @@
                       class="w-1/4 border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm"
                     >
                   </div>
+                  <!-- BACKGROUND INPUT-->
+                  <div
+                    class="border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-drift-indigo focus-within:border-drift-indigo"
+                  >
+                    <label
+                      for="backgroundInput"
+                      class="block text-xs font-medium text-gray-900"
+                    >Background</label>
+                    <input
+                      id="backgroundInput"
+                      v-model="backgroundInput"
+                      type="text"
+                      name="backgroundInput"
+                      class="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm"
+                      placeholder="Insert website or path to hosted image"
+                      value="https://screenshotapi-dot-net.storage.googleapis.com/www_drift_com__cd817069080e.png"
+                    >
+                  </div>
                   <!-- PLAYBOOK DROPDOWN-->
                   <div
                     class="border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-drift-indigo focus-within:border-drift-indigo"
@@ -115,7 +136,9 @@
                     <label
                       for="playbookName"
                       class="block text-xs font-medium text-gray-900"
-                    >Playbook <span v-if="interactionId" class="opacity-50">//</span> {{ interactionId }}</label>
+                    >Playbook
+                      <span v-if="interactionId" class="opacity-50">//</span>
+                      {{ interactionId }}</label>
                     <select
                       id="playbookName"
                       v-model="playbookName"
@@ -139,9 +162,11 @@
                       <option value="Return Bot">
                         Return Bot
                       </option>
-                      <option value="Fastlane">
+                      <!--
+                        <option value="Fastlane">
                         Fastlane
                       </option>
+                       -->
                     </select>
                   </div>
                 </div>
@@ -165,25 +190,41 @@
 
                 <!-- USER SETTINGS OPTIONS -->
                 <div class="space-y-2">
-                  <!-- BACKGROUND INPUT-->
+                  <!-- FIRST NAME INPUT-->
                   <div
                     class="border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-drift-indigo focus-within:border-drift-indigo"
                   >
                     <label
-                      for="backgroundInput"
+                      for="fname"
                       class="block text-xs font-medium text-gray-900"
-                    >Background</label>
+                    >First Name</label>
                     <input
-                      id="backgroundInput"
-                      v-model="backgroundInput"
+                      id="fname"
+                      v-model="firstName"
                       type="text"
-                      name="backgroundInput"
+                      name="fname"
                       class="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm"
-                      placeholder="Insert website or path to hosted image"
-                      value="https://screenshotapi-dot-net.storage.googleapis.com/www_drift_com__cd817069080e.png"
+                      placeholder="Jane"
                     >
                   </div>
-                  <!-- NAME INPUT-->
+                  <!-- LAST NAME INPUT-->
+                  <div
+                    class="border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-drift-indigo focus-within:border-drift-indigo"
+                  >
+                    <label
+                      for="lname"
+                      class="block text-xs font-medium text-gray-900"
+                    >Last Name</label>
+                    <input
+                      id="lname"
+                      v-model="lastName"
+                      type="text"
+                      name="lname"
+                      class="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm"
+                      placeholder="Johnson"
+                    >
+                  </div>
+                  <!-- EMAIL INPUT-->
                   <div
                     class="border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-drift-indigo focus-within:border-drift-indigo"
                   >
@@ -198,6 +239,23 @@
                       name="email"
                       class="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm"
                       placeholder="Jane.Doe@example.com"
+                    >
+                  </div>
+                  <!-- ACCOUNT INPUT-->
+                  <div
+                    class="border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-drift-indigo focus-within:border-drift-indigo"
+                  >
+                    <label
+                      for="account"
+                      class="block text-xs font-medium text-gray-900"
+                    >Account</label>
+                    <input
+                      id="account"
+                      v-model="accountName"
+                      type="text"
+                      name="account"
+                      class="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm"
+                      placeholder="Example Inc"
                     >
                   </div>
                 </div>
@@ -271,14 +329,19 @@ export default {
       isMenuOpen: true,
       menuHotKeys: ['shift', 'z'],
       backgroundInput: localStorage.getItem('backgroundInput') || '', // The textbox for bkgd: can be either an image file or a URL to be screenshotted
-      backgroundUrl: 'https://screenshotapi-dot-net.storage.googleapis.com/www_drift_com__9efae73eb9a4.png', // The image to be used for background (will be either backgroundInput or an image from the screenshot API)
-      backgroundDefault: 'https://screenshotapi-dot-net.storage.googleapis.com/www_drift_com__9efae73eb9a4.png', // The default background when input is blank
+      backgroundUrl:
+        'https://screenshotapi-dot-net.storage.googleapis.com/www_drift_com__9efae73eb9a4.png', // The image to be used for background (will be either backgroundInput or an image from the screenshot API)
+      backgroundDefault:
+        'https://screenshotapi-dot-net.storage.googleapis.com/www_drift_com__9efae73eb9a4.png', // The default background when input is blank
       backgroundFormats: ['.png', '.jpeg', '.jpg'],
       playbookName: localStorage.getItem('playbookName') || '', // name of the playbook
       interactionId: localStorage.getItem('interactionId') || '', // interactionId of the playbook
+      firstName: localStorage.getItem('firstName') || '', // visitor fname
+      lastName: localStorage.getItem('lastName') || '', // visitor lname
       email: localStorage.getItem('email') || '', // visitor email
+      accountName: localStorage.getItem('accountName') || '', // visitor account
       guid: localStorage.getItem('guid') || '', // unique user id
-      botColor: localStorage.getItem('botColor') || '', // bot color,
+      botColor: localStorage.getItem('botColor') || '#005A9C', // bot color,
       showLoader: false,
       loaderMessage: null
     }
@@ -302,6 +365,9 @@ export default {
       // persist settings on refresh
       localStorage.setItem('guid', this.guid || '')
       localStorage.setItem('email', this.email || '')
+      localStorage.setItem('firstName', this.firstName || '')
+      localStorage.setItem('lastName', this.lastName || '')
+      localStorage.setItem('accountName', this.accountName || '')
       localStorage.setItem('playbookName', this.playbookName || '')
       localStorage.setItem('interactionId', this.interactionId || '')
       localStorage.setItem('botColor', this.botColor || '')
@@ -312,7 +378,10 @@ export default {
       localStorage.clear()
       this.playbookName = ''
       this.interactionId = ''
+      this.firstName = ''
+      this.lastName = ''
       this.email = ''
+      this.accountName = ''
       this.guid = ''
       this.backgroundInput = ''
       this.botColor = ''
@@ -468,15 +537,15 @@ export default {
               this.interactionId = 308477
               break
             case 'ABM Bot':
-              this.interactionId = 'ABM'
-              this.setCookie('playbook', 'abmBot', 1)
+              this.interactionId = NaN
+              setTimeout(this.setCookie('playbook', 'abmBot', 1), 5000)
               break
             case 'Engage All':
               this.interactionId = 340714
               break
             default:
               // default is no playbook
-              this.interactionId = ''
+              this.interactionId = NaN
           }
       }
       // Fire selected playbook
@@ -484,8 +553,22 @@ export default {
       drift.on("ready", (api, payload) => {
         if (this.email) {
           drift.api.setUserAttributes({
-            email: this.email,
+            email: this.email
           });
+          console.log('setEmail complete')
+        }
+        if (this.firstName && this.lastName) {
+          drift.api.setUserAttributes({
+            first_name: this.firstName,
+            last_name: this.lastName,
+          });
+          console.log('setUserName complete')
+        }
+        if (this.accountName) {
+          drift.api.setUserAttributes({
+            employment_name: this.accountName,
+          });
+          console.log('setCompany complete')
         }
 
         drift.api.startInteraction({
@@ -493,7 +576,7 @@ export default {
           goToConversation: false,
           replaceActiveConversation: true,
         });
-        // window.history.replaceState(null, null, "#driftRace");
+        window.history.replaceState(null, null, "#driftRace");
         drift.page();
         this.isMenuOpen = false;
       });
@@ -528,17 +611,21 @@ export default {
         // If not, make a request to the screenshot generator
         if (!isImage) {
           this.showLoader = true
-          this.loaderMessage = 'Loading your background image. This may take a minute but will be faster next time!'
+          this.loaderMessage =
+            'Loading your background image. This may take a minute but will be faster next time!'
           try {
             const response = await this.$axios.$get(
-              `https://api.apiflash.com/v1/urltoimage?access_key=50c864cc62ee4df69a23f65c15eea431&url=${encodeURIComponent(this.backgroundInput)}&format=jpeg&full_page=true&quality=100&scroll_page=true&response_type=json&no_cookie_banners=true&no_tracking=true`
+              `https://api.apiflash.com/v1/urltoimage?access_key=50c864cc62ee4df69a23f65c15eea431&url=${encodeURIComponent(
+                this.backgroundInput
+              )}&format=jpeg&full_page=true&quality=100&scroll_page=true&response_type=json&no_cookie_banners=true&no_tracking=true`
             )
             this.backgroundUrl = response.url
             localStorage.setItem('backgroundInput', response.url || '')
           } catch (err) {
             // alert('background failed')
             await new Promise((resolve) => {
-              this.loaderMessage = 'Something went wrong loading your background image. Make sure it starts with http:// or https://.'
+              this.loaderMessage =
+                'Something went wrong loading your background image. Make sure it starts with http:// or https://.'
               setTimeout(resolve, 3000)
             })
           } finally {
@@ -554,22 +641,22 @@ export default {
 
 <style scoped lang="scss">
 .loader {
-    width: 1em;
-    height: 1em;
-    border: 5px solid #ff8329;
-    border-bottom-color: transparent;
-    border-radius: 50%;
-    display: inline-block;
-    box-sizing: border-box;
-    animation: rotation 1s linear infinite;
-    }
+  width: 1em;
+  height: 1em;
+  border: 5px solid #ff8329;
+  border-bottom-color: transparent;
+  border-radius: 50%;
+  display: inline-block;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+}
 
-    @keyframes rotation {
-    0% {
-        transform: rotate(0deg);
-    }
-    100% {
-        transform: rotate(360deg);
-    }
-    }
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
 </style>
