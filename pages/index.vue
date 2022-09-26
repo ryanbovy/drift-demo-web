@@ -268,11 +268,11 @@ export default {
       backgroundDefault:
         'https://screenshotapi-dot-net.storage.googleapis.com/www_drift_com__9efae73eb9a4.png', // The default background when input is blank
       backgroundFormats: ['.png', '.jpeg', '.jpg'],
-      playbookName: localStorage.getItem('playbookName'), // name of the playbook
-      interactionId: localStorage.getItem('interactionId'), // interactionId of the playbook
-      email: localStorage.getItem('email'), // visitor email
-      guid: localStorage.getItem('guid'), // unique user id
-      botColor: localStorage.getItem('botColor') // bot color
+      playbookName: localStorage.getItem('playbookName') || '', // name of the playbook
+      interactionId: localStorage.getItem('interactionId') || '', // interactionId of the playbook
+      email: localStorage.getItem('email') || '', // visitor email
+      guid: localStorage.getItem('guid') || '', // unique user id
+      botColor: localStorage.getItem('botColor') || '' // bot color
     }
   },
   head () {
@@ -297,14 +297,14 @@ export default {
     // This is where we'll put all our functions to make our code organized
     saveSettings () {
       // persist settings on refresh
-      localStorage.setItem('guid', this.guid)
-      localStorage.setItem('email', this.email)
-      localStorage.setItem('playbookName', this.playbookName)
-      localStorage.setItem('interactionId', this.interactionId)
-      localStorage.setItem('botColor', this.botColor)
+      localStorage.setItem('guid', this.guid || '')
+      localStorage.setItem('email', this.email || '')
+      localStorage.setItem('playbookName', this.playbookName || '')
+      localStorage.setItem('interactionId', this.interactionId || '')
+      localStorage.setItem('botColor', this.botColor || '')
 
       this.calculateBackground()
-      localStorage.setItem('backgroundInput', this.backgroundInput)
+      localStorage.setItem('backgroundInput', this.backgroundInput || '')
 
       location.reload()
     },
