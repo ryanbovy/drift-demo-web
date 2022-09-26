@@ -107,7 +107,7 @@
                     <label
                       for="playbookName"
                       class="block text-xs font-medium text-gray-900"
-                    >Playbook // {{ interactionId }}</label>
+                    >Playbook <span v-if="interactionId" class="opacity-50">//</span> {{ interactionId }}</label>
                     <select
                       id="playbookName"
                       v-model="playbookName"
