@@ -2,7 +2,8 @@
   <main class="font-balto">
     <div
       v-if="showLoader"
-      class="fixed flex justify-center items-center inset-0 bg-drift-yellow z-[99999999999] text-3xl gap-4"
+      class="fixed flex justify-center items-center inset-0 z-[99999999999] text-3xl gap-4"
+      :class="[ loaderWarning ? 'bg-drift-orange' : 'bg-drift-yellow']"
     >
       <div class="w-3/5 flex gap-4 items-center">
         <div class="loader grow-0 shrink-0" />
@@ -343,6 +344,7 @@ export default {
       guid: localStorage.getItem('guid') || '', // unique user id
       botColor: localStorage.getItem('botColor') || '#005A9C', // bot color,
       showLoader: false,
+      loaderWarning: false,
       loaderMessage: null
     }
   },
@@ -537,7 +539,7 @@ export default {
               this.interactionId = 308477
               break
             case 'ABM Bot':
-              this.interactionId = NaN
+              this.interactionId = null
               setTimeout(this.setCookie('playbook', 'abmBot', 1), 5000)
               break
             case 'Engage All':
@@ -545,7 +547,7 @@ export default {
               break
             default:
               // default is no playbook
-              this.interactionId = NaN
+              this.interactionId = null
           }
       }
       // Fire selected playbook
@@ -571,13 +573,22 @@ export default {
           console.log('setCompany complete')
         }
 
-        drift.api.startInteraction({
-          interactionId: this.interactionId,
-          goToConversation: false,
-          replaceActiveConversation: true,
+        if (this.interactionId) {
+          drift.api.startInteraction({
+            interactionId: this.interactionId,
+            goToConversation: false,
+            replaceActiveConversation: true,
         });
-        window.history.replaceState(null, null, "#driftRace");
-        drift.page();
+        } else {
+          /* Weird fluke in Drift where the widget is already loaded and the only way to
+          load an ABM bot is through alternative targeting (not interactionId). Therefore,
+          we have to set a cookie, then wait a MILLIsecond and refresh the "page"
+          */
+          setTimeout(() => {
+          // window.history.replaceState(null, null, "#driftRace");
+          drift.page();
+        }, 1)
+        }
         this.isMenuOpen = false;
       });
       /* eslint-enable */
@@ -624,12 +635,14 @@ export default {
           } catch (err) {
             // alert('background failed')
             await new Promise((resolve) => {
+              this.loaderWarning = true
               this.loaderMessage =
                 'Something went wrong loading your background image. Make sure it starts with http:// or https://.'
               setTimeout(resolve, 3000)
             })
           } finally {
             this.showLoader = false
+            this.loaderWarning = false
             this.loaderMessage = null
           }
         }
