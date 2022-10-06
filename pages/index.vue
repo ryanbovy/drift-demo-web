@@ -327,7 +327,7 @@ export default {
   data () {
     return {
       widgetId: '23x3bmcifbhe', // The default widgetId (can be overridden)
-      isMenuOpen: true,
+      isMenuOpen: false,
       menuHotKeys: ['shift', 'z'],
       backgroundInput: localStorage.getItem('backgroundInput') || '', // The textbox for bkgd: can be either an image file or a URL to be screenshotted
       backgroundUrl:
@@ -431,7 +431,6 @@ export default {
     },
     loadDrift () {
       // A function to run the standard install code. The widgetId variable can be set (otherwise uses a default value)
-      /*eslint-disable */
       "use strict";
       !(function () {
         const t = (window.driftt = window.drift = window.driftt || []);
@@ -494,7 +493,6 @@ export default {
       /*drift.config({
       iframeSandbox: 'allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-forms'
     });*/
-      /* eslint-enable */
     },
     generateVisitor () {
       /* eslint-disable */
@@ -526,32 +524,27 @@ export default {
         case 'Conversational Landing Page':
           // deploy CLP
           break
+        case 'Skip the Form':
+          this.interactionId = 309059
+          break
+        case 'Support Bot':
+          this.interactionId = 309512
+          break
+        case 'Return Bot':
+          this.interactionId = 308477
+          break
+        case 'ABM Bot':
+          this.interactionId = null
+          setTimeout(this.setCookie('playbook', 'abmBot', 1), 5000)
+          break
+        case 'Engage All':
+          this.interactionId = 340714
+          break
         default:
-          // deploy regular playbook
-          switch (this.playbookName) {
-            case 'Skip the Form':
-              this.interactionId = 309059
-              break
-            case 'Support Bot':
-              this.interactionId = 309512
-              break
-            case 'Return Bot':
-              this.interactionId = 308477
-              break
-            case 'ABM Bot':
-              this.interactionId = null
-              setTimeout(this.setCookie('playbook', 'abmBot', 1), 5000)
-              break
-            case 'Engage All':
-              this.interactionId = 340714
-              break
-            default:
-              // default is no playbook
-              this.interactionId = null
-          }
+          // default is no playbook
+          this.interactionId = null
       }
       // Fire selected playbook
-      /*eslint-disable */
       drift.on("ready", (api, payload) => {
         if (this.email) {
           drift.api.setUserAttributes({
@@ -585,13 +578,12 @@ export default {
           we have to set a cookie, then wait a MILLIsecond and refresh the "page"
           */
           setTimeout(() => {
-          // window.history.replaceState(null, null, "#driftRace");
-          drift.page();
-        }, 1)
+            window.history.replaceState(null, null, "#driftRace");
+            drift.page()
+          }, 1000)
         }
         this.isMenuOpen = false;
       });
-      /* eslint-enable */
     },
     setCookie (name, value, days) {
       let expires = ''
@@ -604,11 +596,7 @@ export default {
     },
     toggleMenu () {
       this.isMenuOpen = !this.isMenuOpen
-      if (this.isMenuOpen) {
-        /* eslint-disable */
-        drift.hideChat();
-        /* eslint-enable */
-      }
+      drift.api.toggleChat();
     },
     async calculateBackground () {
       if (this.backgroundInput !== null && this.backgroundInput !== '') {
@@ -633,7 +621,6 @@ export default {
             this.backgroundUrl = response.url
             localStorage.setItem('backgroundInput', response.url || '')
           } catch (err) {
-            // alert('background failed')
             await new Promise((resolve) => {
               this.loaderWarning = true
               this.loaderMessage =
@@ -641,12 +628,15 @@ export default {
               setTimeout(resolve, 3000)
             })
           } finally {
-            this.showLoader = false
-            this.loaderWarning = false
-            this.loaderMessage = null
+            this.resetLoader()
           }
         }
       }
+    },
+    resetLoader () {
+      this.showLoader = false
+      this.loaderWarning = false
+      this.loaderMessage = null
     }
   }
 }
