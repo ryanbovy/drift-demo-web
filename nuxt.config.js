@@ -2,6 +2,7 @@ export default {
   server: {
     port: process.env.PORT || 3000
   },
+  serverMiddleware: ["redirect-ssl"],
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
   ssr: false,
 
