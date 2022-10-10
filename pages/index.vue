@@ -161,10 +161,11 @@
                       <option value="Skip the Form">
                         Skip the Form
                       </option>
+
+                      <!--
                       <option value="Return Bot">
                         Return Bot
                       </option>
-                      <!--
                         <option value="Fastlane">
                         Fastlane
                       </option>
@@ -599,6 +600,8 @@ export default {
       this.isMenuOpen = !this.isMenuOpen
       if(this.isMenuOpen){
         drift.api.hideChat();
+      } else {
+        drift.api.openChat();
       }
     },
     async calculateBackground () {
