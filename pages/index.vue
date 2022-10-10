@@ -26,6 +26,7 @@
       role="dialog"
       aria-modal="true"
       @shortkey="toggleMenu()"
+      style="z-index:10000000000"
     >
       <div class="absolute inset-0 overflow-hidden">
         <div
@@ -582,7 +583,6 @@ export default {
             drift.page()
           }, 1000)
         }
-        this.isMenuOpen = false;
       });
     },
     setCookie (name, value, days) {
