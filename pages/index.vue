@@ -172,6 +172,7 @@
                        -->
                     </select>
                   </div>
+                  <div v-if="playbookName==='ABM Bot'">ABM field</div>
                 </div>
                 <!-- END BOT SETTINGS OPTIONS -->
 
