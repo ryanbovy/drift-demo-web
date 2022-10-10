@@ -172,7 +172,22 @@
                        -->
                     </select>
                   </div>
-                  <div v-if="playbookName==='ABM Bot'">ABM field</div>
+                  <div
+                  v-if="playbookName==='ABM Bot'"
+                    class="border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-drift-indigo focus-within:border-drift-indigo"
+                  >
+                    <label
+                      for="abmMessage"
+                      class="block text-xs font-medium text-gray-900"
+                    >ABM Message</label>
+                    <input
+                      id="abmMessage"
+                      v-model="abmMessage"
+                      type="text"
+                      name="abmMessage"
+                      class="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm"
+                    >
+                  </div>
                 </div>
                 <!-- END BOT SETTINGS OPTIONS -->
 
@@ -342,6 +357,7 @@ export default {
       interactionId: localStorage.getItem('interactionId') || '', // interactionId of the playbook
       firstName: localStorage.getItem('firstName') || '', // visitor fname
       lastName: localStorage.getItem('lastName') || '', // visitor lname
+      abmMessage: localStorage.getItem('abmMessage') || 'We help companies like you drive pipeline and hit their revenue targets faster.', // ABM Message
       email: localStorage.getItem('email') || '', // visitor email
       accountName: localStorage.getItem('accountName') || '', // visitor account
       guid: localStorage.getItem('guid') || '', // unique user id
@@ -372,6 +388,7 @@ export default {
       localStorage.setItem('email', this.email || '')
       localStorage.setItem('firstName', this.firstName || '')
       localStorage.setItem('lastName', this.lastName || '')
+      localStorage.setItem('abmMessage', this.abmMessage || '')
       localStorage.setItem('accountName', this.accountName || '')
       localStorage.setItem('playbookName', this.playbookName || '')
       localStorage.setItem('interactionId', this.interactionId || '')
@@ -385,12 +402,14 @@ export default {
       this.interactionId = ''
       this.firstName = ''
       this.lastName = ''
+      this.abmMessage = ''
       this.email = ''
       this.accountName = ''
       this.guid = ''
       this.backgroundInput = ''
       this.botColor = ''
       location.reload()
+      this.toggleMenu()
     },
     createGuid () {
       function value () {
@@ -568,6 +587,12 @@ export default {
             employment_name: this.accountName
           })
           console.log('setCompany complete')
+        }
+        if (this.abmMessage) {
+          drift.api.setUserAttributes({
+            abm_message: this.abmMessage
+          })
+          console.log('ABM message complete')
         }
 
         if (this.interactionId) {
