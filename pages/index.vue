@@ -547,18 +547,19 @@ export default {
       }
       // Fire selected playbook
       drift.on('ready', (api, payload) => {
-        if (this.email) {
-          drift.api.setUserAttributes({
-            email: this.email
-          })
-          console.log('setEmail complete')
-        }
+        
         if (this.firstName && this.lastName) {
           drift.api.setUserAttributes({
             first_name: this.firstName,
             last_name: this.lastName
           })
           console.log('setUserName complete')
+        }
+        if (this.email) {
+          drift.api.setUserAttributes({
+            email: this.email
+          })
+          console.log('setEmail complete')
         }
         if (this.accountName) {
           drift.api.setUserAttributes({
@@ -581,7 +582,7 @@ export default {
           setTimeout(() => {
             window.history.replaceState(null, null, '#driftRace')
             drift.page()
-          }, 1000)
+          }, 250)
         }
       })
     },
