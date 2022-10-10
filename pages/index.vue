@@ -596,7 +596,9 @@ export default {
     },
     toggleMenu () {
       this.isMenuOpen = !this.isMenuOpen
-      // drift.api.toggleChat();
+      if(this.isMenuOpen){
+        drift.api.hideChat();
+      }
     },
     async calculateBackground () {
       if (this.backgroundInput !== null && this.backgroundInput !== '') {
