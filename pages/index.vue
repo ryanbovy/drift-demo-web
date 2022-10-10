@@ -25,8 +25,8 @@
       aria-labelledby="slide-over-title"
       role="dialog"
       aria-modal="true"
-      @shortkey="toggleMenu()"
       style="z-index:10000000000"
+      @shortkey="toggleMenu()"
     >
       <div class="absolute inset-0 overflow-hidden">
         <div
@@ -432,68 +432,68 @@ export default {
     },
     loadDrift () {
       // A function to run the standard install code. The widgetId variable can be set (otherwise uses a default value)
-      "use strict";
+      'use strict'
       !(function () {
-        const t = (window.driftt = window.drift = window.driftt || []);
+        const t = (window.driftt = window.drift = window.driftt || [])
         if (!t.init) {
           if (t.invoked) {
             return void (
               window.console &&
               console.error &&
-              console.error("Drift snippet included twice.")
-            );
+              console.error('Drift snippet included twice.')
+            )
           }
           (t.invoked = !0),
-            (t.methods = [
-              "identify",
-              "config",
-              "track",
-              "reset",
-              "debug",
-              "show",
-              "ping",
-              "page",
-              "hide",
-              "off",
-              "on",
-            ]),
-            (t.factory = function (e) {
-              return function () {
-                const n = Array.prototype.slice.call(arguments);
-                return n.unshift(e), t.push(n), t;
-              };
-            }),
-            t.methods.forEach(function (e) {
-              t[e] = t.factory(e);
-            }),
-            (t.load = function (t) {
-              const e = 3e5;
-              const n = Math.ceil(new Date() / e) * e;
-              const o = document.createElement("script");
-              (o.type = "text/javascript"),
-                (o.async = !0),
-                (o.crossorigin = "anonymous"),
-                (o.src =
-                  "https://js.driftt.com/include/" + n + "/" + t + ".js");
-              const i = document.getElementsByTagName("script")[0];
-              i.parentNode.insertBefore(o, i);
-            });
+          (t.methods = [
+            'identify',
+            'config',
+            'track',
+            'reset',
+            'debug',
+            'show',
+            'ping',
+            'page',
+            'hide',
+            'off',
+            'on'
+          ]),
+          (t.factory = function (e) {
+            return function () {
+              const n = Array.prototype.slice.call(arguments)
+              return n.unshift(e), t.push(n), t
+            }
+          }),
+          t.methods.forEach(function (e) {
+            t[e] = t.factory(e)
+          }),
+          (t.load = function (t) {
+            const e = 3e5
+            const n = Math.ceil(new Date() / e) * e
+            const o = document.createElement('script');
+            (o.type = 'text/javascript'),
+            (o.async = !0),
+            (o.crossorigin = 'anonymous'),
+            (o.src =
+                  'https://js.driftt.com/include/' + n + '/' + t + '.js')
+            const i = document.getElementsByTagName('script')[0]
+            i.parentNode.insertBefore(o, i)
+          })
         }
-      })();
-      drift.SNIPPET_VERSION = "0.3.1";
-      drift.load(this.widgetId);
+      })()
+      drift.SNIPPET_VERSION = '0.3.1'
+      drift.load(this.widgetId)
 
       drift.config({
-        backgroundColor: this.botColor,
-      });
+        backgroundColor: this.botColor
+      })
 
       // TODO: Drift config is currently broken (https://drift.slack.com/archives/CHK7L9AB1/p1649777796544179)
       // but it appears the following config is going to be needed access Drift via JS/CSS selectors to do some
       // of the fancy stuff we were doing via console (https://devdocs.drift.com/docs/securing-drift-on-your-site-with-an-iframe#required-attributes)
       // Afterwards we should be able to access elements in the iFrame like this: https://stackoverflow.com/questions/26630519/queryselector-for-web-elements-inside-iframe
-      /*drift.config({
+      /* drift.config({
       iframeSandbox: 'allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-forms'
-    });*/
+    }); */
     },
     generateVisitor () {
       /* eslint-disable */
@@ -546,24 +546,24 @@ export default {
           this.interactionId = null
       }
       // Fire selected playbook
-      drift.on("ready", (api, payload) => {
+      drift.on('ready', (api, payload) => {
         if (this.email) {
           drift.api.setUserAttributes({
             email: this.email
-          });
+          })
           console.log('setEmail complete')
         }
         if (this.firstName && this.lastName) {
           drift.api.setUserAttributes({
             first_name: this.firstName,
-            last_name: this.lastName,
-          });
+            last_name: this.lastName
+          })
           console.log('setUserName complete')
         }
         if (this.accountName) {
           drift.api.setUserAttributes({
-            employment_name: this.accountName,
-          });
+            employment_name: this.accountName
+          })
           console.log('setCompany complete')
         }
 
@@ -571,19 +571,19 @@ export default {
           drift.api.startInteraction({
             interactionId: this.interactionId,
             goToConversation: false,
-            replaceActiveConversation: true,
-        });
+            replaceActiveConversation: true
+          })
         } else {
           /* Weird fluke in Drift where the widget is already loaded and the only way to
           load an ABM bot is through alternative targeting (not interactionId). Therefore,
           we have to set a cookie, then wait a MILLIsecond and refresh the "page"
           */
           setTimeout(() => {
-            window.history.replaceState(null, null, "#driftRace");
+            window.history.replaceState(null, null, '#driftRace')
             drift.page()
           }, 1000)
         }
-      });
+      })
     },
     setCookie (name, value, days) {
       let expires = ''
@@ -596,7 +596,7 @@ export default {
     },
     toggleMenu () {
       this.isMenuOpen = !this.isMenuOpen
-      drift.api.toggleChat();
+      // drift.api.toggleChat();
     },
     async calculateBackground () {
       if (this.backgroundInput !== null && this.backgroundInput !== '') {
