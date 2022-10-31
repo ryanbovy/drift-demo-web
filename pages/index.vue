@@ -25,6 +25,7 @@
       aria-labelledby="slide-over-title"
       role="dialog"
       aria-modal="true"
+      style="z-index:10000000000"
       @shortkey="toggleMenu()"
     >
       <div class="absolute inset-0 overflow-hidden">
@@ -683,6 +684,10 @@ export default {
   display: inline-block;
   box-sizing: border-box;
   animation: rotation 1s linear infinite;
+}
+
+#drift-video-extension-root{
+  z-index:11000000000;
 }
 
 @keyframes rotation {
