@@ -687,7 +687,7 @@ export default {
 }
 
 #drift-video-extension-root{
-  z-index:11000000000;
+  z-index:11000000000 !important;
 }
 
 @keyframes rotation {
