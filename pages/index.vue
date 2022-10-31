@@ -25,12 +25,12 @@
       aria-labelledby="slide-over-title"
       role="dialog"
       aria-modal="true"
-      style="z-index:10000000000"
+      style="z-index: 10000000000"
       @shortkey="toggleMenu()"
     >
       <div class="absolute inset-0 overflow-hidden">
         <div
-          class="absolute inset-0 bg-drift-yellow bg-opacity-75 transition-opacity ease-in-out duration-500"
+          class="absolute inset-0 bg-opacity-75 transition-opacity ease-in-out duration-500"
           aria-hidden="true"
           :class="[isMenuOpen ? 'opacity-100' : 'opacity-0']"
         />
@@ -687,7 +687,7 @@ export default {
 }
 
 #drift-video-extension-root{
-  z-index:11000000000 !important;
+  z-index: 11000000000 !important;
 }
 
 @keyframes rotation {
