@@ -25,7 +25,6 @@
       aria-labelledby="slide-over-title"
       role="dialog"
       aria-modal="true"
-      style="z-index:10000000000"
       @shortkey="toggleMenu()"
     >
       <div class="absolute inset-0 overflow-hidden">
