@@ -32,7 +32,7 @@
         <div
           class="absolute inset-0 bg-opacity-75 transition-opacity ease-in-out duration-500"
           aria-hidden="true"
-          style="filter: drop-shadow(-10px 0px 25px #ffff05);"
+          id="settingsMenu"
           :class="[isMenuOpen ? 'opacity-100' : 'opacity-0']"
         />
         <div
@@ -685,10 +685,6 @@ export default {
   display: inline-block;
   box-sizing: border-box;
   animation: rotation 1s linear infinite;
-}
-
-#drift-video-extension-root{
-  z-index: 11000000000 !important;
 }
 
 @keyframes rotation {

@@ -24,3 +24,11 @@ h1, h2, h3, h4, h5, h6 {
     @apply uppercase;
     font-weight: bold !important;
 }
+
+#settingsMenu{
+    filter: drop-shadow(-10px 0px 25px #ffff05);
+}
+
+#drift-video-extension-root{
+    z-index: 11000000000 !important;
+}
