@@ -25,18 +25,17 @@
       aria-labelledby="slide-over-title"
       role="dialog"
       aria-modal="true"
-      style="z-index: 10000000000"
       @shortkey="toggleMenu()"
     >
       <div class="absolute inset-0 overflow-hidden">
         <div
           class="absolute inset-0 bg-opacity-75 transition-opacity ease-in-out duration-500"
           aria-hidden="true"
-          id="settingsMenu"
           :class="[isMenuOpen ? 'opacity-100' : 'opacity-0']"
         />
         <div
           class="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10"
+          :class="[isMenuOpen ? 'menu-shadow' : '']"
         >
           <div
             class="pointer-events-auto w-screen max-w-md transform transition ease-in-out duration-500 sm:duration-700"
