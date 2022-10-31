@@ -33,6 +33,7 @@ h1, h2, h3, h4, h5, h6 {
     filter: drop-shadow(-10px 0px 25px #ffff05);
 }
 
-#drift-video-extension-root{
+#drift-video-extension-root,
+#drift-video-extension-share-modal{
     z-index: 11000000000 !important;
 }
