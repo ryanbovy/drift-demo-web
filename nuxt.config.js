@@ -1,8 +1,9 @@
+import redirectSSL from 'redirect-ssl'
 export default {
   server: {
     port: process.env.PORT || 3000
   },
-  serverMiddleware: ["redirect-ssl"],
+  serverMiddleware: [redirectSSL.create({enabled: process.env.NODE_ENV==='production'})],
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
   ssr: false,
 
