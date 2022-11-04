@@ -14,7 +14,11 @@ module.exports = {
   plugins: [
   ],
   // add your custom rules here
-  rules: {},
+  rules: {
+    'no-unused-expressions':'off',
+    'no-void':'off',
+    'no-sequences':'off'
+  },
   globals: {
     'drift': 'readonly'
   }

@@ -60,7 +60,7 @@ export default {
     '@nuxtjs/toast'
   ],
   axios: {
-    baseUrl: process.env.apiUrl || 'http://localhost:3001/v1'
+    baseUrl: process.env.API_URL || 'http://localhost:3001'
   },
   toast: {
     position: 'top-right',
@@ -79,6 +79,6 @@ export default {
     },
   },
   env: {
-    apiUrl: process.env.API_URL || 'http://localhost:3001/v1'
+    API_URL: process.env.API_URL || 'http://localhost:3001'
   }
 }
