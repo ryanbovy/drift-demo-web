@@ -17,7 +17,8 @@ module.exports = {
   rules: {
     'no-unused-expressions':'off',
     'no-void':'off',
-    'no-sequences':'off'
+    'no-sequences':'off',
+    'no-global-assign': 'off'
   },
   globals: {
     'drift': 'readonly'

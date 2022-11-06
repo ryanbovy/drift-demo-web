@@ -1,457 +1,14 @@
 <template>
   <main class="font-balto">
-    <div
-      v-if="showLoader"
-      class="fixed flex justify-center items-center inset-0 z-[99999999999] text-3xl gap-4"
-      :class="[ loaderWarning ? 'bg-drift-orange' : 'bg-drift-yellow']"
-    >
-      <div class="w-3/5 flex gap-4 items-center">
-        <div class="loader grow-0 shrink-0" />
-        <div class="uppercase font-bold animate-pulse">
-          {{ loaderMessage || "Loading your amazing demo." }}
-        </div>
-      </div>
-    </div>
+    <!-- LOADER SCREEN -->
+    <TheLoaderModal />
     <!-- MAIN WINDOW CONTENT -->
     <div>
-      <img :src="backgroundUrl">
+      <img :src="background">
     </div>
     <!-- END MAIN WINDOW CONTENT -->
     <!-- SIDEBAR MENU -->
-    <div
-      id="app"
-      v-shortkey="menuHotKeys"
-      class="fixed inset-0 overflow-hidden"
-      aria-labelledby="slide-over-title"
-      role="dialog"
-      aria-modal="true"
-      @shortkey="toggleMenu()"
-    >
-      <div class="absolute inset-0 overflow-hidden">
-        <div
-          class="absolute inset-0 bg-opacity-75 transition-opacity ease-in-out duration-500"
-          aria-hidden="true"
-          :class="[isMenuOpen ? 'opacity-100' : 'opacity-0']"
-        />
-        <div
-          class="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10"
-          :class="[isMenuOpen ? 'menu-shadow' : '']"
-        >
-          <div
-            class="pointer-events-auto w-screen max-w-md transform transition ease-in-out duration-500 sm:duration-700"
-            :class="[isMenuOpen ? 'translate-x-0' : 'translate-x-full']"
-          >
-            <div
-              class="flex h-full flex-col overflow-y-scroll bg-white py-6 shadow-xl"
-            >
-              <div class="px-4 sm:px-6">
-                <div class="flex items-start justify-between">
-                  <h2 id="slide-over-title" class="text-lg font-medium">
-                    Drift Demo <span class="text-xs text-drift-cyan">V2</span>
-                  </h2>
-                  <div class="ml-3 flex h-7 items-center">
-                    <button
-                      type="button"
-                      class="rounded-md bg-white text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-drift-indigo focus:ring-offset-2"
-                      @click="isMenuOpen = false"
-                    >
-                      <span class="sr-only">Close panel</span>
-                      <!-- Heroicon name: outline/x -->
-                      <svg
-                        class="h-6 w-6"
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                        aria-hidden="true"
-                      >
-                        <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="2"
-                          d="M6 18L18 6M6 6l12 12"
-                        />
-                      </svg>
-                    </button>
-                  </div>
-                </div>
-              </div>
-
-              <!-- SIDEBAR MENU CONTENT -->
-              <div v-if="userId" class="relative mt-6 flex-1 px-4 sm:px-6">
-                <!-- SAVED SETTINGS DIVIDER -->
-                <div class="relative mt-6 mb-2">
-                  <div
-                    class="absolute inset-0 flex items-center"
-                    aria-hidden="true"
-                  >
-                    <div class="w-full border-t border-gray-200" />
-                  </div>
-                  <div class="relative flex justify-start">
-                    <span class="pr-2 bg-white text-xs uppercase font-bold">
-                      Saved Settings
-                    </span>
-                  </div>
-                </div>
-                <!-- END SAVED SETTINGS DIVIDER -->
-
-                <!-- LOGGED IN OUTPUTS-->
-                <div class="text-xs text-drift-grey mb-2">
-                  <span class="pr-2">
-                    Logged in as: <span class="text-drift-violet">{{ userEmail }}</span>
-                  </span>
-                  <button type="link" class="rounded-md shadow-sm bg-drift-orange text-white py-1 px-3" @click="logout()">
-                    Logout
-                  </button>
-                </div>
-                <!-- END LOGGED IN OUTPUTS-->
-
-                <!-- SAVED SETTING OPTIONS-->
-                <!-- DEMO SELECT -->
-                <div class="space-y-2">
-                  <div
-                    v-if="!noDemos"
-                    class="border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-drift-indigo focus-within:border-drift-indigo"
-                  >
-                    <label
-                      for="savedDemos"
-                      class="block text-xs font-medium text-gray-900"
-                    >Saved Demos</label>
-                    <select
-                      id="savedDemos"
-                      class="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm"
-                    >
-                      <option v-for="demo in savedDemos" :key="demo">
-                        {{ demo.settings.demoName }}
-                      </option>
-                    </select>
-                  </div>
-                  <div v-else class="mt-2 text-drift-indigo font-medium text-center text-md">
-                    Create and save your first demo!
-                  </div>
-
-                  <!-- DEMO NAME INPUT-->
-                  <div
-                    class="border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-drift-indigo focus-within:border-drift-indigo"
-                  >
-                    <label
-                      for="demoName"
-                      class="block text-xs font-medium text-gray-900"
-                    >Demo Name</label>
-                    <input
-                      id="demoName"
-                      v-model="demoName"
-                      type="text"
-                      name="demoName"
-                      class="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm"
-                      placeholder="Account Bot Experience"
-                    >
-                  </div>
-                </div>
-
-                <!-- END SAVED SETTINGS OPTIONS -->
-
-                <!-- BOT SETTINGS DIVIDER -->
-                <div class="relative mt-6 mb-2">
-                  <div
-                    class="absolute inset-0 flex items-center"
-                    aria-hidden="true"
-                  >
-                    <div class="w-full border-t border-gray-200" />
-                  </div>
-                  <div class="relative flex justify-start">
-                    <span class="pr-2 bg-white text-xs uppercase font-bold">
-                      Bot Settings
-                    </span>
-                  </div>
-                </div>
-                <!-- END BOT SETTINGS DIVIDER -->
-
-                <!-- BOT SETTINGS OPTIONS -->
-                <div class="space-y-2">
-                  <!-- COLOR SELECTION-->
-                  <div
-                    class="flex border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-drift-indigo focus-within:border-drift-indigo"
-                  >
-                    <label
-                      for="botColor"
-                      class="w-3/4 text-xs font-medium text-gray-900"
-                    >Bot Color</label>
-                    <input
-                      id="botColor"
-                      v-model="botColor"
-                      type="color"
-                      name="botColor"
-                      class="w-1/4 border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm"
-                    >
-                  </div>
-                  <!-- BACKGROUND INPUT-->
-                  <div
-                    class="border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-drift-indigo focus-within:border-drift-indigo"
-                  >
-                    <label
-                      for="backgroundInput"
-                      class="block text-xs font-medium text-gray-900"
-                    >Background</label>
-                    <input
-                      id="backgroundInput"
-                      v-model="backgroundInput"
-                      type="text"
-                      name="backgroundInput"
-                      class="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm"
-                      placeholder="Insert website or path to hosted image"
-                      value="https://screenshotapi-dot-net.storage.googleapis.com/www_drift_com__cd817069080e.png"
-                    >
-                  </div>
-                  <!-- PLAYBOOK DROPDOWN-->
-                  <div
-                    class="border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-drift-indigo focus-within:border-drift-indigo"
-                  >
-                    <label
-                      for="playbookName"
-                      class="block text-xs font-medium text-gray-900"
-                    >Playbook
-                      <span v-if="interactionId" class="opacity-50">//</span>
-                      {{ interactionId }}</label>
-                    <select
-                      id="playbookName"
-                      v-model="playbookName"
-                      type="text"
-                      name="playbookName"
-                      class="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm"
-                      placeholder="Select a Playbook"
-                    >
-                      <option value="Engage All">
-                        Engage All
-                      </option>
-                      <option value="ABM Bot">
-                        ABM Bot
-                      </option>
-                      <option value="Support Bot">
-                        Support Bot
-                      </option>
-                      <option value="Skip the Form">
-                        Skip the Form
-                      </option>
-
-                      <!--
-                      <option value="Return Bot">
-                        Return Bot
-                      </option>
-                        <option value="Fastlane">
-                        Fastlane
-                      </option>
-                       -->
-                    </select>
-                  </div>
-                  <div
-                    v-if="playbookName==='ABM Bot'"
-                    class="border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-drift-indigo focus-within:border-drift-indigo"
-                  >
-                    <label
-                      for="abmMessage"
-                      class="block text-xs font-medium text-gray-900"
-                    >ABM Message</label>
-                    <input
-                      id="abmMessage"
-                      v-model="abmMessage"
-                      type="text"
-                      name="abmMessage"
-                      class="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm"
-                    >
-                  </div>
-                </div>
-                <!-- END BOT SETTINGS OPTIONS -->
-
-                <!-- USER SETTINGS DIVIDER -->
-                <div class="relative mt-6 mb-2">
-                  <div
-                    class="absolute inset-0 flex items-center"
-                    aria-hidden="true"
-                  >
-                    <div class="w-full border-t border-gray-200" />
-                  </div>
-                  <div class="relative flex justify-start">
-                    <span class="pr-2 bg-white text-xs uppercase font-bold">
-                      User Settings
-                    </span>
-                  </div>
-                </div>
-                <!-- END USER SETTINGS DIVIDER -->
-
-                <!-- USER SETTINGS OPTIONS -->
-                <div class="space-y-2">
-                  <!-- FIRST NAME INPUT-->
-                  <div
-                    class="border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-drift-indigo focus-within:border-drift-indigo"
-                  >
-                    <label
-                      for="fname"
-                      class="block text-xs font-medium text-gray-900"
-                    >First Name</label>
-                    <input
-                      id="fname"
-                      v-model="firstName"
-                      type="text"
-                      name="fname"
-                      class="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm"
-                      placeholder="Jane"
-                    >
-                  </div>
-                  <!-- LAST NAME INPUT-->
-                  <div
-                    class="border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-drift-indigo focus-within:border-drift-indigo"
-                  >
-                    <label
-                      for="lname"
-                      class="block text-xs font-medium text-gray-900"
-                    >Last Name</label>
-                    <input
-                      id="lname"
-                      v-model="lastName"
-                      type="text"
-                      name="lname"
-                      class="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm"
-                      placeholder="Johnson"
-                    >
-                  </div>
-                  <!-- EMAIL INPUT-->
-                  <div
-                    class="border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-drift-indigo focus-within:border-drift-indigo"
-                  >
-                    <label
-                      for="email"
-                      class="block text-xs font-medium text-gray-900"
-                    >Email</label>
-                    <input
-                      id="email"
-                      v-model="email"
-                      type="text"
-                      name="email"
-                      class="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm"
-                      placeholder="Jane.Doe@example.com"
-                    >
-                  </div>
-                  <!-- ACCOUNT INPUT-->
-                  <div
-                    class="border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-drift-indigo focus-within:border-drift-indigo"
-                  >
-                    <label
-                      for="account"
-                      class="block text-xs font-medium text-gray-900"
-                    >Account</label>
-                    <input
-                      id="account"
-                      v-model="accountName"
-                      type="text"
-                      name="account"
-                      class="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm"
-                      placeholder="Example Inc"
-                    >
-                  </div>
-                </div>
-
-                <!-- USER OUTPUTS -->
-                <div class="relative mt-6 mb-2">
-                  <div
-                    class="absolute inset-0 flex items-center"
-                    aria-hidden="true"
-                  >
-                    <div class="w-full border-t border-gray-200" />
-                  </div>
-                  <div class="relative flex justify-start">
-                    <span class="pr-2 bg-white text-xs uppercase font-bold">
-                      Web Vistor
-                    </span>
-                  </div>
-                </div>
-                <div class="text-xs text-drift-grey">
-                  GUID: <span class="text-drift-violet">{{ guid }}</span><br>
-                  Email: <span class="text-drift-violet">{{ email }}</span>
-                </div>
-                <!-- END USER OUTPUTS -->
-
-                <!-- SAVE BUTTON -->
-                <button
-                  type="button"
-                  class="mt-6 w-full items-center px-6 py-3 border border-transparent rounded-md shadow-sm bg-drift-lime hover:bg-drift-cyan focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-drift-indigo font-bold uppercase"
-                  @click="saveSettings()"
-                >
-                  ⚡️ Save
-                </button>
-
-                <!-- REFRESH BUTTON -->
-                <button
-                  type="button"
-                  class="mt-6 w-full items-center px-6 py-3 border border-transparent rounded-md shadow-sm bg-drift-lime hover:bg-drift-cyan focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-drift-indigo font-bold uppercase"
-                  @click="clearSettings()"
-                >
-                  🗑 Clear Settings
-                </button>
-
-                <!-- END OF SIDEBAR MENU CONTENT -->
-              </div>
-
-              <!-- LOGIN MENU CONTENT -->
-              <div v-else class="relative mt-6 flex-1 px-4 sm:px-6">
-                <!-- LOGIN DIVIDER -->
-                <div class="relative mt-6 mb-2">
-                  <div
-                    class="absolute inset-0 flex items-center"
-                    aria-hidden="true"
-                  >
-                    <div class="w-full border-t border-gray-200" />
-                  </div>
-                  <div class="relative flex justify-start">
-                    <span class="pr-2 bg-white text-xs uppercase font-bold">
-                      Login
-                    </span>
-                  </div>
-                </div>
-                <!-- END LOGIN DIVIDER -->
-
-                <!-- LOGIN SETTINGS OPTIONS -->
-                <div class="space-y-2">
-                  <!-- USER EMAIL INPUT-->
-                  <div
-                    class="border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-drift-indigo focus-within:border-drift-indigo"
-                  >
-                    <label
-                      for="userEmail"
-                      class="block text-xs font-medium text-gray-900"
-                    >Email</label>
-                    <input
-                      id="userEmail"
-                      v-model="userEmail"
-                      type="email"
-                      name="userEmail"
-                      class="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm"
-                      placeholder="jdoe@drift.com"
-                    >
-                  </div>
-                </div>
-
-                <!-- LOGIN BUTTON -->
-                <button
-                  type="button"
-                  class="mt-6 w-full items-center px-6 py-3 border border-transparent rounded-md shadow-sm bg-drift-lime hover:bg-drift-cyan focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-drift-indigo font-bold uppercase"
-                  @click="login"
-                >
-                  ⚡️ Login
-                </button>
-
-                <!-- LOGIN ERROR -->
-                <div class="mt-2 text-drift-orange transition" :class="[loginError?'opacity-100':'opacity-0']">
-                  User not found
-                </div>
-
-                <!-- END OF SIDEBAR MENU CONTENT -->
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    <TheSideBar />
     <!-- END SIDEBAR MENU -->
   </main>
 </template>
@@ -461,151 +18,33 @@ export default {
   name: 'Home',
   data () {
     return {
-      widgetId: '23x3bmcifbhe', // The default widgetId (can be overridden)
-      isMenuOpen: false,
-      menuHotKeys: ['shift', 'z'],
-      backgroundInput: localStorage.getItem('backgroundInput') || '', // The textbox for bkgd: can be either an image file or a URL to be screenshotted
-      backgroundUrl:
-        'https://screenshotapi-dot-net.storage.googleapis.com/www_drift_com__9efae73eb9a4.png', // The image to be used for background (will be either backgroundInput or an image from the screenshot API)
-      backgroundDefault:
-        'https://screenshotapi-dot-net.storage.googleapis.com/www_drift_com__9efae73eb9a4.png', // The default background when input is blank
-      backgroundFormats: ['.png', '.jpeg', '.jpg'],
-      playbookName: localStorage.getItem('playbookName') || '', // name of the playbook
-      interactionId: localStorage.getItem('interactionId') || '', // interactionId of the playbook
-      firstName: localStorage.getItem('firstName') || '', // visitor fname
-      lastName: localStorage.getItem('lastName') || '', // visitor lname
-      abmMessage: localStorage.getItem('abmMessage') || 'We help companies like you drive pipeline and hit their revenue targets faster.', // ABM Message
-      email: localStorage.getItem('email') || '', // visitor email
-      accountName: localStorage.getItem('accountName') || '', // visitor account
-      guid: localStorage.getItem('guid') || '', // unique user id
-      botColor: localStorage.getItem('botColor') || '#005A9C', // bot color,
-      showLoader: false,
-      loaderWarning: false,
-      loaderMessage: null,
-      userId: localStorage.getItem('userId') || '',
-      userEmail: localStorage.getItem('userEmail') || '',
-      loginError: false,
-      noDemos: false,
-      demoSettings: {},
-      demoName: null,
-      savedDemos: null
+      widgetId: '23x3bmcifbhe',
+      background: 'https://screenshotapi-dot-net.storage.googleapis.com/www_drift_com__9efae73eb9a4.png',
+      backgroundFormats: ['.png', '.jpeg', '.jpg']
     }
   },
-  head () {
-    return {
-      title: 'Home'
+  computed: {
+    activeDemo () {
+      return this.$store.getters['demos/getActivated']
     }
   },
-  mounted () {
-    // Mounted runs when the page is ready (kind of like onload)
-    this.clearStorage()
-    this.loadDrift()
-    this.generateVisitor()
-    this.calculateBackground()
-    this.firePlaybook()
+  watch: {
+    activeDemo: {
+      handler (newValue, oldValue) {
+        if (newValue?.id !== oldValue?.id) {
+          // TODO: For some reason watch is being called twice
+          this.resetDrift()
+          this.loadDrift()
+          this.calculateBackground()
+          this.firePlaybook()
+        }
+      },
+      deep: true
+    }
   },
+  mounted () {},
   methods: {
-    // This is where we'll put all our functions to make our code organized
-    async login () {
-      try {
-        const user = await this.$axios.get(`${process.env.API_URL}/user/${this.userEmail}`)
-        console.log(user.data)
-        this.userId = user.data.id
-        this.userEmail = user.data.email
-
-        localStorage.setItem('userId', this.userId || '')
-        localStorage.setItem('userEmail', this.userEmail || '')
-
-        this.getDemos()
-        location.reload()
-      } catch (err) {
-        this.loginError = true
-        setTimeout(() => {
-          this.loginError = false
-        }, 5000)
-      }
-    },
-    async saveSettings () {
-      this.demoSettings = {
-        demoName: this.demoName,
-        guid: this.guid,
-        email: this.email,
-        firstName: this.firstName,
-        lastName: this.lastName,
-        abmMessage: this.abmMessage,
-        accountName: this.accountName,
-        playbookName: this.playbookName,
-        interactionId: this.interactionId,
-        botColor: this.botColor,
-        backgroundInput: this.backgroundInput
-      }
-
-      try {
-        const settings = await this.$axios.post(`${process.env.API_URL}/demo_settings`, { user: this.userId, settings: this.demoSettings })
-        console.log(settings.data)
-      } catch (err) {
-        alert(err)
-      }
-
-      this.noDemos = false
-
-      // persist settings on refresh
-      localStorage.setItem('guid', this.guid || '')
-      localStorage.setItem('email', this.email || '')
-      localStorage.setItem('firstName', this.firstName || '')
-      localStorage.setItem('lastName', this.lastName || '')
-      localStorage.setItem('abmMessage', this.abmMessage || '')
-      localStorage.setItem('accountName', this.accountName || '')
-      localStorage.setItem('playbookName', this.playbookName || '')
-      localStorage.setItem('interactionId', this.interactionId || '')
-      localStorage.setItem('botColor', this.botColor || '')
-      localStorage.setItem('backgroundInput', this.backgroundInput || '')
-      location.reload()
-    },
-    clearSettings () {
-      localStorage.setItem('guid', '')
-      localStorage.setItem('email', '')
-      localStorage.setItem('firstName', '')
-      localStorage.setItem('lastName', '')
-      localStorage.setItem('abmMessage', '')
-      localStorage.setItem('accountName', '')
-      localStorage.setItem('playbookName', '')
-      localStorage.setItem('interactionId', '')
-      localStorage.setItem('botColor', '')
-      localStorage.setItem('backgroundInput', '')
-      location.reload()
-      this.toggleMenu()
-    },
-    logout () {
-      localStorage.clear()
-      this.clearSettings()
-      this.toggleMenu()
-    },
-    async getDemos () {
-      try {
-        const demos = await this.$axios.get(`${process.env.API_URL}/demo_settings/${this.userId}`)
-        console.log(demos.data)
-        this.savedDemos = demos.data
-        console.log(this.savedDemos)
-      } catch (err) {
-        this.noDemos = true
-      }
-    },
-    createGuid () {
-      function value () {
-        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
-          const r =
-            (window.crypto.getRandomValues(new Uint32Array(1))[0] *
-              Math.pow(2, -32) *
-              16) |
-            0
-          const v = c === 'x' ? r : (r & 0x3) | 0x8
-          return v.toString(16)
-        })
-      }
-      this.guid = value()
-    },
-    clearStorage () {
+    resetDrift () {
       document.cookie =
         'drift_aid=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
       document.cookie =
@@ -683,32 +122,18 @@ export default {
       })()
       drift.SNIPPET_VERSION = '0.3.1'
       drift.load(this.widgetId)
-
       drift.config({
-        backgroundColor: this.botColor
+        backgroundColor: this.activeDemo.settings?.color || '#005A9C'
       })
-
-      // TODO: Drift config is currently broken (https://drift.slack.com/archives/CHK7L9AB1/p1649777796544179)
-      // but it appears the following config is going to be needed access Drift via JS/CSS selectors to do some
-      // of the fancy stuff we were doing via console (https://devdocs.drift.com/docs/securing-drift-on-your-site-with-an-iframe#required-attributes)
-      // Afterwards we should be able to access elements in the iFrame like this: https://stackoverflow.com/questions/26630519/queryselector-for-web-elements-inside-iframe
-      /* drift.config({
-      iframeSandbox: 'allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-forms'
-    }); */
-    },
-    generateVisitor () {
-      /* eslint-disable */
-      this.clearStorage();
-      this.createGuid();
-      /* eslint-enable */
     },
     firePlaybook () {
+      let interactionId = null
       // A function to fire the desired playbook
       // Choose selected playbook
-      switch (this.playbookName) {
+      switch (this.activeDemo.settings?.playbookType) {
         case 'Fastlane':
           // deploy fastlane on body click
-          this.interactionId = 2527830
+          interactionId = 2527830
           /* document.querySelector('body').click(
         console.log('body click')
         function(){
@@ -719,7 +144,7 @@ export default {
               companyName: 'Drift',
               title: 'SC'
             }, {
-              campaignId: this.interactionId
+              campaignId: interactionId
             })
         }); */
           break
@@ -727,56 +152,60 @@ export default {
           // deploy CLP
           break
         case 'Skip the Form':
-          this.interactionId = 309059
+          interactionId = 309059
           break
         case 'Support Bot':
-          this.interactionId = 309512
+          interactionId = 309512
           break
         case 'Return Bot':
-          this.interactionId = 308477
+          interactionId = 308477
           break
         case 'ABM Bot':
-          this.interactionId = null
+          interactionId = null
           setTimeout(this.setCookie('playbook', 'abmBot', 1), 5000)
           break
         case 'Engage All':
-          this.interactionId = 340714
+          interactionId = 340714
           break
         default:
           // default is no playbook
-          this.interactionId = null
+          interactionId = null
       }
       // Fire selected playbook
       drift.on('ready', (api, payload) => {
-        if (this.firstName && this.lastName) {
+        if (this.activeDemo.settings?.firstName) {
           drift.api.setUserAttributes({
-            first_name: this.firstName,
-            last_name: this.lastName
+            first_name: this.activeDemo.settings?.firstName
           })
-          console.log('setUserName complete')
+          console.log('setFirstName complete')
         }
-        if (this.email) {
+        if (this.activeDemo.settings?.lastName) {
           drift.api.setUserAttributes({
-            email: this.email
+            last_name: this.activeDemo.settings?.lastName
+          })
+          console.log('setLastName complete')
+        }
+        if (this.activeDemo.settings?.email) {
+          drift.api.setUserAttributes({
+            email: this.activeDemo.settings?.email
           })
           console.log('setEmail complete')
         }
-        if (this.accountName) {
+        if (this.activeDemo.settings?.accountName) {
           drift.api.setUserAttributes({
-            employment_name: this.accountName
+            employment_name: this.activeDemo.settings?.accountName
           })
           console.log('setCompany complete')
         }
-        if (this.abmMessage) {
+        if (this.activeDemo.settings?.abmMessage) {
           drift.api.setUserAttributes({
-            abm_message: this.abmMessage
+            abm_message: this.activeDemo.settings?.abmMessage
           })
           console.log('ABM message complete')
         }
-
-        if (this.interactionId) {
+        if (interactionId) {
           drift.api.startInteraction({
-            interactionId: this.interactionId,
+            interactionId,
             goToConversation: false,
             replaceActiveConversation: true
           })
@@ -801,77 +230,42 @@ export default {
       }
       document.cookie = name + '=' + (value || '') + expires + '; path=/'
     },
-    toggleMenu () {
-      this.isMenuOpen = !this.isMenuOpen
-      if (this.isMenuOpen) {
-        drift.api.hideChat()
-        this.getDemos()
-      } else {
-        drift.api.openChat()
-      }
-    },
     async calculateBackground () {
-      if (this.backgroundInput !== null && this.backgroundInput !== '') {
+      if (this.activeDemo.settings?.background && this.activeDemo.settings?.background !== null && this.activeDemo.settings?.background !== '') {
         let isImage = false
         this.backgroundFormats.forEach((format) => {
-          if (this.backgroundInput.includes(format)) {
+          if (this.activeDemo.settings?.background.includes(format)) {
             isImage = true
-            this.backgroundUrl = this.backgroundInput
+            this.background = this.activeDemo.settings?.background
           }
         })
         // If not, make a request to the screenshot generator
         if (!isImage) {
-          this.showLoader = true
-          this.loaderMessage =
-            'Loading your background image. This may take a minute but will be faster next time!'
+          this.$store.commit('loader/show', {
+            message: 'Loading your background image. This may take a minute but will be faster next time!',
+            isWarning: false
+          })
           try {
             const response = await this.$axios.$get(
               `https://api.apiflash.com/v1/urltoimage?access_key=50c864cc62ee4df69a23f65c15eea431&url=${encodeURIComponent(
-                this.backgroundInput
+                this.activeDemo.settings?.background
               )}&format=jpeg&full_page=true&quality=100&scroll_page=true&response_type=json&no_cookie_banners=true&no_tracking=true`
             )
-            this.backgroundUrl = response.url
-            localStorage.setItem('backgroundInput', response.url || '')
+            this.background = response.url
           } catch (err) {
             await new Promise((resolve) => {
-              this.loaderWarning = true
-              this.loaderMessage =
-                'Something went wrong loading your background image. Make sure it starts with http:// or https://.'
+              this.$store.commit('loader/show', {
+                message: 'Something went wrong loading your background image. Make sure it starts with http:// or https://.',
+                isWarning: true
+              })
               setTimeout(resolve, 3000)
             })
           } finally {
-            this.resetLoader()
+            this.$store.commit('loader/reset')
           }
         }
       }
-    },
-    resetLoader () {
-      this.showLoader = false
-      this.loaderWarning = false
-      this.loaderMessage = null
     }
   }
 }
 </script>
-
-<style scoped lang="scss">
-.loader {
-  width: 1em;
-  height: 1em;
-  border: 5px solid #ff8329;
-  border-bottom-color: transparent;
-  border-radius: 50%;
-  display: inline-block;
-  box-sizing: border-box;
-  animation: rotation 1s linear infinite;
-}
-
-@keyframes rotation {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
-</style>

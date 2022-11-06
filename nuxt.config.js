@@ -57,18 +57,19 @@ export default {
     // https://go.nuxtjs.dev/bootstrap
     // 'bootstrap-vue/nuxt',
     '@nuxtjs/axios',
-    '@nuxtjs/toast'
+    '@nuxtjs/toast',
   ],
   axios: {
     baseUrl: process.env.API_URL || 'http://localhost:3001'
   },
   toast: {
-    position: 'top-right',
+    position: 'top-center',
     duration: 3000
   },
   router: {
     linkActiveClass: 'active-placeholder',
-    linkExactActiveClass: 'active'
+    linkExactActiveClass: 'active',
+    middleware: [ 'onload' ]
   },
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
