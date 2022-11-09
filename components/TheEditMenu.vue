@@ -180,8 +180,12 @@
                         Fastlane
                       </option>
                        -->
+          <option value="Custom Bot">
+            Custom Bot
+          </option>
         </select>
       </div>
+      <!-- ABM Message -->
       <div
         v-if="playbookType === 'ABM Bot'"
         class="
@@ -204,6 +208,76 @@
           v-model="abmMessage"
           type="text"
           name="abmMessage"
+          class="
+            block
+            w-full
+            border-0
+            p-0
+            text-gray-900
+            placeholder-gray-500
+            focus:ring-0
+            sm:text-sm
+          "
+        >
+      </div>
+      <!-- WIDGET ID -->
+      <div
+        v-if="playbookType === 'Custom Bot'"
+        class="
+          border border-gray-300
+          rounded-md
+          px-3
+          py-2
+          shadow-sm
+          focus-within:ring-1
+          focus-within:ring-drift-indigo
+          focus-within:border-drift-indigo
+        "
+      >
+        <label
+          for="widgetId"
+          class="block text-xs font-medium text-gray-900"
+        >Widget ID</label>
+        <input
+          id="widgetId"
+          v-model="widgetId"
+          type="text"
+          name="widgetId"
+          class="
+            block
+            w-full
+            border-0
+            p-0
+            text-gray-900
+            placeholder-gray-500
+            focus:ring-0
+            sm:text-sm
+          "
+        >
+      </div>
+      <!-- TARGETING CONDITION -->
+      <div
+        v-if="playbookType === 'Custom Bot'"
+        class="
+          border border-gray-300
+          rounded-md
+          px-3
+          py-2
+          shadow-sm
+          focus-within:ring-1
+          focus-within:ring-drift-indigo
+          focus-within:border-drift-indigo
+        "
+      >
+        <label
+          for="targetingCondition"
+          class="block text-xs font-medium text-gray-900"
+        >Targeting Condition</label>
+        <input
+          id="targetingCondition"
+          v-model="targetingCondition"
+          type="text"
+          name="targetingCondition"
           class="
             block
             w-full
@@ -475,7 +549,9 @@ export default {
       playbookType: this.$store.getters['demos/getSelected'].settings?.playbookType,
       interactionId: this.$store.getters['demos/getSelected'].settings?.interactionId,
       color: this.$store.getters['demos/getSelected'].settings?.color,
-      background: this.$store.getters['demos/getSelected'].settings?.background
+      background: this.$store.getters['demos/getSelected'].settings?.background,
+      widgetId: this.$store.getters['demos/getSelected'].settings?.widgetId,
+      targetingCondition: this.$store.getters['demos/getSelected'].settings?.targetingCondition
     }
   },
   computed: {
@@ -493,7 +569,9 @@ export default {
           playbookType: this.playbookType,
           interactionId: this.interactionId,
           color: this.color,
-          background: this.background
+          background: this.background,
+          widgetId: this.widgetId,
+          targetingCondition: this.targetingCondition
         })
         // TODO: Add a toast success alert
       } catch (err) {
@@ -507,7 +585,7 @@ export default {
     },
     async activateDemo () {
       this.updateDemo()
-      this.$store.dispatch('demos/activate')
+      await this.$store.dispatch('demos/activate')
     }
   }
 }

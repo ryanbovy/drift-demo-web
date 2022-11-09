@@ -80,6 +80,7 @@ export const actions = {
     try {
       const userId = rootGetters['user/getId']
       if (!userId) { throw new Error('Could not find user ID.') }
+      if (data.playbookType !== 'Custom Bot') { data.widgetId = null }
       const demo = await this.$axios.put(`${process.env.API_URL}/demo_settings/${state.selected}`, {
         name: data.name,
         settings: {
@@ -91,7 +92,9 @@ export const actions = {
           playbookType: data.playbookType,
           interactionId: data.interactionId,
           color: data.color,
-          background: data.background
+          background: data.background,
+          widgetId: data.widgetId,
+          targetingCondition: data.targetingCondition
         }
       })
       dispatch('get')

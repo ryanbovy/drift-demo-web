@@ -15,11 +15,17 @@
     <!-- CONTENT -->
     <ul v-if="demos.length" class="border rounded divide-y">
       <li v-for="demo in demos" :key="demo.id" class="group p-4 cursor-pointer" @click="selectDemo(demo.id)">
-        <div class="transition origin-left group-hover:scale-105 opacity-75 group-hover:opacity-100 flex items-center">
-          <span v-if="demo.id === activated" class="mr-2 text-xxs">
-            ✅
-          </span>
-          {{ demo.name }}
+        <div class="flex items-center justify-between">
+          <div class="flex items-center transition origin-left group-hover:scale-105 opacity-75 group-hover:opacity-100">
+            <span v-if="demo.id === activated" class="mr-2 text-xxs">
+              ✅
+            </span>
+            {{ demo.name }}
+          </div>
+          <!-- TODO : CLONE BUTTON DOES NOT WORK YET -->
+          <button class="text-xs uppercase rounded border font-base leading-4 px-3 py-2 bg-drift-violet text-white">
+            Clone
+          </button>
         </div>
       </li>
     </ul>

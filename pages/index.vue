@@ -18,7 +18,7 @@ export default {
   name: 'Home',
   data () {
     return {
-      widgetId: '23x3bmcifbhe',
+      baseWidget: '23x3bmcifbhe',
       background: 'https://screenshotapi-dot-net.storage.googleapis.com/www_drift_com__9efae73eb9a4.png',
       backgroundFormats: ['.png', '.jpeg', '.jpg']
     }
@@ -121,7 +121,7 @@ export default {
         }
       })()
       drift.SNIPPET_VERSION = '0.3.1'
-      drift.load(this.widgetId)
+      drift.load(this.activeDemo.settings?.widgetId || this.baseWidget)
       drift.config({
         backgroundColor: this.activeDemo.settings?.color || '#005A9C'
       })
@@ -163,6 +163,10 @@ export default {
         case 'ABM Bot':
           interactionId = null
           setTimeout(this.setCookie('playbook', 'abmBot', 1), 5000)
+          break
+        case 'Custom Bot':
+          interactionId = null
+          setTimeout(this.setCookie('playbook', this.activeDemo.settings?.targetingCondition, 1), 5000)
           break
         case 'Engage All':
           interactionId = 340714
