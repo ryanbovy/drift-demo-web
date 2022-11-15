@@ -87,7 +87,7 @@ export const actions = {
         name: data.demoName
       })
       dispatch('get')
-      this.$toast.success('Successfully saved demo!')
+      this.$toast.success('Successfully cloned demo!')
       return demo.data
     } catch (err) {
       this.$toast.error('Failed saving demo! Make sure you have named it.')
