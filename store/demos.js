@@ -76,6 +76,24 @@ export const actions = {
       throw new Error(err.message)
     }
   },
+  async clone ({ commit, state, rootGetters, dispatch }, data) {
+    try {
+      const userId = rootGetters['user/getId']
+      if (!userId) { throw new Error('Could not find user ID.') }
+      if (data.playbookType !== 'Custom Bot') { data.widgetId = null }
+      const demo = await this.$axios.post(`${process.env.API_URL}/demo_settings/clone`, {
+        user: userId,
+        id: data.demoId,
+        name: data.demoName
+      })
+      dispatch('get')
+      this.$toast.success('Successfully saved demo!')
+      return demo.data
+    } catch (err) {
+      this.$toast.error('Failed saving demo! Make sure you have named it.')
+      throw new Error(err.message)
+    }
+  },
   async update ({ commit, state, rootGetters, dispatch }, data) {
     try {
       const userId = rootGetters['user/getId']
