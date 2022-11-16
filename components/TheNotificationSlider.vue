@@ -33,10 +33,14 @@ export default {
       account: 'Slack'
     }
   },
-  computed: {},
+  computed: {
+    demo () {
+      return this.$store.state.demos.saved
+    }
+  },
   watch: {},
   mounted () {
-    console.log(this.$store.getters['demos/getById'])
+    console.log(this.$store.getters['demos/getDemoById'](this.id))
   },
   methods: {
   }

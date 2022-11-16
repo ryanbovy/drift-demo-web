@@ -11,10 +11,10 @@ export const getters = {
   getActivated (state) {
     return state.saved.find(demo => demo.id === state.activated)
   },
-  getById (state) {
-    const demo = state.saved.find(demo => demo.id === parseInt(24))
-    console.log(demo)
-    return state.saved.find(demo => demo.id === parseInt(24))
+  getDemoById: state => (id) => {
+    console.log(id)
+    console.log(state.saved)
+    return state.saved.find(demo => demo.id === parseInt(id))
   }
 }
 
