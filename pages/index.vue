@@ -1,5 +1,9 @@
 <template>
-  <main class="font-balto">
+  <main
+    v-shortkey="notificationHotKeys"
+    class="font-balto"
+    @shortkey="openNotification()"
+  >
     <!-- LOADER SCREEN -->
     <TheLoaderModal />
     <!-- MAIN WINDOW CONTENT -->
@@ -20,7 +24,8 @@ export default {
     return {
       baseWidget: '23x3bmcifbhe',
       background: 'https://screenshotapi-dot-net.storage.googleapis.com/www_drift_com__9efae73eb9a4.png',
-      backgroundFormats: ['.png', '.jpeg', '.jpg']
+      backgroundFormats: ['.png', '.jpeg', '.jpg'],
+      notificationHotKeys: ['shift', 'n']
     }
   },
   computed: {
@@ -44,6 +49,10 @@ export default {
   },
   mounted () {},
   methods: {
+    openNotification () {
+      console.log('launch notification')
+      // open new window
+    },
     resetDrift () {
       document.cookie =
         'drift_aid=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'

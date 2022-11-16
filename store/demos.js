@@ -10,6 +10,11 @@ export const getters = {
   },
   getActivated (state) {
     return state.saved.find(demo => demo.id === state.activated)
+  },
+  getById (state) {
+    const demo = state.saved.find(demo => demo.id === parseInt(24))
+    console.log(demo)
+    return state.saved.find(demo => demo.id === parseInt(24))
   }
 }
 
@@ -112,7 +117,8 @@ export const actions = {
           color: data.color,
           background: data.background,
           widgetId: data.widgetId,
-          targetingCondition: data.targetingCondition
+          targetingCondition: data.targetingCondition,
+          notificationType: data.notificationType
         }
       })
       dispatch('get')

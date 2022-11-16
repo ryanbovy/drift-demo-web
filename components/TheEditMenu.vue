@@ -293,6 +293,65 @@
     </div>
     <!-- END BOT SETTINGS OPTIONS -->
 
+    <!-- NOTIFICATION SETTINGS DIVIDER -->
+    <div class="relative mt-6 mb-2">
+      <div class="absolute inset-0 flex items-center" aria-hidden="true">
+        <div class="w-full border-t border-gray-200" />
+      </div>
+      <div class="relative flex justify-start">
+        <span class="pr-2 bg-white text-xs uppercase font-bold">
+          Notification Settings
+        </span>
+      </div>
+    </div>
+    <!-- END NOTIFICATION SETTINGS DIVIDER -->
+
+    <!-- NOTIFICATION DROPDOWN-->
+    <div
+      class="
+          border border-gray-300
+          rounded-md
+          px-3
+          py-2
+          shadow-sm
+          focus-within:ring-1
+          focus-within:ring-drift-indigo
+          focus-within:border-drift-indigo
+        "
+    >
+      <label
+        for="notificationType"
+        class="block text-xs font-medium text-gray-900"
+      >Notification Type</label>
+      <select
+        id="notificationType"
+        v-model="notificationType"
+        type="text"
+        name="notificationType"
+        class="
+            block
+            w-full
+            border-0
+            p-0
+            text-gray-900
+            placeholder-gray-500
+            focus:ring-0
+            sm:text-sm
+          "
+        placeholder="Select a Notification Type"
+      >
+        <option value="Salesforce_Desktop">
+          Salesforce Desktop
+        </option>
+        <option value="Salesloft_Desktop">
+          Salesloft Desktop
+        </option>
+        <option value="Outreach_Desktop">
+          Outreach Desktop
+        </option>
+      </select>
+    </div>
+
     <!-- USER SETTINGS DIVIDER -->
     <div class="relative mt-6 mb-2">
       <div class="absolute inset-0 flex items-center" aria-hidden="true">
@@ -551,7 +610,8 @@ export default {
       color: this.$store.getters['demos/getSelected'].settings?.color,
       background: this.$store.getters['demos/getSelected'].settings?.background,
       widgetId: this.$store.getters['demos/getSelected'].settings?.widgetId,
-      targetingCondition: this.$store.getters['demos/getSelected'].settings?.targetingCondition
+      targetingCondition: this.$store.getters['demos/getSelected'].settings?.targetingCondition,
+      notificationType: this.$store.getters['demos/getSelected'].settings?.notificationType
     }
   },
   computed: {
@@ -571,7 +631,8 @@ export default {
           color: this.color,
           background: this.background,
           widgetId: this.widgetId,
-          targetingCondition: this.targetingCondition
+          targetingCondition: this.targetingCondition,
+          notificationType: this.notificationType
         })
         // TODO: Add a toast success alert
       } catch (err) {
