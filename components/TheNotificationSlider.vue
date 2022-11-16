@@ -1,19 +1,24 @@
 <template>
-  <div class="notification">
-    <div class="message">
-      <img class="icons" src="~/assets/img/chrome.png" alt="">
-      <div class="text">
-        <span class="abmCompany">🎯 {{ account }}  - </span><span class="abmName">{{ name }}</span><br>
-        <span class="abmUrl">app.drift.com</span><br>
-        <span class="abmPage">is on Enterprise Communications page</span>
+  <div
+    id="app"
+    class="fixed inset-0 overflow-hidden"
+  >
+    <div class="notification">
+      <div class="message">
+        <img class="icons" src="~/assets/img/chrome.png" alt="">
+        <div class="text">
+          <span class="abmCompany">🎯 {{ account }}  - </span><span class="abmName">{{ name }}</span><br>
+          <span class="abmUrl">app.drift.com</span><br>
+          <span class="abmPage">is on Enterprise Communications page</span>
+        </div>
+        <img class="icons" src="~/assets/img/drift.png" alt="">
       </div>
-      <img class="icons" src="~/assets/img/drift.png" alt="">
-    </div>
-    <div class="actions">
-      <div class="close">
-        Close
+      <div class="actions">
+        <div class="close">
+          Close
+        </div>
+        <div>More</div>
       </div>
-      <div>More</div>
     </div>
   </div>
 </template>
@@ -23,14 +28,18 @@ export default {
   name: 'TheNotificationSlider',
   data () {
     return {
+      id: this.$route.query.demo,
       name: 'Joshua Perk',
       account: 'Slack'
     }
   },
   computed: {},
   watch: {},
-  mouted () {},
-  methods: {}
+  mounted () {
+    console.log(this.$store.getters['demos/getById'])
+  },
+  methods: {
+  }
 }
 </script>
 
