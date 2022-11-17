@@ -55,7 +55,7 @@ export default {
   mounted () {},
   methods: {
     fireFastlane () {
-      if (this.activeDemo.settings?.playbookType === 'Fastlane') {
+      if (this.activeDemo?.settings?.playbookType === 'Fastlane') {
         drift('collectFormData', {
           fname: this.activeDemo?.settings?.firstName || 'John',
           lname: this.activeDemo?.settings?.lastName || 'Williams',

@@ -4,7 +4,7 @@
     <TheLoaderModal />
     <!-- MAIN WINDOW CONTENT -->
     <div>
-      <img :src="background">
+      <img :src="background" class="w-screen max-w-none">
     </div>
     <!-- END MAIN WINDOW CONTENT -->
     <!-- NOFICATION -->
