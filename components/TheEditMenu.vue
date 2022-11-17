@@ -171,13 +171,12 @@
           <option value="Skip the Form">
             Skip the Form
           </option>
-
+          <option value="Fastlane">
+            Fastlane
+          </option>
           <!--
                       <option value="Return Bot">
                         Return Bot
-                      </option>
-                        <option value="Fastlane">
-                        Fastlane
                       </option>
                        -->
           <option value="Custom Bot">

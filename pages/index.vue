@@ -8,7 +8,10 @@
     <!-- LOADER SCREEN -->
     <TheLoaderModal />
     <!-- MAIN WINDOW CONTENT -->
-    <div @dblclick="openNotification()">
+    <div
+      @click="fireFastlane()"
+      @dblclick="openNotification()"
+    >
       <img :src="background">
     </div>
     <!-- END MAIN WINDOW CONTENT -->
@@ -26,7 +29,8 @@ export default {
       baseWidget: '23x3bmcifbhe',
       background: 'https://screenshotapi-dot-net.storage.googleapis.com/www_drift_com__9efae73eb9a4.png',
       backgroundFormats: ['.png', '.jpeg', '.jpg'],
-      notificationHotKeys: ['shift', 'n']
+      notificationHotKeys: ['shift', 'n'],
+      interactionId: null
     }
   },
   computed: {
@@ -50,6 +54,18 @@ export default {
   },
   mounted () {},
   methods: {
+    fireFastlane () {
+      if (this.activeDemo.settings?.playbookType === 'Fastlane') {
+        drift('collectFormData', {
+          fname: this.activeDemo?.settings?.firstName || 'John',
+          lname: this.activeDemo?.settings?.lastName || 'Williams',
+          email: this.activeDemo?.settings?.email || 'John.Williams@adobe.com',
+          companyName: this.activeDemo?.settings?.accountName || 'Adobe'
+        }, {
+          campaignId: this.interactionId
+        })
+      }
+    },
     openNotification () {
       window.open(`/notification?demo=${this.$route.query.demo}`, 'NotificationWindow')
     },
@@ -139,53 +155,39 @@ export default {
       })
     },
     firePlaybook () {
-      let interactionId = null
       // A function to fire the desired playbook
       // Choose selected playbook
       switch (this.activeDemo.settings?.playbookType) {
         case 'Fastlane':
           // deploy fastlane on body click
-          interactionId = 2527830
-          /* document.querySelector('body').click(
-        console.log('body click')
-        function(){
-          drift('collectFormData', {
-              fname: 'Ryan',
-              lname: 'Bovy',
-              email: 'rbovy@drift.com',
-              companyName: 'Drift',
-              title: 'SC'
-            }, {
-              campaignId: interactionId
-            })
-        }); */
+          this.interactionId = 2527830
           break
         case 'Conversational Landing Page':
           // deploy CLP
           break
         case 'Skip the Form':
-          interactionId = 309059
+          this.interactionId = 309059
           break
         case 'Support Bot':
-          interactionId = 309512
+          this.interactionId = 309512
           break
         case 'Return Bot':
-          interactionId = 308477
+          this.interactionId = 308477
           break
         case 'ABM Bot':
-          interactionId = null
+          this.interactionId = null
           setTimeout(this.setCookie('playbook', 'abmBot', 1), 5000)
           break
         case 'Custom Bot':
-          interactionId = null
+          this.interactionId = null
           setTimeout(this.setCookie('playbook', this.activeDemo.settings?.targetingCondition, 1), 5000)
           break
         case 'Engage All':
-          interactionId = 340714
+          this.interactionId = 340714
           break
         default:
           // default is no playbook
-          interactionId = null
+          this.interactionId = null
       }
       // Fire selected playbook
       drift.on('ready', (api, payload) => {
@@ -219,9 +221,9 @@ export default {
           })
           console.log('ABM message complete')
         }
-        if (interactionId) {
+        if (this.interactionId) {
           drift.api.startInteraction({
-            interactionId,
+            interactionId: this.interactionId,
             goToConversation: false,
             replaceActiveConversation: true
           })
