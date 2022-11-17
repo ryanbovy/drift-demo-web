@@ -31,8 +31,8 @@ export default {
   },
   data () {
     return {
-      name: 'Joshua Perk',
-      account: 'Slack'
+      name: 'John Williams',
+      account: 'Adobe'
     }
   },
   computed: {},

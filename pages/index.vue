@@ -3,13 +3,12 @@
     v-shortkey="notificationHotKeys"
     class="font-balto"
     @shortkey="openNotification()"
-    @dblclick="openNotification()"
     @contextmenu.prevent="toggleMenu()"
   >
     <!-- LOADER SCREEN -->
     <TheLoaderModal />
     <!-- MAIN WINDOW CONTENT -->
-    <div>
+    <div @dblclick="openNotification()">
       <img :src="background">
     </div>
     <!-- END MAIN WINDOW CONTENT -->

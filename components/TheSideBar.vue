@@ -3,7 +3,7 @@
   <div
     id="app"
     v-shortkey="menuHotKeys"
-    class="fixed inset-0 overflow-hidden"
+    class="fixed inset-0 overflow-hidden pointer-events-none"
     aria-labelledby="slide-over-title"
     role="dialog"
     aria-modal="true"
