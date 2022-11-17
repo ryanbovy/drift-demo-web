@@ -149,9 +149,9 @@ export default {
         }
       })()
       drift.SNIPPET_VERSION = '0.3.1'
-      drift.load(this.activeDemo.settings?.widgetId || this.baseWidget)
+      drift.load(this.activeDemo?.settings?.widgetId || this.baseWidget)
       drift.config({
-        backgroundColor: this.activeDemo.settings?.color || '#005A9C'
+        backgroundColor: this.activeDemo?.settings?.color || '#005A9C'
       })
     },
     firePlaybook () {

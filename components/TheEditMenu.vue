@@ -158,6 +158,7 @@
             sm:text-sm
           "
           placeholder="Select a Playbook"
+          @change="loadWidgetId($event)"
         >
           <option value="Engage All">
             Engage All
@@ -270,8 +271,22 @@
       >
         <label
           for="targetingCondition"
-          class="block text-xs font-medium text-gray-900"
-        >Targeting Condition</label>
+          class="block text-xs font-medium text-gray-900 flex flex-wrap relative"
+        >
+          <div>Targeting Condition</div> &nbsp;&nbsp;
+          <div>
+            <a
+              tabindex="0"
+              class="flex bg-drift-grey px-1 text-white font-xxs rounded shadow-md hover:bg-drift-orange hover:shadow-lg focus:bg-drift-orange focus:shadow-lg focus:outline-none focus:ring-0 active:bg-drift-orange active:shadow-lg transition duration-150 ease-in-out"
+              role="button"
+              title="Targeting Help"
+              @click="toggleTooltip()"
+            >?</a>
+          </div>
+          <div v-if="tooltipVis" class="absolute top-5 z-50 font-medium text-sm bg-drift-orange text-white rounded shadow-md py-2 px-3">
+            In your Drift playbook, use the targeting condition of <i>"Cookie CONTAINS playbook=target"</i> &ndash; everything after the equal sign will go here!
+          </div>
+        </label>
         <input
           id="targetingCondition"
           v-model="targetingCondition"
@@ -610,12 +625,25 @@ export default {
       background: this.$store.getters['demos/getSelected'].settings?.background,
       widgetId: this.$store.getters['demos/getSelected'].settings?.widgetId,
       targetingCondition: this.$store.getters['demos/getSelected'].settings?.targetingCondition,
-      notificationType: this.$store.getters['demos/getSelected'].settings?.notificationType
+      notificationType: this.$store.getters['demos/getSelected'].settings?.notificationType,
+      tooltipVis: false
     }
   },
   computed: {
   },
   methods: {
+    loadWidgetId (event) {
+      if (event.target.value === 'Custom Bot' && !this.widgetId) {
+        this.widgetId = this.$store.getters['user/getWidget']
+      }
+    },
+    toggleTooltip () {
+      if (!this.tooltipVis) {
+        this.tooltipVis = true
+      } else {
+        this.tooltipVis = false
+      }
+    },
     async updateDemo () {
       try {
         await this.$store.dispatch('demos/update', {

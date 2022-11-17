@@ -3,7 +3,7 @@ export const state = () => ({
   email: null,
   name: null,
   id: null,
-  widget: null
+  widgetId: null
 })
 
 export const getters = {
@@ -20,7 +20,7 @@ export const getters = {
     return state.id
   },
   getWidget (state) {
-    return state.widget
+    return state.widgetId
   }
 }
 
@@ -29,11 +29,13 @@ export const mutations = {
     state.isLoggedIn = true
     state.email = user.email
     state.id = user.id
+    state.widgetId = user.widget_id
   },
   logout (state) {
     state.isLoggedIn = false
     state.email = null
     state.id = null
+    state.widgetId = null
   }
 }
 
