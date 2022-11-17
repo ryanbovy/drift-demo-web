@@ -26,22 +26,23 @@
 <script>
 export default {
   name: 'TheNotificationSlider',
+  props: {
+    demo: Object
+  },
   data () {
     return {
-      id: this.$route.query.demo,
       name: 'Joshua Perk',
       account: 'Slack'
     }
   },
-  computed: {
+  computed: {},
+  watch: {
     demo () {
-      return this.$store.state.demos.saved
+      if (this.demo?.settings?.firstName) { this.name = `${this.demo?.settings?.firstName} ${this.demo?.settings?.lastName}` }
+      if (this.demo?.settings?.accountName) { this.account = this.demo?.settings?.accountName }
     }
   },
-  watch: {},
-  mounted () {
-    console.log(this.$store.getters['demos/getDemoById'](this.id))
-  },
+  mounted () {},
   methods: {
   }
 }

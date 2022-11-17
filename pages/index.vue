@@ -3,6 +3,8 @@
     v-shortkey="notificationHotKeys"
     class="font-balto"
     @shortkey="openNotification()"
+    @dblclick="openNotification()"
+    @contextmenu.prevent="toggleMenu()"
   >
     <!-- LOADER SCREEN -->
     <TheLoaderModal />
@@ -50,8 +52,10 @@ export default {
   mounted () {},
   methods: {
     openNotification () {
-      console.log('launch notification')
-      // open new window
+      window.open(`/notification?demo=${this.$route.query.demo}`, 'NotificationWindow')
+    },
+    toggleMenu () {
+      this.$store.commit('sidebar/toggle')
     },
     resetDrift () {
       document.cookie =
