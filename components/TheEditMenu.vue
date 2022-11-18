@@ -638,11 +638,7 @@ export default {
       }
     },
     toggleTooltip () {
-      if (!this.tooltipVis) {
-        this.tooltipVis = true
-      } else {
-        this.tooltipVis = false
-      }
+      this.tooltipVis = !this.tooltipVis
     },
     async updateDemo () {
       try {

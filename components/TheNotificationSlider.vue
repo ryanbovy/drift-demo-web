@@ -9,7 +9,7 @@
         <div class="text">
           <span class="abmCompany">🎯 {{ account }}  - </span><span class="abmName">{{ name }}</span><br>
           <span class="abmUrl">app.drift.com</span><br>
-          <span class="abmPage">is on Enterprise Communications page</span>
+          <span class="abmPage">is on Pricing page</span>
         </div>
         <img class="icons" src="~/assets/img/drift.png" alt="">
       </div>
