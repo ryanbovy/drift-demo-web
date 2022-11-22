@@ -28,7 +28,8 @@ module.exports = {
           violet: '#b312ff',
           grey: '#BABCBE',
           orange: '#ff8329',
-          indigo: '#3f0fff'
+          indigo: '#3f0fff',
+          black: '#111111'
         }
       }
     },

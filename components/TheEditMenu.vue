@@ -283,8 +283,8 @@
               @click="toggleTooltip()"
             >?</a>
           </div>
-          <div v-if="tooltipVis" class="absolute top-5 z-50 font-medium text-sm bg-drift-orange text-white rounded shadow-md py-2 px-3">
-            In your Drift playbook, use the targeting condition of <i>"Cookie CONTAINS playbook=target"</i> &ndash; everything after the equal sign will go here!
+          <div v-if="tooltipVis" class="absolute top-5 z-50 font-medium text-sm bg-drift-black text-white rounded shadow-md py-2 px-3">
+            In your Drift playbook, use the targeting condition of <i>"Cookie CONTAINS playbook=<span class="text-drift-orange">target</span>"</i> &mdash; everything after the equal sign (orange in our example) will go in this box!
           </div>
         </label>
         <input
