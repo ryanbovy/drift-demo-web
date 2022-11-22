@@ -625,7 +625,7 @@ export default {
       background: this.$store.getters['demos/getSelected'].settings?.background,
       widgetId: this.$store.getters['demos/getSelected'].settings?.widgetId,
       targetingCondition: this.$store.getters['demos/getSelected'].settings?.targetingCondition,
-      notificationType: this.$store.getters['demos/getSelected'].settings?.notificationType,
+      notificationType: this.$store.getters['demos/getSelected'].settings?.notificationType || 'Salesforce_Desktop',
       tooltipVis: false
     }
   },

@@ -13,9 +13,9 @@ export const mutations = {
     state.isOpen = !state.isOpen
     if (typeof drift !== 'undefined') {
       if (state.isOpen) {
-        drift.api.hideChat()
+        drift.api.widget.hide()
       } else {
-        drift.api.openChat()
+        drift.api.widget.show()
       }
     }
   }
