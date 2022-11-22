@@ -79,7 +79,7 @@ export default {
   name: 'TheSideBar',
   data () {
     return {
-      menuHotKeys: ['shift', 'z']
+      menuHotKeys: ['ctrl', 'z']
     }
   },
   computed: {

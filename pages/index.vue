@@ -29,7 +29,7 @@ export default {
       baseWidget: '23x3bmcifbhe',
       background: 'https://screenshotapi-dot-net.storage.googleapis.com/www_drift_com__9efae73eb9a4.png',
       backgroundFormats: ['.png', '.jpeg', '.jpg'],
-      notificationHotKeys: ['shift', 'n'],
+      notificationHotKeys: ['ctrl', 'n'],
       interactionId: null
     }
   },
