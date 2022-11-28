@@ -54,6 +54,22 @@ export default {
   },
   mounted () {},
   methods: {
+    capFirst (string) {
+      return string.charAt(0).toUpperCase() + string.slice(1)
+    },
+    getRandomInt (min, max) {
+      return Math.floor(Math.random() * (max - min)) + min
+    },
+    generateName (type) {
+      const firstNames = ['Emily', 'Hannah', 'Madison', 'Ashley', 'Sarah', 'Alexis', 'Samantha', 'Jessica', 'Elizabeth', 'Taylor', 'Lauren', 'Alyssa', 'Kayla', 'Abigail', 'Brianna', 'Olivia', 'Emma', 'Megan', 'Grace', 'Victoria', 'Rachel', 'Anna', 'Sydney', 'Destiny', 'Morgan', 'Jennifer', 'Jasmine', 'Haley', 'Julia', 'Kaitlyn', 'Nicole', 'Amanda', 'Jacob', 'Michael', 'Matthew', 'Joshua', 'Christopher', 'Nicholas', 'Andrew', 'Joseph', 'Daniel', 'Tyler', 'William', 'Brandon', 'Ryan', 'John', 'Zachary', 'David', 'Anthony', 'James', 'Justin', 'Alexander', 'Jonathan', 'Christian', 'Austin', 'Dylan', 'Ethan', 'Benjamin', 'Noah', 'Samuel', 'Robert', 'Nathan', 'Cameron', 'Kevin', 'Thomas', 'Jose', 'Hunter', 'Jordan', 'Kyle', 'Caleb', 'Jason', 'Logan', 'Aaron', 'Eric', 'Brian', 'Gabriel', 'Adam', 'Jack', 'Isaiah', 'Juan', 'Luis', 'Connor', 'Charles', 'Elijah', 'Isaac', 'Steven', 'Evan', 'Jared', 'Sean', 'Timothy', 'Luke', 'Cody', 'Nathaniel', 'Alex', 'Seth', 'Mason', 'Richard', 'Carlos', 'Angel', 'Patrick', 'Devin', 'Bryan', 'Cole', 'Jackson', 'Ian', 'Garrett', 'Trevor', 'Jesus', 'Chase', 'Adrian', 'Mark', 'Blake', 'Sebastian', 'Antonio', 'Lucas', 'Jeremy', 'Gavin', 'Miguel', 'Julian', 'Dakota', 'Alejandro', 'Jesse']
+      const lastNames = ['Smith', 'Johnson', 'Williams', 'Brown', 'Jones', 'Miller', 'Davis', 'Garcia', 'Rodriguez', 'Wilson', 'Martinez', 'Anderson', 'Taylor', 'Thomas', 'Hernandez', 'Moore', 'Martin', 'Jackson', 'Thompson', 'White', 'Lopez', 'Lee', 'Gonzalez', 'Harris', 'Clark', 'Lewis', 'Robinson', 'Walker', 'Perez', 'Hall', 'Young', 'Allen', 'Sanchez', 'Wright', 'King', 'Scott', 'Green', 'Baker', 'Adams', 'Nelson', 'Hill', 'Ramirez', 'Campbell', 'Mitchell', 'Roberts', 'Carter', 'Phillips', 'Evans', 'Turner', 'Torres', 'Parker', 'Collins', 'Edwards', 'Stewart', 'Flores', 'Morris', 'Nguyen', 'Murphy', 'Rivera', 'Cook', 'Rogers', 'Morgan', 'Peterson', 'Cooper', 'Reed', 'Bailey', 'Bell', 'Gomez', 'Kelly', 'Howard', 'Ward', 'Cox']
+      switch (type) {
+        case 'first':
+          return this.capFirst(firstNames[this.getRandomInt(0, firstNames.length + 1)])
+        case 'last':
+          return this.capFirst(lastNames[this.getRandomInt(0, lastNames.length + 1)])
+      }
+    },
     fireFastlane () {
       if (this.activeDemo?.settings?.playbookType === 'Fastlane') {
         drift('collectFormData', {
@@ -191,17 +207,26 @@ export default {
       }
       // Fire selected playbook
       drift.on('ready', (api, payload) => {
-        if (this.activeDemo.settings?.firstName) {
+        if (this.activeDemo.settings.firstName && this.activeDemo.settings.lastName) {
           drift.api.setUserAttributes({
-            first_name: this.activeDemo.settings?.firstName
+            first_name: this.activeDemo.settings.firstName,
+            last_name: this.activeDemo.settings.lastName
           })
-          console.log('setFirstName complete')
-        }
-        if (this.activeDemo.settings?.lastName) {
+        } else if (this.activeDemo.settings.firstName && !this.activeDemo.settings.lastName) {
           drift.api.setUserAttributes({
-            last_name: this.activeDemo.settings?.lastName
+            first_name: this.activeDemo.settings.firstName,
+            last_name: this.generateName('last')
           })
-          console.log('setLastName complete')
+        } else if (!this.activeDemo.settings.firstName && this.activeDemo.settings.lastName) {
+          drift.api.setUserAttributes({
+            first_name: this.generateName('first'),
+            last_name: this.activeDemo.settings.lastName
+          })
+        } else if (!this.activeDemo.settings.firstName && !this.activeDemo.settings.lastName) {
+          drift.api.setUserAttributes({
+            first_name: this.generateName('first'),
+            last_name: this.generateName('last')
+          })
         }
         if (this.activeDemo.settings?.email) {
           drift.api.setUserAttributes({
@@ -235,7 +260,7 @@ export default {
           setTimeout(() => {
             window.history.replaceState(null, null, '#driftRace')
             drift.page()
-          }, 250)
+          }, 500)
         }
       })
     },
