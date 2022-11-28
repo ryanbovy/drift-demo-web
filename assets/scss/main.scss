@@ -25,15 +25,17 @@ h1, h2, h3, h4, h5, h6 {
     font-weight: bold !important;
 }
 
-#app{
-    z-index: 10000000000;
-}
-
 .menu-shadow{
     filter: drop-shadow(-10px 0px 25px #ffff05);
 }
 
+#drift-frame-controller{
+    z-index: 2147483639 !important;
+}
+#app{
+    z-index: 2147483640;
+}
 #drift-video-extension-root,
 #drift-video-extension-share-modal{
-    z-index: 11000000000 !important;
+    z-index: 2147483642 !important;
 }
