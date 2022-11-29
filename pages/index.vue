@@ -222,11 +222,6 @@ export default {
             first_name: this.generateName('first'),
             last_name: this.activeDemo.settings.lastName
           })
-        } else if (!this.activeDemo.settings.firstName && !this.activeDemo.settings.lastName) {
-          drift.api.setUserAttributes({
-            first_name: this.generateName('first'),
-            last_name: this.generateName('last')
-          })
         }
         if (this.activeDemo.settings?.email) {
           drift.api.setUserAttributes({
