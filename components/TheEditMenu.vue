@@ -175,6 +175,9 @@
           <option value="Fastlane">
             Fastlane
           </option>
+          <option value="ConvoAI Bot">
+            ConvoAI Bot
+          </option>
           <!--
                       <option value="Return Bot">
                         Return Bot
