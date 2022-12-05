@@ -38,7 +38,8 @@ export default {
   plugins: [
     // { src: '~/plugins/vue-debounce.js' },
     // { src: '~/plugins/vue-data-object-path.js' }
-    { src: '~/plugins/vue-shortkey.js', mode: 'client' }
+    { src: '~/plugins/vue-shortkey.js', mode: 'client' },
+    { src: '~/plugins/floating-vue.js', mode: 'client' }
     //{ src: '~/plugins/chrome-color-picker.js' }
   ],
 

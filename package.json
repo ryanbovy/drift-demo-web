@@ -21,6 +21,7 @@
     "@tailwindcss/typography": "0.4.1",
     "canvas-confetti": "^1.4.0",
     "core-js": "^3.8.3",
+    "floating-vue": "^1.0.0-beta.19",
     "nuxt": "^2.15.3",
     "redirect-ssl": "^3.0.0",
     "vue-color": "^2.8.1",

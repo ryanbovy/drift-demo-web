@@ -39,6 +39,12 @@ h1, h2, h3, h4, h5, h6 {
 #app{
     z-index: 2147483640;
 }
+
+.v-popper__popper{
+    z-index: 2147483641 !important;
+    max-width: 480px !important;
+}
+
 #drift-video-extension-root,
 #drift-video-extension-share-modal{
     z-index: 2147483642 !important;
