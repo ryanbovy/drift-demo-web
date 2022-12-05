@@ -12,7 +12,7 @@
       @click="fireFastlane()"
       @dblclick="openNotification()"
     >
-      <img :src="background">
+      <img :src="background" id="bkgdImg">
     </div>
     <!-- END MAIN WINDOW CONTENT -->
     <!-- SIDEBAR MENU -->

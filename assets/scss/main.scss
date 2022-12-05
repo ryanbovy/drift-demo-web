@@ -25,6 +25,10 @@ h1, h2, h3, h4, h5, h6 {
     font-weight: bold !important;
 }
 
+#bkgdImg{
+    min-width: 100vw;
+}
+
 .menu-shadow{
     filter: drop-shadow(-10px 0px 25px #ffff05);
 }
