@@ -278,7 +278,7 @@
         >
           <div>Targeting Condition</div> &nbsp;&nbsp;
           <button
-            v-tooltip.bottom="{ content: '<div class=\'break-normal text-sm\'>In your Drift playbook, use the targeting condition of <i>Cookie CONTAINS playbook=<span class=\'text-drift-orange\'>target</span></i> &mdash; everything after the equal sign (orange in our example) will go in this box!', html: true }"
+            v-tooltip.bottom="{ content: '<div class=\'break-normal text-sm font-normal\'>In your Drift playbook, use the targeting condition of <span class=\'italic\'>Cookie CONTAINS playbook=<span class=\'text-drift-orange\'>target</span></span> &mdash; everything after the equal sign (orange in our example) will go in this box!', html: true }"
             class="flex bg-drift-grey px-1 text-white font-xxs rounded shadow-md hover:bg-drift-orange hover:shadow-lg focus:bg-drift-orange focus:shadow-lg focus:outline-none focus:ring-0 active:bg-drift-orange active:shadow-lg transition duration-150 ease-in-out"
           >
             ?
