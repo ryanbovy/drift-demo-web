@@ -32,7 +32,7 @@
                   Drift Demo <span class="text-xs text-drift-cyan">V2</span>
                 </h2>
                 <div class="flex h-7 items-center">
-                  <button v-tooltip.bottom="{ content: '<div class=\'text-xs\'><span class=\'text-sm\'>Shortcuts:</span><ul><li><span class=\'text-drift-cyan\'>Toggle Menu:</span> CTRL+Z || <i>two-finger-click</i></li><li><span class=\'text-drift-cyan\'>Open Notification:</span> CTRL+N <i>or</i> double-click</li><li><span class=\'text-drift-cyan\'>Fire Fastlane:</span> Single click</li></ul></div>', html: true }" class="text-xs text-drift-grey">
+                  <button v-tooltip.bottom="{ content: '<div class=\'text-xs\' style=\'letter-spacing: 0.5px;\'><span class=\'text-sm\'>Shortcuts:</span><ul><li><span class=\'text-drift-cyan\'>Toggle Menu:</span> CTRL+Z <i>// two-finger-click</i></li><li><span class=\'text-drift-cyan\'>Open Notification:</span> CTRL+N <i>// double-click</i></li><li><span class=\'text-drift-cyan\'>Fire Fastlane:</span> Single click</li></ul></div>', html: true }" class="text-xs text-drift-grey">
                     [navigation hints]
                   </button>
                 </div>
