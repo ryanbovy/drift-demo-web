@@ -20,16 +20,7 @@
     <div class="space-y-2">
       <!-- NAME INPUT-->
       <div
-        class="
-          border border-gray-300
-          rounded-md
-          px-3
-          py-2
-          shadow-sm
-          focus-within:ring-1
-          focus-within:ring-drift-indigo
-          focus-within:border-drift-indigo
-        "
+        class="border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-drift-indigo focus-within:border-drift-indigo"
       >
         <label
           for="name"
@@ -40,32 +31,13 @@
           v-model="name"
           type="text"
           name="name"
-          class="
-            block
-            w-full
-            border-0
-            p-0
-            text-gray-900
-            placeholder-gray-500
-            focus:ring-0
-            sm:text-sm
-          "
+          class="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm"
           placeholder="Acme ABM"
         >
       </div>
       <!-- COLOR SELECTION-->
       <div
-        class="
-          flex
-          border border-gray-300
-          rounded-md
-          px-3
-          py-2
-          shadow-sm
-          focus-within:ring-1
-          focus-within:ring-drift-indigo
-          focus-within:border-drift-indigo
-        "
+        class="flex border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-drift-indigo focus-within:border-drift-indigo"
       >
         <label
           for="color"
@@ -76,29 +48,12 @@
           v-model="color"
           type="color"
           name="color"
-          class="
-            w-1/4
-            border-0
-            p-0
-            text-gray-900
-            placeholder-gray-500
-            focus:ring-0
-            sm:text-sm
-          "
+          class="w-1/4 border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm"
         >
       </div>
       <!-- BACKGROUND INPUT-->
       <div
-        class="
-          border border-gray-300
-          rounded-md
-          px-3
-          py-2
-          shadow-sm
-          focus-within:ring-1
-          focus-within:ring-drift-indigo
-          focus-within:border-drift-indigo
-        "
+        class="border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-drift-indigo focus-within:border-drift-indigo"
       >
         <label
           for="background"
@@ -109,32 +64,14 @@
           v-model="background"
           type="text"
           name="background"
-          class="
-            block
-            w-full
-            border-0
-            p-0
-            text-gray-900
-            placeholder-gray-500
-            focus:ring-0
-            sm:text-sm
-          "
+          class="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm"
           placeholder="Insert website or path to hosted image"
           value="https://screenshotapi-dot-net.storage.googleapis.com/www_drift_com__cd817069080e.png"
         >
       </div>
       <!-- PLAYBOOK DROPDOWN-->
       <div
-        class="
-          border border-gray-300
-          rounded-md
-          px-3
-          py-2
-          shadow-sm
-          focus-within:ring-1
-          focus-within:ring-drift-indigo
-          focus-within:border-drift-indigo
-        "
+        class="border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-drift-indigo focus-within:border-drift-indigo"
       >
         <label
           for="playbookType"
@@ -147,16 +84,7 @@
           v-model="playbookType"
           type="text"
           name="playbookType"
-          class="
-            block
-            w-full
-            border-0
-            p-0
-            text-gray-900
-            placeholder-gray-500
-            focus:ring-0
-            sm:text-sm
-          "
+          class="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm"
           placeholder="Select a Playbook"
           @change="loadWidgetId($event)"
         >
@@ -191,51 +119,24 @@
       <!-- ABM Message -->
       <div
         v-if="playbookType === 'ABM Bot'"
-        class="
-          border border-gray-300
-          rounded-md
-          px-3
-          py-2
-          shadow-sm
-          focus-within:ring-1
-          focus-within:ring-drift-indigo
-          focus-within:border-drift-indigo
-        "
+        class="border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-drift-indigo focus-within:border-drift-indigo"
       >
         <label
           for="abmMessage"
           class="block text-xs font-medium text-gray-900"
         >ABM Message</label>
-        <input
+        <textarea
           id="abmMessage"
           v-model="abmMessage"
           type="text"
           name="abmMessage"
-          class="
-            block
-            w-full
-            border-0
-            p-0
-            text-gray-900
-            placeholder-gray-500
-            focus:ring-0
-            sm:text-sm
-          "
-        >
+          class="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm"
+        />
       </div>
       <!-- WIDGET ID -->
       <div
         v-if="playbookType === 'Custom Bot'"
-        class="
-          border border-gray-300
-          rounded-md
-          px-3
-          py-2
-          shadow-sm
-          focus-within:ring-1
-          focus-within:ring-drift-indigo
-          focus-within:border-drift-indigo
-        "
+        class="border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-drift-indigo focus-within:border-drift-indigo"
       >
         <label
           for="widgetId"
@@ -246,39 +147,26 @@
           v-model="widgetId"
           type="text"
           name="widgetId"
-          class="
-            block
-            w-full
-            border-0
-            p-0
-            text-gray-900
-            placeholder-gray-500
-            focus:ring-0
-            sm:text-sm
-          "
+          class="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm"
         >
       </div>
       <!-- TARGETING CONDITION -->
       <div
         v-if="playbookType === 'Custom Bot'"
-        class="
-          border border-gray-300
-          rounded-md
-          px-3
-          py-2
-          shadow-sm
-          focus-within:ring-1
-          focus-within:ring-drift-indigo
-          focus-within:border-drift-indigo
-        "
+        class="border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-drift-indigo focus-within:border-drift-indigo"
       >
         <label
           for="targetingCondition"
           class="block text-xs font-medium text-gray-900 flex flex-wrap relative"
         >
-          <div>Targeting Condition</div> &nbsp;&nbsp;
+          <div>Targeting Condition</div>
+          &nbsp;&nbsp;
           <button
-            v-tooltip.bottom="{ content: '<div class=\'break-normal text-sm font-normal\' style=\'letter-spacing: 0.5px;\'>In your Drift playbook, use the targeting condition of \'Cookie CONTAINS playbook=<span class=\'text-drift-magenta\'>target</span>\' &mdash; everything after the equal sign will go in this box, and it is case sensitive. <br/><br/>The word \'<span class=\'text-drift-magenta\'>target</span>\' in this example.', html: true }"
+            v-tooltip.bottom="{
+              content:
+                '<div class=\'break-normal text-sm font-normal\' style=\'letter-spacing: 0.5px;\'>In your Drift playbook, use the targeting condition of \'Cookie CONTAINS playbook=<span class=\'text-drift-magenta\'>target</span>\' &mdash; everything after the equal sign will go in this box, and it is case sensitive. <br/><br/>The word \'<span class=\'text-drift-magenta\'>target</span>\' in this example.',
+              html: true
+            }"
             class="flex bg-drift-grey px-1 text-white font-xxs rounded shadow-md hover:bg-drift-magenta hover:shadow-lg focus:bg-drift-magenta focus:shadow-lg focus:outline-none focus:ring-0 active:bg-drift-orange active:shadow-lg transition duration-150 ease-in-out"
           >
             ?
@@ -289,16 +177,7 @@
           v-model="targetingCondition"
           type="text"
           name="targetingCondition"
-          class="
-            block
-            w-full
-            border-0
-            p-0
-            text-gray-900
-            placeholder-gray-500
-            focus:ring-0
-            sm:text-sm
-          "
+          class="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm"
         >
       </div>
     </div>
@@ -319,16 +198,7 @@
 
     <!-- NOTIFICATION DROPDOWN-->
     <div
-      class="
-          border border-gray-300
-          rounded-md
-          px-3
-          py-2
-          shadow-sm
-          focus-within:ring-1
-          focus-within:ring-drift-indigo
-          focus-within:border-drift-indigo
-        "
+      class="border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-drift-indigo focus-within:border-drift-indigo"
     >
       <label
         for="notificationType"
@@ -339,16 +209,7 @@
         v-model="notificationType"
         type="text"
         name="notificationType"
-        class="
-            block
-            w-full
-            border-0
-            p-0
-            text-gray-900
-            placeholder-gray-500
-            focus:ring-0
-            sm:text-sm
-          "
+        class="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm"
         placeholder="Select a Notification Type"
       >
         <option value="Salesforce_Desktop">
@@ -380,16 +241,7 @@
     <div class="space-y-2">
       <!-- FIRST NAME INPUT-->
       <div
-        class="
-          border border-gray-300
-          rounded-md
-          px-3
-          py-2
-          shadow-sm
-          focus-within:ring-1
-          focus-within:ring-drift-indigo
-          focus-within:border-drift-indigo
-        "
+        class="border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-drift-indigo focus-within:border-drift-indigo"
       >
         <label
           for="fname"
@@ -400,31 +252,13 @@
           v-model="firstName"
           type="text"
           name="fname"
-          class="
-            block
-            w-full
-            border-0
-            p-0
-            text-gray-900
-            placeholder-gray-500
-            focus:ring-0
-            sm:text-sm
-          "
+          class="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm"
           placeholder="Jane"
         >
       </div>
       <!-- LAST NAME INPUT-->
       <div
-        class="
-          border border-gray-300
-          rounded-md
-          px-3
-          py-2
-          shadow-sm
-          focus-within:ring-1
-          focus-within:ring-drift-indigo
-          focus-within:border-drift-indigo
-        "
+        class="border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-drift-indigo focus-within:border-drift-indigo"
       >
         <label
           for="lname"
@@ -435,31 +269,13 @@
           v-model="lastName"
           type="text"
           name="lname"
-          class="
-            block
-            w-full
-            border-0
-            p-0
-            text-gray-900
-            placeholder-gray-500
-            focus:ring-0
-            sm:text-sm
-          "
+          class="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm"
           placeholder="Johnson"
         >
       </div>
       <!-- EMAIL INPUT-->
       <div
-        class="
-          border border-gray-300
-          rounded-md
-          px-3
-          py-2
-          shadow-sm
-          focus-within:ring-1
-          focus-within:ring-drift-indigo
-          focus-within:border-drift-indigo
-        "
+        class="border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-drift-indigo focus-within:border-drift-indigo"
       >
         <label
           for="email"
@@ -470,31 +286,13 @@
           v-model="email"
           type="text"
           name="email"
-          class="
-            block
-            w-full
-            border-0
-            p-0
-            text-gray-900
-            placeholder-gray-500
-            focus:ring-0
-            sm:text-sm
-          "
+          class="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm"
           placeholder="Jane.Doe@example.com"
         >
       </div>
       <!-- ACCOUNT INPUT-->
       <div
-        class="
-          border border-gray-300
-          rounded-md
-          px-3
-          py-2
-          shadow-sm
-          focus-within:ring-1
-          focus-within:ring-drift-indigo
-          focus-within:border-drift-indigo
-        "
+        class="border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-drift-indigo focus-within:border-drift-indigo"
       >
         <label
           for="account"
@@ -505,16 +303,7 @@
           v-model="accountName"
           type="text"
           name="account"
-          class="
-            block
-            w-full
-            border-0
-            p-0
-            text-gray-900
-            placeholder-gray-500
-            focus:ring-0
-            sm:text-sm
-          "
+          class="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm"
           placeholder="Example Inc"
         >
       </div>
@@ -523,25 +312,7 @@
     <!-- SAVE BUTTON -->
     <button
       type="button"
-      class="
-        mt-6
-        w-full
-        items-center
-        px-6
-        py-3
-        border border-transparent
-        rounded-md
-        shadow-sm
-        transition
-        bg-drift-lime
-        hover:bg-drift-cyan
-        focus:outline-none
-        focus:ring-2
-        focus:ring-offset-2
-        focus:ring-drift-indigo
-        font-bold
-        uppercase
-      "
+      class="mt-6 w-full items-center px-6 py-3 border border-transparent rounded-md shadow-sm transition bg-drift-lime hover:bg-drift-cyan focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-drift-indigo font-bold uppercase"
       @click="updateDemo()"
     >
       ⚡️ Save
@@ -550,25 +321,7 @@
     <!-- ACTIVATE BUTTON -->
     <button
       type="button"
-      class="
-        mt-6
-        w-full
-        items-center
-        px-6
-        py-3
-        border border-transparent
-        rounded-md
-        shadow-sm
-        transition
-        bg-drift-lime
-        hover:bg-drift-cyan
-        focus:outline-none
-        focus:ring-2
-        focus:ring-offset-2
-        focus:ring-drift-indigo
-        font-bold
-        uppercase
-      "
+      class="mt-6 w-full items-center px-6 py-3 border border-transparent rounded-md shadow-sm transition bg-drift-lime hover:bg-drift-cyan focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-drift-indigo font-bold uppercase"
       @click="activateDemo()"
     >
       🐐 Activate
@@ -577,25 +330,7 @@
     <!-- DELETE BUTTON -->
     <button
       type="button"
-      class="
-        mt-6
-        w-full
-        items-center
-        px-6
-        py-3
-        border border-transparent
-        rounded-md
-        shadow-sm
-        transition
-        bg-red-400
-        hover:bg-red-600
-        focus:outline-none
-        focus:ring-2
-        focus:ring-offset-2
-        focus:ring-drift-indigo
-        font-bold
-        uppercase
-      "
+      class="mt-6 w-full items-center px-6 py-3 border border-transparent rounded-md shadow-sm transition bg-red-400 hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-drift-indigo font-bold uppercase"
       @click="deleteDemo()"
     >
       🗑 Delete
@@ -614,20 +349,27 @@ export default {
       email: this.$store.getters['demos/getSelected'].settings?.email,
       firstName: this.$store.getters['demos/getSelected'].settings?.firstName,
       lastName: this.$store.getters['demos/getSelected'].settings?.lastName,
-      abmMessage: this.$store.getters['demos/getSelected'].settings?.abmMessage,
-      accountName: this.$store.getters['demos/getSelected'].settings?.accountName,
-      playbookType: this.$store.getters['demos/getSelected'].settings?.playbookType,
-      interactionId: this.$store.getters['demos/getSelected'].settings?.interactionId,
+      abmMessage:
+        this.$store.getters['demos/getSelected'].settings?.abmMessage ||
+        'We help companies like you drive pipeline and hit their revenue targets faster.',
+      accountName:
+        this.$store.getters['demos/getSelected'].settings?.accountName,
+      playbookType:
+        this.$store.getters['demos/getSelected'].settings?.playbookType,
+      interactionId:
+        this.$store.getters['demos/getSelected'].settings?.interactionId,
       color: this.$store.getters['demos/getSelected'].settings?.color,
       background: this.$store.getters['demos/getSelected'].settings?.background,
       widgetId: this.$store.getters['demos/getSelected'].settings?.widgetId,
-      targetingCondition: this.$store.getters['demos/getSelected'].settings?.targetingCondition,
-      notificationType: this.$store.getters['demos/getSelected'].settings?.notificationType || 'Salesforce_Desktop',
+      targetingCondition:
+        this.$store.getters['demos/getSelected'].settings?.targetingCondition,
+      notificationType:
+        this.$store.getters['demos/getSelected'].settings?.notificationType ||
+        'Salesforce_Desktop',
       tooltipVis: false
     }
   },
-  computed: {
-  },
+  computed: {},
   methods: {
     loadWidgetId (event) {
       if (event.target.value === 'Custom Bot' && !this.widgetId) {
