@@ -24,7 +24,9 @@ export default {
   },
   computed: {
     demo () {
-      if (this.id) { return this.$store.getters['demos/getDemoById'](this.id) }
+      if (this.id) {
+        return this.$store.getters['demos/getDemoById'](this.id)
+      }
       return null
     }
   },
@@ -34,6 +36,9 @@ export default {
         switch (this.demo.settings.notificationType) {
           case 'Salesforce_Desktop':
             this.background = 'https://i.imgur.com/I8y3kyf.png'
+            break
+          case 'Dynamics_Desktop':
+            this.background = 'https://i.imgur.com/LPTyP6V.jpg'
             break
           case 'Salesloft_Desktop':
             this.background = 'https://i.imgur.com/wtoza39.png'

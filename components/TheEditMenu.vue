@@ -215,6 +215,9 @@
         <option value="Salesforce_Desktop">
           Salesforce Desktop
         </option>
+        <option value="Dynamics_Desktop">
+          Microsoft Dynamics Desktop
+        </option>
         <option value="Salesloft_Desktop">
           Salesloft Desktop
         </option>
