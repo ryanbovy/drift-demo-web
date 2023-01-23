@@ -8,11 +8,8 @@
     <!-- LOADER SCREEN -->
     <TheLoaderModal />
     <!-- MAIN WINDOW CONTENT -->
-    <div
-      @click="fireFastlane()"
-      @dblclick="openNotification()"
-    >
-      <img :src="background" id="bkgdImg">
+    <div @click="fireFastlane()" @dblclick="openNotification()">
+      <img id="bkgdImg" :src="background">
     </div>
     <!-- END MAIN WINDOW CONTENT -->
     <!-- SIDEBAR MENU -->
@@ -27,7 +24,7 @@ export default {
   data () {
     return {
       baseWidget: '23x3bmcifbhe',
-      background: 'https://screenshotapi-dot-net.storage.googleapis.com/www_drift_com__9efae73eb9a4.png',
+      background: 'https://www.drift.com/',
       backgroundFormats: ['.png', '.jpeg', '.jpg'],
       notificationHotKeys: ['ctrl', 'n'],
       interactionId: null
@@ -61,29 +58,237 @@ export default {
       return Math.floor(Math.random() * (max - min)) + min
     },
     generateName (type) {
-      const firstNames = ['Emily', 'Hannah', 'Madison', 'Ashley', 'Sarah', 'Alexis', 'Samantha', 'Jessica', 'Elizabeth', 'Taylor', 'Lauren', 'Alyssa', 'Kayla', 'Abigail', 'Brianna', 'Olivia', 'Emma', 'Megan', 'Grace', 'Victoria', 'Rachel', 'Anna', 'Sydney', 'Destiny', 'Morgan', 'Jennifer', 'Jasmine', 'Haley', 'Julia', 'Kaitlyn', 'Nicole', 'Amanda', 'Jacob', 'Michael', 'Matthew', 'Joshua', 'Christopher', 'Nicholas', 'Andrew', 'Joseph', 'Daniel', 'Tyler', 'William', 'Brandon', 'Ryan', 'John', 'Zachary', 'David', 'Anthony', 'James', 'Justin', 'Alexander', 'Jonathan', 'Christian', 'Austin', 'Dylan', 'Ethan', 'Benjamin', 'Noah', 'Samuel', 'Robert', 'Nathan', 'Cameron', 'Kevin', 'Thomas', 'Jose', 'Hunter', 'Jordan', 'Kyle', 'Caleb', 'Jason', 'Logan', 'Aaron', 'Eric', 'Brian', 'Gabriel', 'Adam', 'Jack', 'Isaiah', 'Juan', 'Luis', 'Connor', 'Charles', 'Elijah', 'Isaac', 'Steven', 'Evan', 'Jared', 'Sean', 'Timothy', 'Luke', 'Cody', 'Nathaniel', 'Alex', 'Seth', 'Mason', 'Richard', 'Carlos', 'Angel', 'Patrick', 'Devin', 'Bryan', 'Cole', 'Jackson', 'Ian', 'Garrett', 'Trevor', 'Jesus', 'Chase', 'Adrian', 'Mark', 'Blake', 'Sebastian', 'Antonio', 'Lucas', 'Jeremy', 'Gavin', 'Miguel', 'Julian', 'Dakota', 'Alejandro', 'Jesse']
-      const lastNames = ['Smith', 'Johnson', 'Williams', 'Brown', 'Jones', 'Miller', 'Davis', 'Garcia', 'Rodriguez', 'Wilson', 'Martinez', 'Anderson', 'Taylor', 'Thomas', 'Hernandez', 'Moore', 'Martin', 'Jackson', 'Thompson', 'White', 'Lopez', 'Lee', 'Gonzalez', 'Harris', 'Clark', 'Lewis', 'Robinson', 'Walker', 'Perez', 'Hall', 'Young', 'Allen', 'Sanchez', 'Wright', 'King', 'Scott', 'Green', 'Baker', 'Adams', 'Nelson', 'Hill', 'Ramirez', 'Campbell', 'Mitchell', 'Roberts', 'Carter', 'Phillips', 'Evans', 'Turner', 'Torres', 'Parker', 'Collins', 'Edwards', 'Stewart', 'Flores', 'Morris', 'Nguyen', 'Murphy', 'Rivera', 'Cook', 'Rogers', 'Morgan', 'Peterson', 'Cooper', 'Reed', 'Bailey', 'Bell', 'Gomez', 'Kelly', 'Howard', 'Ward', 'Cox']
+      const firstNames = [
+        'Emily',
+        'Hannah',
+        'Madison',
+        'Ashley',
+        'Sarah',
+        'Alexis',
+        'Samantha',
+        'Jessica',
+        'Elizabeth',
+        'Taylor',
+        'Lauren',
+        'Alyssa',
+        'Kayla',
+        'Abigail',
+        'Brianna',
+        'Olivia',
+        'Emma',
+        'Megan',
+        'Grace',
+        'Victoria',
+        'Rachel',
+        'Anna',
+        'Sydney',
+        'Destiny',
+        'Morgan',
+        'Jennifer',
+        'Jasmine',
+        'Haley',
+        'Julia',
+        'Kaitlyn',
+        'Nicole',
+        'Amanda',
+        'Jacob',
+        'Michael',
+        'Matthew',
+        'Joshua',
+        'Christopher',
+        'Nicholas',
+        'Andrew',
+        'Joseph',
+        'Daniel',
+        'Tyler',
+        'William',
+        'Brandon',
+        'Ryan',
+        'John',
+        'Zachary',
+        'David',
+        'Anthony',
+        'James',
+        'Justin',
+        'Alexander',
+        'Jonathan',
+        'Christian',
+        'Austin',
+        'Dylan',
+        'Ethan',
+        'Benjamin',
+        'Noah',
+        'Samuel',
+        'Robert',
+        'Nathan',
+        'Cameron',
+        'Kevin',
+        'Thomas',
+        'Jose',
+        'Hunter',
+        'Jordan',
+        'Kyle',
+        'Caleb',
+        'Jason',
+        'Logan',
+        'Aaron',
+        'Eric',
+        'Brian',
+        'Gabriel',
+        'Adam',
+        'Jack',
+        'Isaiah',
+        'Juan',
+        'Luis',
+        'Connor',
+        'Charles',
+        'Elijah',
+        'Isaac',
+        'Steven',
+        'Evan',
+        'Jared',
+        'Sean',
+        'Timothy',
+        'Luke',
+        'Cody',
+        'Nathaniel',
+        'Alex',
+        'Seth',
+        'Mason',
+        'Richard',
+        'Carlos',
+        'Angel',
+        'Patrick',
+        'Devin',
+        'Bryan',
+        'Cole',
+        'Jackson',
+        'Ian',
+        'Garrett',
+        'Trevor',
+        'Jesus',
+        'Chase',
+        'Adrian',
+        'Mark',
+        'Blake',
+        'Sebastian',
+        'Antonio',
+        'Lucas',
+        'Jeremy',
+        'Gavin',
+        'Miguel',
+        'Julian',
+        'Dakota',
+        'Alejandro',
+        'Jesse'
+      ]
+      const lastNames = [
+        'Smith',
+        'Johnson',
+        'Williams',
+        'Brown',
+        'Jones',
+        'Miller',
+        'Davis',
+        'Garcia',
+        'Rodriguez',
+        'Wilson',
+        'Martinez',
+        'Anderson',
+        'Taylor',
+        'Thomas',
+        'Hernandez',
+        'Moore',
+        'Martin',
+        'Jackson',
+        'Thompson',
+        'White',
+        'Lopez',
+        'Lee',
+        'Gonzalez',
+        'Harris',
+        'Clark',
+        'Lewis',
+        'Robinson',
+        'Walker',
+        'Perez',
+        'Hall',
+        'Young',
+        'Allen',
+        'Sanchez',
+        'Wright',
+        'King',
+        'Scott',
+        'Green',
+        'Baker',
+        'Adams',
+        'Nelson',
+        'Hill',
+        'Ramirez',
+        'Campbell',
+        'Mitchell',
+        'Roberts',
+        'Carter',
+        'Phillips',
+        'Evans',
+        'Turner',
+        'Torres',
+        'Parker',
+        'Collins',
+        'Edwards',
+        'Stewart',
+        'Flores',
+        'Morris',
+        'Nguyen',
+        'Murphy',
+        'Rivera',
+        'Cook',
+        'Rogers',
+        'Morgan',
+        'Peterson',
+        'Cooper',
+        'Reed',
+        'Bailey',
+        'Bell',
+        'Gomez',
+        'Kelly',
+        'Howard',
+        'Ward',
+        'Cox'
+      ]
       switch (type) {
         case 'first':
-          return this.capFirst(firstNames[this.getRandomInt(0, firstNames.length + 1)])
+          return this.capFirst(
+            firstNames[this.getRandomInt(0, firstNames.length + 1)]
+          )
         case 'last':
-          return this.capFirst(lastNames[this.getRandomInt(0, lastNames.length + 1)])
+          return this.capFirst(
+            lastNames[this.getRandomInt(0, lastNames.length + 1)]
+          )
       }
     },
     fireFastlane () {
       if (this.activeDemo?.settings?.playbookType === 'Fastlane') {
-        drift('collectFormData', {
-          fname: this.activeDemo?.settings?.firstName || 'John',
-          lname: this.activeDemo?.settings?.lastName || 'Williams',
-          email: this.activeDemo?.settings?.email || 'John.Williams@adobe.com',
-          companyName: this.activeDemo?.settings?.accountName || 'Adobe'
-        }, {
-          campaignId: this.interactionId
-        })
+        drift(
+          'collectFormData',
+          {
+            fname: this.activeDemo?.settings?.firstName || 'John',
+            lname: this.activeDemo?.settings?.lastName || 'Williams',
+            email:
+              this.activeDemo?.settings?.email || 'John.Williams@adobe.com',
+            companyName: this.activeDemo?.settings?.accountName || 'Adobe'
+          },
+          {
+            campaignId: this.interactionId
+          }
+        )
       }
     },
     openNotification () {
-      window.open(`/notification?demo=${this.$route.query.demo}`, 'NotificationWindow')
+      window.open(
+        `/notification?demo=${this.$route.query.demo}`,
+        'NotificationWindow'
+      )
     },
     toggleMenu () {
       this.$store.commit('sidebar/toggle')
@@ -127,7 +332,7 @@ export default {
               console.error('Drift snippet included twice.')
             )
           }
-          (t.invoked = !0),
+          ;(t.invoked = !0),
           (t.methods = [
             'identify',
             'config',
@@ -153,12 +358,11 @@ export default {
           (t.load = function (t) {
             const e = 3e5
             const n = Math.ceil(new Date() / e) * e
-            const o = document.createElement('script');
-            (o.type = 'text/javascript'),
+            const o = document.createElement('script')
+              ;(o.type = 'text/javascript'),
             (o.async = !0),
             (o.crossorigin = 'anonymous'),
-            (o.src =
-                  'https://js.driftt.com/include/' + n + '/' + t + '.js')
+            (o.src = 'https://js.driftt.com/include/' + n + '/' + t + '.js')
             const i = document.getElementsByTagName('script')[0]
             i.parentNode.insertBefore(o, i)
           })
@@ -199,7 +403,14 @@ export default {
           break
         case 'Custom Bot':
           this.interactionId = null
-          setTimeout(this.setCookie('playbook', this.activeDemo.settings?.targetingCondition, 1), 5000)
+          setTimeout(
+            this.setCookie(
+              'playbook',
+              this.activeDemo.settings?.targetingCondition,
+              1
+            ),
+            5000
+          )
           break
         case 'Engage All':
           this.interactionId = 340714
@@ -210,17 +421,26 @@ export default {
       }
       // Fire selected playbook
       drift.on('ready', (api, payload) => {
-        if (this.activeDemo.settings.firstName && this.activeDemo.settings.lastName) {
+        if (
+          this.activeDemo.settings.firstName &&
+          this.activeDemo.settings.lastName
+        ) {
           drift.api.setUserAttributes({
             first_name: this.activeDemo.settings.firstName,
             last_name: this.activeDemo.settings.lastName
           })
-        } else if (this.activeDemo.settings.firstName && !this.activeDemo.settings.lastName) {
+        } else if (
+          this.activeDemo.settings.firstName &&
+          !this.activeDemo.settings.lastName
+        ) {
           drift.api.setUserAttributes({
             first_name: this.activeDemo.settings.firstName,
             last_name: this.generateName('last')
           })
-        } else if (!this.activeDemo.settings.firstName && this.activeDemo.settings.lastName) {
+        } else if (
+          !this.activeDemo.settings.firstName &&
+          this.activeDemo.settings.lastName
+        ) {
           drift.api.setUserAttributes({
             first_name: this.generateName('first'),
             last_name: this.activeDemo.settings.lastName
@@ -272,7 +492,11 @@ export default {
       document.cookie = name + '=' + (value || '') + expires + '; path=/'
     },
     async calculateBackground () {
-      if (this.activeDemo.settings?.background && this.activeDemo.settings?.background !== null && this.activeDemo.settings?.background !== '') {
+      if (
+        this.activeDemo.settings?.background &&
+        this.activeDemo.settings?.background !== null &&
+        this.activeDemo.settings?.background !== ''
+      ) {
         let isImage = false
         this.backgroundFormats.forEach((format) => {
           if (this.activeDemo.settings?.background.includes(format)) {
@@ -283,7 +507,8 @@ export default {
         // If not, make a request to the screenshot generator
         if (!isImage) {
           this.$store.commit('loader/show', {
-            message: 'Loading your background image. This may take a minute but will be faster next time!',
+            message:
+              'Loading your background image. This may take a minute but will be faster next time!',
             isWarning: false
           })
           try {
@@ -296,7 +521,8 @@ export default {
           } catch (err) {
             await new Promise((resolve) => {
               this.$store.commit('loader/show', {
-                message: 'Something went wrong loading your background image. Make sure it starts with http:// or https://.',
+                message:
+                  'Something went wrong loading your background image. Make sure it starts with http:// or https://.',
                 isWarning: true
               })
               setTimeout(resolve, 3000)
