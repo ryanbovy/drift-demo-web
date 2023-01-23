@@ -24,7 +24,7 @@ export default {
   data () {
     return {
       baseWidget: '23x3bmcifbhe',
-      background: 'https://www.drift.com/',
+      background: 'https://i.imgur.com/IoqqPq4.png',
       backgroundFormats: ['.png', '.jpeg', '.jpg'],
       notificationHotKeys: ['ctrl', 'n'],
       interactionId: null
