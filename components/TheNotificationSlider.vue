@@ -38,8 +38,8 @@ export default {
   computed: {},
   watch: {
     demo () {
-      if (this.demo?.settings?.firstName && this.demo?.settings?.lastName ) { 
-        this.name = `${this.demo?.settings?.firstName} ${this.demo?.settings?.lastName}` 
+      if (this.demo?.settings?.firstName && this.demo?.settings?.lastName) {
+        this.name = `${this.demo?.settings?.firstName} ${this.demo?.settings?.lastName}`
       } else if (this.demo?.settings?.firstName) {
         this.name = `${this.demo?.settings?.firstName}`
       }
