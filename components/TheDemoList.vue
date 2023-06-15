@@ -84,10 +84,17 @@ export default {
       return this.$store.state.demos.activated
     },
     filteredDemos () {
-      return this.demos.filter((demo) => {
-        // Perform case-insensitive search on the 'name' property
-        return demo.name.toLowerCase().includes(this.searchQuery.toLowerCase())
-      })
+      return this.demos
+        .filter((demo) => {
+          // Perform case-insensitive search on the 'name' property
+          return demo.name
+            .toLowerCase()
+            .includes(this.searchQuery.toLowerCase())
+        })
+        .sort((a, b) => {
+          // Sort by 'updated_at' field in descending order
+          return new Date(b.updated_at) - new Date(a.updated_at)
+        })
     }
   },
   methods: {
