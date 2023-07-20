@@ -397,6 +397,9 @@ export default {
         case 'ConvoAI Bot':
           this.interactionId = 219549
           break
+        case 'ROI Bot':
+          this.interactionId = 368523
+          break
         case 'ABM Bot':
           this.interactionId = null
           setTimeout(this.setCookie('playbook', 'abmBot', 1), 5000)
