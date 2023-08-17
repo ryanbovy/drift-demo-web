@@ -539,3 +539,6 @@ export default {
   }
 }
 </script>
+<script type="text/plain">
+LIFT-AI-VERIFICATION-f9adb105-14ee-4547-b2f6-e9803b1b4013
+</script>
