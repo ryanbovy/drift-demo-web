@@ -15,9 +15,21 @@
     <!-- SIDEBAR MENU -->
     <TheSideBar />
     <!-- END SIDEBAR MENU -->
-    <script type="text/plain">
-      LIFT-AI-VERIFICATION-f9adb105-14ee-4547-b2f6-e9803b1b4013
+    <!--BEGIN  MarketLinc Monitor. -->
+    <script type="text/javascript">
+      try {
+      var ml_url =
+      'https://lift-ai-js.marketlinc.com/v2.drift-demo.com/deployment.js'
+      var ml_script = document.createElement('script')
+      ml_script.type = 'text/javascript'
+      ml_script.id = 'ml_snippet_script_id'
+      ml_script.src = ml_url + '?' + Math.floor(Math.random() * 1000000000)
+      document.getElementsByTagName('head')[0].appendChild(ml_script)
+      } catch (e) {
+      /*the endpoint is not available, do nothing*/
+      }
     </script>
+    <!-- END MarketLinc Monitor. -->
   </main>
 </template>
 
