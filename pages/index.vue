@@ -332,6 +332,19 @@ export default {
       localStorage.removeItem('DRIFT_visitCounts')
       localStorage.removeItem('DRIFT_isChatFrameOpen')
       localStorage.removeItem('DRIFT_openTabs')
+      // Clear Lift AI Cookies
+      document.cookie =
+        'vs_convo_ai=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
+      document.cookie =
+        'vs_vfs=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
+      document.cookie =
+        'vs_lift_ai=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
+      document.cookie =
+        'vs_intent=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
+      document.cookie =
+        'vs_sid=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
+      document.cookie =
+        'vs_vid=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
       sessionStorage.clear()
     },
     loadDrift () {
