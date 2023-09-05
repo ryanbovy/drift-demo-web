@@ -64,7 +64,9 @@ export default {
       deep: true
     }
   },
-  mounted () {},
+  mounted () {
+    this.resetDrift()
+  },
   methods: {
     capFirst (string) {
       return string.charAt(0).toUpperCase() + string.slice(1)
