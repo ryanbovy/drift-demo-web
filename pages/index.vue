@@ -64,9 +64,6 @@ export default {
       deep: true
     }
   },
-  mounted () {
-    this.resetDrift()
-  },
   methods: {
     capFirst (string) {
       return string.charAt(0).toUpperCase() + string.slice(1)
@@ -510,6 +507,7 @@ export default {
           */
           setTimeout(() => {
             window.history.replaceState(null, null, '#driftRace')
+            this.resetDrift()
             drift.page()
           }, 500)
         }
