@@ -433,6 +433,7 @@ export default {
           break
         case 'Custom Bot':
           this.interactionId = null
+          this.resetDrift()
           setTimeout(
             this.setCookie(
               'playbook',
@@ -494,7 +495,10 @@ export default {
           })
           console.log('ABM message complete')
         }
-        if (this.interactionId) {
+        if (
+          this.interactionId ||
+          this.activeDemo.settings?.playbookType === 'Custom Bot'
+        ) {
           drift.api.startInteraction({
             interactionId: this.interactionId,
             goToConversation: false,
@@ -507,7 +511,6 @@ export default {
           */
           setTimeout(() => {
             window.history.replaceState(null, null, '#driftRace')
-            this.resetDrift()
             drift.page()
           }, 500)
         }
