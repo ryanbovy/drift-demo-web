@@ -495,10 +495,7 @@ export default {
           })
           console.log('ABM message complete')
         }
-        if (
-          this.interactionId ||
-          this.activeDemo.settings?.playbookType === 'Custom Bot'
-        ) {
+        if (this.interactionId) {
           drift.api.startInteraction({
             interactionId: this.interactionId,
             goToConversation: false,
