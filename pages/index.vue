@@ -51,6 +51,7 @@ export default {
     }
   },
   mounted () {
+    console.log('mounted')
     this.resetDrift()
   },
   methods: {
@@ -297,12 +298,9 @@ export default {
       this.$store.commit('sidebar/toggle')
     },
     resetDrift () {
-      document.cookie =
-        'drift_aid=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
-      document.cookie =
-        'driftt_aid=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
-      document.cookie =
-        'drift_eid=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
+      document.cookie = 'drift_aid=; expires=Thu, 01 Jan 1970 00:00:01 GMT;'
+      document.cookie = 'driftt_aid=; expires=Thu, 01 Jan 1970 00:00:01 GMT;'
+      document.cookie = 'drift_eid=; expires=Thu, 01 Jan 1970 00:00:00 UTC;'
       document.cookie =
         'driftt_eid=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
       document.cookie =
@@ -334,6 +332,7 @@ export default {
       document.cookie =
         'vs_vid=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
       sessionStorage.clear()
+      console.log('resetDrift complete')
     },
     loadDrift () {
       // A function to run the standard install code. The widgetId variable can be set (otherwise uses a default value)
