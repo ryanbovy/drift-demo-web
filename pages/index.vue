@@ -38,6 +38,7 @@ export default {
   watch: {
     activeDemo: {
       handler (newValue, oldValue) {
+        this.resetDrift()
         if (newValue?.id !== oldValue?.id) {
           // TODO: For some reason watch is being called twice
           this.resetDrift()
