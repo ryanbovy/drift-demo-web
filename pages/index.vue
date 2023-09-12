@@ -433,7 +433,6 @@ export default {
           break
         case 'Custom Bot':
           this.interactionId = null
-          this.resetDrift()
           setTimeout(
             this.setCookie(
               'playbook',
