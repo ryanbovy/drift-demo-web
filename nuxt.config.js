@@ -3,7 +3,9 @@ export default {
   server: {
     port: process.env.PORT || 3000
   },
-  serverMiddleware: [redirectSSL.create({enabled: process.env.NODE_ENV==='production'})],
+  serverMiddleware: [
+    redirectSSL.create({ enabled: process.env.NODE_ENV === 'production' })
+  ],
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
   ssr: false,
 
@@ -18,9 +20,7 @@ export default {
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { hid: 'description', name: 'description', content: '' }
     ],
-    link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.png' }
-    ],
+    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.png' }],
     script: [
       // {
       //   src: 'https://code.jquery.com/jquery-3.3.1.slim.min.js',
@@ -30,9 +30,7 @@ export default {
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
-  css: [
-    '@/assets/scss/main',
-  ],
+  css: ['@/assets/scss/main'],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
@@ -40,7 +38,7 @@ export default {
     // { src: '~/plugins/vue-data-object-path.js' }
     { src: '~/plugins/vue-shortkey.js', mode: 'client' },
     { src: '~/plugins/floating-vue.js', mode: 'client' }
-    //{ src: '~/plugins/chrome-color-picker.js' }
+    // { src: '~/plugins/chrome-color-picker.js' }
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -58,7 +56,7 @@ export default {
     // https://go.nuxtjs.dev/bootstrap
     // 'bootstrap-vue/nuxt',
     '@nuxtjs/axios',
-    '@nuxtjs/toast',
+    '@nuxtjs/toast'
   ],
   axios: {
     baseUrl: process.env.API_URL || 'http://localhost:3001'
@@ -70,7 +68,7 @@ export default {
   router: {
     linkActiveClass: 'active-placeholder',
     linkExactActiveClass: 'active',
-    middleware: [ 'onload' ]
+    middleware: ['onload']
   },
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
@@ -78,7 +76,7 @@ export default {
       vue: {
         compiler: require('vue-template-babel-compiler')
       }
-    },
+    }
   },
   env: {
     API_URL: process.env.API_URL || 'http://localhost:3001'
