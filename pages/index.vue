@@ -294,27 +294,49 @@ export default {
       this.$store.commit('sidebar/toggle')
     },
     resetDrift () {
-      document.cookie = 'drift_aid=;expires=-1; path=/;'
-      document.cookie = 'driftt_aid=; expires=-1; path=/;'
-      document.cookie = 'drift_eid=; expires=-1; path=/;'
-      document.cookie = 'driftt_eid=; expires=-1; path=/;'
-      document.cookie = 'drift_campaign_refresh=; expires=-1; path=/;'
-      document.cookie = 'driftt_sid=; expires=-1; path=/;'
-      document.cookie = 'driftt_wmd=; expires=-1; path=/;'
-      document.cookie = 'DFTT_END_USER_PREV_BOOTSTRAPPED=; expires=-1; path=/;'
-      document.cookie = 'DFTT_LEAD_HAS_PREV_IDENTIFIED=; expires=-1; path=/;'
-      document.cookie = 'playbook=; expires=-1; path=/;'
+      const cookies = document.cookie
+      console.log(cookies)
+
+      document.cookie =
+        'drift_aid=; expires=Thu, 01 Jan 1970 00:00:01 GMT; path=/;'
+      document.cookie =
+        'driftt_aid=; expires=Thu, 01 Jan 1970 00:00:01 GMT; path=/;'
+      document.cookie =
+        'drift_eid=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
+      document.cookie =
+        'driftt_eid=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
+      document.cookie =
+        'drift_campaign_refresh=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
+      document.cookie =
+        'driftt_sid=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
+      document.cookie =
+        'driftt_wmd=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
+      document.cookie =
+        'DFTT_END_USER_PREV_BOOTSTRAPPED=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
+      document.cookie =
+        'DFTT_LEAD_HAS_PREV_IDENTIFIED=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
+      document.cookie =
+        'playbook=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
       localStorage.removeItem('DRIFT_visitCounts')
       localStorage.removeItem('DRIFT_isChatFrameOpen')
       localStorage.removeItem('DRIFT_openTabs')
       // Clear Lift AI Cookies
-      document.cookie = 'vs_convo_ai=; expires=-1; path=/;'
-      document.cookie = 'vs_vfs=; expires=-1; path=/;'
-      document.cookie = 'vs_lift_ai=; expires=-1; path=/;'
-      document.cookie = 'vs_intent=; expires=-1; path=/;'
-      document.cookie = 'vs_sid=; expires=-1; path=/;'
-      document.cookie = 'vs_vid=; expires=-1; path=/;'
+      document.cookie =
+        'vs_convo_ai=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
+      document.cookie =
+        'vs_vfs=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
+      document.cookie =
+        'vs_lift_ai=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
+      document.cookie =
+        'vs_intent=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
+      document.cookie =
+        'vs_sid=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
+      document.cookie =
+        'vs_vid=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
       sessionStorage.clear()
+
+      this.cookies = document.cookie
+      console.log(cookies)
     },
     loadDrift () {
       // A function to run the standard install code. The widgetId variable can be set (otherwise uses a default value)
