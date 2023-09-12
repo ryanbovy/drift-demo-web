@@ -50,6 +50,9 @@ export default {
       deep: true
     }
   },
+  created () {
+    this.resetDrift()
+  },
   methods: {
     capFirst (string) {
       return string.charAt(0).toUpperCase() + string.slice(1)
