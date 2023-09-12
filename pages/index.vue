@@ -51,8 +51,9 @@ export default {
     }
   },
   mounted () {
-    console.log('mounted')
+    console.log('document.cookie')
     this.resetDrift()
+    console.log('document.cookie')
   },
   methods: {
     capFirst (string) {
