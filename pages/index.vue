@@ -50,6 +50,9 @@ export default {
       deep: true
     }
   },
+  mounted () {
+    this.resetDrift()
+  },
   methods: {
     capFirst (string) {
       return string.charAt(0).toUpperCase() + string.slice(1)
@@ -314,8 +317,6 @@ export default {
         'DFTT_LEAD_HAS_PREV_IDENTIFIED=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
       document.cookie =
         'playbook=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
-      localStorage.removeItem('userEmail')
-      localStorage.removeItem('userId')
       localStorage.removeItem('DRIFT_visitCounts')
       localStorage.removeItem('DRIFT_isChatFrameOpen')
       localStorage.removeItem('DRIFT_openTabs')
