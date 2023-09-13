@@ -15,6 +15,9 @@
     <!-- SIDEBAR MENU -->
     <TheSideBar />
     <!-- END SIDEBAR MENU -->
+    <script>
+      this.resetDrift()
+    </script>
     <!--BEGIN  MarketLinc Monitor. -->
     <script type="text/javascript">
       try {
@@ -309,9 +312,9 @@ export default {
     },
     resetDrift () {
       document.cookie =
-        'drift_aid=; expires=Thu, 01 Jan 1970 00:00:01 GMT; path=/;'
+        'drift_aid=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
       document.cookie =
-        'driftt_aid=; expires=Thu, 01 Jan 1970 00:00:01 GMT; path=/;'
+        'driftt_aid=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
       document.cookie =
         'drift_eid=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
       document.cookie =
@@ -326,12 +329,9 @@ export default {
         'DFTT_END_USER_PREV_BOOTSTRAPPED=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
       document.cookie =
         'DFTT_LEAD_HAS_PREV_IDENTIFIED=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
-      document.cookie =
-        'playbook=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
       localStorage.removeItem('DRIFT_visitCounts')
       localStorage.removeItem('DRIFT_isChatFrameOpen')
       localStorage.removeItem('DRIFT_openTabs')
-      localStorage.removeItem('DRIFT_SESSION_CAMPAIGNS')
       // Clear Lift AI Cookies
       document.cookie =
         'vs_convo_ai=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
@@ -397,9 +397,7 @@ export default {
         }
       })()
       drift.SNIPPET_VERSION = '0.3.1'
-      this.resetDrift()
       drift.load(this.activeDemo?.settings?.widgetId || this.baseWidget)
-      this.resetDrift()
       drift.config({
         backgroundColor: this.activeDemo?.settings?.color || '#005A9C'
       })
