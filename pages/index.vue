@@ -53,7 +53,6 @@ export default {
   watch: {
     activeDemo: {
       handler (newValue, oldValue) {
-        this.resetDrift()
         if (newValue?.id !== oldValue?.id) {
           // TODO: For some reason watch is being called twice
           this.resetDrift()
@@ -309,9 +308,6 @@ export default {
       this.$store.commit('sidebar/toggle')
     },
     resetDrift () {
-      const cookies = document.cookie
-      console.log(cookies)
-
       document.cookie =
         'drift_aid=; expires=Thu, 01 Jan 1970 00:00:01 GMT; path=/;'
       document.cookie =
@@ -335,6 +331,7 @@ export default {
       localStorage.removeItem('DRIFT_visitCounts')
       localStorage.removeItem('DRIFT_isChatFrameOpen')
       localStorage.removeItem('DRIFT_openTabs')
+      localStorage.removeItem('DRIFT_SESSION_CAMPAIGNS')
       // Clear Lift AI Cookies
       document.cookie =
         'vs_convo_ai=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
@@ -349,9 +346,6 @@ export default {
       document.cookie =
         'vs_vid=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
       sessionStorage.clear()
-
-      this.cookies = document.cookie
-      console.log(cookies)
     },
     loadDrift () {
       // A function to run the standard install code. The widgetId variable can be set (otherwise uses a default value)
@@ -403,7 +397,9 @@ export default {
         }
       })()
       drift.SNIPPET_VERSION = '0.3.1'
+      this.resetDrift()
       drift.load(this.activeDemo?.settings?.widgetId || this.baseWidget)
+      this.resetDrift()
       drift.config({
         backgroundColor: this.activeDemo?.settings?.color || '#005A9C'
       })
