@@ -91,6 +91,10 @@ export default {
   watch: {
     activeDemo: {
       handler (newValue, oldValue) {
+        this.resetDrift()
+        this.loadDrift()
+        this.calculateBackground()
+        this.firePlaybook()
         if (newValue?.id !== oldValue?.id) {
           // TODO: For some reason watch is being called twice
           this.resetDrift()
