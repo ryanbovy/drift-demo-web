@@ -182,7 +182,7 @@ export const actions = {
     })
     setTimeout(() => {
       location.reload()
-    }, 1000)
+    }, 100)
   },
   deactivate ({ commit, state }) {
     commit('deactivate')
