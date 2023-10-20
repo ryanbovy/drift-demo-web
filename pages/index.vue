@@ -15,44 +15,6 @@
     <!-- SIDEBAR MENU -->
     <TheSideBar />
     <!-- END SIDEBAR MENU -->
-    <!--CLEAR COOKIES-->
-    <script type="text/javascript">
-      document.cookie =
-      'drift_aid=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
-      document.cookie =
-      'driftt_aid=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
-      document.cookie =
-      'drift_eid=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
-      document.cookie =
-      'driftt_eid=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
-      document.cookie =
-      'drift_campaign_refresh=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
-      document.cookie =
-      'driftt_sid=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
-      document.cookie =
-      'driftt_wmd=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
-      document.cookie =
-      'DFTT_END_USER_PREV_BOOTSTRAPPED=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
-      document.cookie =
-      'DFTT_LEAD_HAS_PREV_IDENTIFIED=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
-      localStorage.removeItem('DRIFT_visitCounts')
-      localStorage.removeItem('DRIFT_isChatFrameOpen')
-      localStorage.removeItem('DRIFT_openTabs')
-      // Clear Lift AI Cookies
-      document.cookie =
-      'vs_convo_ai=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
-      document.cookie =
-      'vs_vfs=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
-      document.cookie =
-      'vs_lift_ai=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
-      document.cookie =
-      'vs_intent=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
-      document.cookie =
-      'vs_sid=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
-      document.cookie =
-      'vs_vid=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
-      sessionStorage.clear()
-    </script>
     <!--BEGIN  MarketLinc Monitor. -->
     <script type="text/javascript">
       try {
@@ -91,10 +53,6 @@ export default {
   watch: {
     activeDemo: {
       handler (newValue, oldValue) {
-        this.resetDrift()
-        this.loadDrift()
-        this.calculateBackground()
-        this.firePlaybook()
         if (newValue?.id !== oldValue?.id) {
           // TODO: For some reason watch is being called twice
           this.resetDrift()
