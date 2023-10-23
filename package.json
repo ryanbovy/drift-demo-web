@@ -25,8 +25,8 @@
     "nuxt": "^2.15.3",
     "redirect-ssl": "^3.0.0",
     "vue-color": "^2.8.1",
-    "vue-shortkey": "^3.1.7",
     "vue-cookies": "^1.8.3",
+    "vue-shortkey": "^3.1.7",
     "vue-tailwind-color-picker": "^1.0.6",
     "vue-template-babel-compiler": "^1.0.5"
   },
