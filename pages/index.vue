@@ -308,11 +308,8 @@ export default {
       this.$store.commit('sidebar/toggle')
     },
     resetDrift () {
-      this.$cookies.keys().forEach(cookie => this.$cookies.remove(cookie))
-      document.cookie =
-        'drift_aid=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
-      document.cookie =
-        'driftt_aid=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
+      this.$cookies.remove('drift_aid', null, 'v2.drift-demo.com')
+      this.$cookies.remove('driftt_aid', null, 'v2.drift-demo.com')
       document.cookie =
         'drift_eid=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
       document.cookie =
