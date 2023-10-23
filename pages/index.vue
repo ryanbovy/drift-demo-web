@@ -310,36 +310,32 @@ export default {
     resetDrift () {
       this.$cookies.remove('drift_aid', null, 'v2.drift-demo.com')
       this.$cookies.remove('driftt_aid', null, 'v2.drift-demo.com')
-      document.cookie =
-        'drift_eid=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
-      document.cookie =
-        'driftt_eid=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
-      document.cookie =
-        'drift_campaign_refresh=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
-      document.cookie =
-        'driftt_sid=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
-      document.cookie =
-        'driftt_wmd=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
-      document.cookie =
-        'DFTT_END_USER_PREV_BOOTSTRAPPED=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
-      document.cookie =
-        'DFTT_LEAD_HAS_PREV_IDENTIFIED=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
+      this.$cookies.remove('drift_eid', null, 'v2.drift-demo.com')
+      this.$cookies.remove('driftt_eid', null, 'v2.drift-demo.com')
+      this.$cookies.remove('drift_campaign_refresh', null, 'v2.drift-demo.com')
+      this.$cookies.remove('drift_campaign_refresh', null, 'v2.drift-demo.com')
+      this.$cookies.remove('driftt_sid', null, 'v2.drift-demo.com')
+      this.$cookies.remove('driftt_wmd', null, 'v2.drift-demo.com')
+      this.$cookies.remove(
+        'DFTT_END_USER_PREV_BOOTSTRAPPED',
+        null,
+        'v2.drift-demo.com'
+      )
+      this.$cookies.remove(
+        'DFTT_LEAD_HAS_PREV_IDENTIFIED',
+        null,
+        'v2.drift-demo.com'
+      )
       localStorage.removeItem('DRIFT_visitCounts')
       localStorage.removeItem('DRIFT_isChatFrameOpen')
       localStorage.removeItem('DRIFT_openTabs')
       // Clear Lift AI Cookies
-      document.cookie =
-        'vs_convo_ai=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
-      document.cookie =
-        'vs_vfs=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
-      document.cookie =
-        'vs_lift_ai=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
-      document.cookie =
-        'vs_intent=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
-      document.cookie =
-        'vs_sid=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
-      document.cookie =
-        'vs_vid=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
+      this.$cookies.remove('vs_convo_ai', null, 'v2.drift-demo.com')
+      this.$cookies.remove('vs_vfs', null, 'v2.drift-demo.com')
+      this.$cookies.remove('vs_lift_ai', null, 'v2.drift-demo.com')
+      this.$cookies.remove('vs_intent', null, 'v2.drift-demo.com')
+      this.$cookies.remove('vs_sid', null, 'v2.drift-demo.com')
+      this.$cookies.remove('vs_vid', null, 'v2.drift-demo.com')
       sessionStorage.clear()
     },
     loadDrift () {
