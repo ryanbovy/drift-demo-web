@@ -64,6 +64,9 @@ export default {
       deep: true
     }
   },
+  mounted () {
+    this.resetDrift()
+  },
   methods: {
     capFirst (string) {
       return string.charAt(0).toUpperCase() + string.slice(1)
@@ -326,9 +329,14 @@ export default {
         null,
         'v2.drift-demo.com'
       )
+      // Clear local storage items
       localStorage.removeItem('DRIFT_visitCounts')
       localStorage.removeItem('DRIFT_isChatFrameOpen')
       localStorage.removeItem('DRIFT_openTabs')
+      // Clear session storage items
+      sessionStorage.removeItem('DRIFT_SESSION_ID')
+      sessionStorage.removeItem('DRIFT_SESSION_STARTED')
+      sessionStorage.removeItem('DRIFT_NOTIFICATION_PLAYED')
       // Clear Lift AI Cookies
       this.$cookies.remove('vs_convo_ai', null, 'v2.drift-demo.com')
       this.$cookies.remove('vs_vfs', null, 'v2.drift-demo.com')
@@ -336,7 +344,6 @@ export default {
       this.$cookies.remove('vs_intent', null, 'v2.drift-demo.com')
       this.$cookies.remove('vs_sid', null, 'v2.drift-demo.com')
       this.$cookies.remove('vs_vid', null, 'v2.drift-demo.com')
-      sessionStorage.clear()
     },
     loadDrift () {
       // A function to run the standard install code. The widgetId variable can be set (otherwise uses a default value)
@@ -490,8 +497,10 @@ export default {
           this.interactionId &&
           this.activeDemo.settings?.playbookType === 'Fastlane'
         ) {
+          // Hide widget for Fastlane
           drift.api.widget.hide()
         } else if (this.interactionId) {
+          // Start bot interaction for all bots aside from ABM and Fastlane
           drift.api.startInteraction({
             interactionId: this.interactionId,
             goToConversation: false,
