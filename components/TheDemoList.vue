@@ -14,6 +14,16 @@
     </div>
     <!-- END SEARCH -->
 
+    <!-- NEW DEMO BUTTON -->
+    <button
+      type="button"
+      class="mt-6 w-full items-center px-6 py-3 border border-transparent rounded-md shadow-sm transition bg-drift-lime hover:bg-drift-cyan focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-drift-indigo font-bold uppercase"
+      @click="createDemo"
+    >
+      ⚡️ Create new demo
+    </button>
+    <!-- END NEW DEMO BUTTON -->
+
     <!-- DIVIDER -->
     <div class="relative mt-6 mb-2">
       <div class="absolute inset-0 flex items-center" aria-hidden="true">
@@ -54,16 +64,6 @@
     <div v-else class="uppercase text-xs text-center p-4 font-bold opacity-50">
       😭 You don't have any demos
     </div>
-
-    <!-- NEW DEMO BUTTON -->
-    <button
-      type="button"
-      class="mt-6 w-full items-center px-6 py-3 border border-transparent rounded-md shadow-sm transition bg-drift-lime hover:bg-drift-cyan focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-drift-indigo font-bold uppercase"
-      @click="createDemo"
-    >
-      ⚡️ Create new demo
-    </button>
-
     <!-- END CONTENT -->
   </div>
 </template>
