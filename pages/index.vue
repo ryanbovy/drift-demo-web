@@ -486,7 +486,12 @@ export default {
           })
           console.log('ABM message complete')
         }
-        if (this.interactionId) {
+        if (
+          this.interactionId &&
+          this.activeDemo.settings?.playbookType === 'Fastlane'
+        ) {
+          drift.api.widget.hide()
+        } else if (this.interactionId) {
           drift.api.startInteraction({
             interactionId: this.interactionId,
             goToConversation: false,
