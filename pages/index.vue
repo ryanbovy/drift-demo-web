@@ -39,7 +39,7 @@ export default {
   data () {
     return {
       baseWidget: '23x3bmcifbhe',
-      background: 'https://i.imgur.com/IoqqPq4.png',
+      background: 'https://i.imgur.com/cvwV44o.png',
       backgroundFormats: ['.png', '.jpeg', '.jpg'],
       notificationHotKeys: ['ctrl', 'n'],
       interactionId: null
