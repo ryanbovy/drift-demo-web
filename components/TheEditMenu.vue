@@ -413,7 +413,7 @@ export default {
       } catch (err) {}
     },
     async activateDemo () {
-      this.updateDemo()
+      await this.updateDemo()
       await this.$store.dispatch('demos/activate')
     }
   }
