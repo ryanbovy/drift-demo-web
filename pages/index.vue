@@ -313,7 +313,7 @@ export default {
       }
       setTimeout(() => {
         this.fastlaneFix()
-      }, 1500)
+      }, 1750)
     },
     openNotification () {
       window.open(
