@@ -69,15 +69,17 @@ export default {
   },
   methods: {
     fastlaneFix () {
-      const chatFrame = document.getElementById('drift-frame-chat')
-      chatFrame.style.removeProperty('width')
+      if (this.activeDemo?.settings?.playbookType === 'Fastlane') {
+        const chatFrame = document.getElementById('drift-frame-chat')
+        chatFrame.style.removeProperty('width')
 
-      const innerFrame = document.querySelector(
-        '[title="Drift Widget Chat Window"]'
-      )
-      innerFrame.style.removeProperty('width')
+        const innerFrame = document.querySelector(
+          '[title="Drift Widget Chat Window"]'
+        )
+        innerFrame.style.removeProperty('width')
 
-      console.log('fixes fired')
+        console.log('fixes fired')
+      }
     },
     capFirst (string) {
       return string.charAt(0).toUpperCase() + string.slice(1)
