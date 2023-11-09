@@ -305,8 +305,9 @@ export default {
             fname: this.activeDemo?.settings?.firstName || 'John',
             lname: this.activeDemo?.settings?.lastName || 'Williams',
             email:
-              this.activeDemo?.settings?.email || 'John.Williams@adobe.com',
-            companyName: this.activeDemo?.settings?.accountName || 'Adobe'
+              this.activeDemo?.settings?.email ||
+              'John.Williams@whitewhale.com',
+            companyName: this.activeDemo?.settings?.accountName || 'Whitewhale'
           },
           {
             campaignId: this.interactionId
