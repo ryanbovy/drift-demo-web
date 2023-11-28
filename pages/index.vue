@@ -333,7 +333,6 @@ export default {
       this.$cookies.remove('drift_eid', null, 'v2.drift-demo.com')
       this.$cookies.remove('driftt_eid', null, 'v2.drift-demo.com')
       this.$cookies.remove('drift_campaign_refresh', null, 'v2.drift-demo.com')
-      this.$cookies.remove('drift_campaign_refresh', null, 'v2.drift-demo.com')
       this.$cookies.remove('driftt_sid', null, 'v2.drift-demo.com')
       this.$cookies.remove('driftt_wmd', null, 'v2.drift-demo.com')
       this.$cookies.remove(
