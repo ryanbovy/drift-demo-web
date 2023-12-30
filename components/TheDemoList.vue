@@ -77,6 +77,9 @@ export default {
     }
   },
   computed: {
+    userId () {
+      return this.$store.state.user.id
+    },
     demos () {
       return this.$store.state.demos.saved
     },
@@ -85,6 +88,10 @@ export default {
     },
     filteredDemos () {
       return this.demos
+        .filter((demo) => {
+          // Initial filter to include only demos with the correct userId
+          return demo.user === this.userId
+        })
         .filter((demo) => {
           // Perform case-insensitive search on the 'name' property
           return demo.name

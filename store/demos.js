@@ -40,18 +40,27 @@ export const mutations = {
   },
   deactivate (state) {
     state.activated = null
+  },
+  setActivated (state, value) {
+    state.activated = value
   }
 }
 
 export const actions = {
+  shareUrl ({ commit, state }) {
+    const demoParam = parseInt(this.app.router.currentRoute.query.demo, 10)
+    if (demoParam) {
+      // If the demo parameter exists in the URL, set the state
+      commit('setActivated', demoParam)
+    } else {
+      // Set a default value if the demo parameter is not present
+      commit('deactivate')
+    }
+  },
   async get ({ commit, state, rootGetters }) {
     try {
-      const userId = rootGetters['user/getId']
-      if (!userId) {
-        throw new Error('Could not find user ID.')
-      }
       const demos = await this.$axios.get(
-        `${process.env.API_URL}/demo_settings/${userId}`
+        `${process.env.API_URL}/demo_settings/`
       )
       commit('get', {
         demos: demos.data

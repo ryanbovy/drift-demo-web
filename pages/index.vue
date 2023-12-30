@@ -64,6 +64,10 @@ export default {
       deep: true
     }
   },
+  beforeCreate () {
+    this.$store.dispatch('demos/get')
+    this.$store.dispatch('demos/shareUrl')
+  },
   mounted () {
     this.resetDrift()
   },
@@ -77,8 +81,6 @@ export default {
           '[title="Drift Widget Chat Window"]'
         )
         innerFrame.style.removeProperty('width')
-
-        console.log('fixes fired')
       }
     },
     capFirst (string) {
@@ -495,19 +497,16 @@ export default {
           drift.api.setUserAttributes({
             email: this.activeDemo.settings?.email
           })
-          console.log('setEmail complete')
         }
         if (this.activeDemo.settings?.accountName) {
           drift.api.setUserAttributes({
             employment_name: this.activeDemo.settings?.accountName
           })
-          console.log('setCompany complete')
         }
         if (this.activeDemo.settings?.abmMessage) {
           drift.api.setUserAttributes({
             abm_message: this.activeDemo.settings?.abmMessage
           })
-          console.log('ABM message complete')
         }
         if (
           this.interactionId &&
