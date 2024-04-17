@@ -16,12 +16,12 @@
         :class="[isOpen ? 'opacity-100' : 'opacity-0']"
       />
       <div
-        class="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10"
+        class="pointer-events-none fixed inset-y-0 left-0 flex max-w-full pr-10"
         :class="[isOpen ? 'menu-shadow' : '']"
       >
         <div
           class="pointer-events-auto w-screen max-w-md transform transition ease-in-out duration-500 sm:duration-700"
-          :class="[isOpen ? 'translate-x-0' : 'translate-x-full']"
+          :class="[isOpen ? 'translate-x-0' : '-translate-x-full']"
         >
           <div
             class="flex h-full flex-col overflow-y-scroll bg-white py-6 shadow-xl"
@@ -29,10 +29,17 @@
             <div class="px-4 sm:px-6">
               <div class="flex items-start justify-between">
                 <h2 id="slide-over-title" class="text-lg font-medium">
-                  Drift Demo <span class="text-xs text-drift-cyan">V2</span>
+                  Drift Demo <span class="text-xs text-drift-cyan">v2.1</span>
                 </h2>
                 <div class="flex h-7 items-center">
-                  <button v-tooltip.bottom="{ content: '<div class=\'text-xs\' style=\'letter-spacing: 0.5px;\'><span class=\'text-sm\'>Shortcuts:</span><ul><li><span class=\'text-drift-cyan\'>Toggle Menu:</span> CTRL+Z <i>// two-finger-click</i></li><li><span class=\'text-drift-cyan\'>Open Notification:</span> CTRL+N <i>// double-click</i></li><li><span class=\'text-drift-cyan\'>Fire Fastlane:</span> Single click</li></ul></div>', html: true }" class="text-xs text-drift-grey">
+                  <button
+                    v-tooltip.bottom="{
+                      content:
+                        '<div class=\'text-xs\' style=\'letter-spacing: 0.5px;\'><span class=\'text-sm\'>Shortcuts:</span><ul><li><span class=\'text-drift-cyan\'>Toggle Menu:</span> CTRL+Z <i>// two-finger-click</i></li><li><span class=\'text-drift-cyan\'>Open Notification:</span> CTRL+N <i>// double-click</i></li><li><span class=\'text-drift-cyan\'>Fire Fastlane:</span> Single click</li></ul></div>',
+                      html: true
+                    }"
+                    class="text-xs text-drift-grey"
+                  >
                     [navigation hints]
                   </button>
                 </div>
@@ -62,10 +69,21 @@
                   </button>
                 </div>
               </div>
-              <button v-if="isLoggedIn && !selectedDemo" class="uppercase font-black text-xs text-drift-magenta" @click="logout">
-                Logout <span class="opacity-25 ml-1">({{ $store.state.user.email }})</span>
+              <button
+                v-if="isLoggedIn && !selectedDemo"
+                class="uppercase font-black text-xs text-drift-magenta"
+                @click="logout"
+              >
+                Logout
+                <span
+                  class="opacity-25 ml-1"
+                >({{ $store.state.user.email }})</span>
               </button>
-              <button v-if="isLoggedIn && selectedDemo" class="uppercase font-black text-xs text-drift-magenta" @click="goToDemoMenu">
+              <button
+                v-if="isLoggedIn && selectedDemo"
+                class="uppercase font-black text-xs text-drift-magenta"
+                @click="goToDemoMenu"
+              >
                 &larr; Back
               </button>
             </div>
