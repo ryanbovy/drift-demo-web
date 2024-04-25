@@ -109,6 +109,9 @@
           <option value="ROI Bot">
             Webhook ROI Bot
           </option>
+          <option value="Bionic Bot">
+            Bionic Bot
+          </option>
           <!--
                       <option value="Return Bot">
                         Return Bot

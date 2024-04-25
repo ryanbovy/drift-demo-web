@@ -448,6 +448,9 @@ export default {
           this.interactionId = null
           setTimeout(this.setCookie('playbook', 'abmBot', 1), 5000)
           break
+        case 'Bionic Bot':
+          this.interactionId = 384687
+          break
         case 'Custom Bot':
           this.interactionId = null
           setTimeout(
