@@ -41,7 +41,7 @@ export default {
             this.background = 'https://i.imgur.com/LPTyP6V.jpg'
             break
           case 'Salesloft_Desktop':
-            this.background = 'https://i.imgur.com/wtoza39.png'
+            this.background = 'https://i.imgur.com/ZUYNdjE.png'
             break
           case 'Outreach_Desktop':
             this.background = 'https://i.imgur.com/14XBHXV.png'
