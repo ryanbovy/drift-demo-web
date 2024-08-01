@@ -425,6 +425,7 @@ export default {
         case 'Fastlane':
           // deploy fastlane on body click
           this.interactionId = 2527830
+          setTimeout(this.setCookie('playbook', 'null', 1), 5000)
           break
         case 'Conversational Landing Page':
           // deploy CLP
