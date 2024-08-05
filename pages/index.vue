@@ -568,7 +568,7 @@ export default {
           })
           try {
             const response = await this.$axios.$get(
-              `https://api.apiflash.com/v1/urltoimage?access_key=50c864cc62ee4df69a23f65c15eea431&url=${encodeURIComponent(
+              `https://api.apiflash.com/v1/urltoimage?access_key=2eb4df5d0e6d41719524029e465555d9&url=${encodeURIComponent(
                 this.activeDemo.settings?.background
               )}&format=jpeg&full_page=true&quality=100&scroll_page=true&response_type=json&no_cookie_banners=true&no_tracking=true`
             )
