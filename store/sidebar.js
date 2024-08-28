@@ -11,12 +11,14 @@ export const getters = {
 export const mutations = {
   toggle (state) {
     state.isOpen = !state.isOpen
-    if (typeof drift !== 'undefined') {
+    /* 
+if (typeof drift !== 'undefined') {
       if (state.isOpen) {
         drift.api.widget.hide()
       } else {
         drift.api.widget.show()
       }
-    }
+    } 
+*/
   }
 }
