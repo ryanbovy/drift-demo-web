@@ -450,7 +450,7 @@ export default {
           setTimeout(this.setCookie('playbook', 'abmBot', 1), 5000)
           break
         case 'Bionic Bot':
-          this.interactionId = 377891
+          this.interactionId = 384687
           break
         case 'Custom Bot':
           this.interactionId = null
@@ -472,6 +472,7 @@ export default {
       }
       // Fire selected playbook
       drift.on('ready', (api, payload) => {
+        // Set first and last if present
         if (
           this.activeDemo.settings.firstName &&
           this.activeDemo.settings.lastName
@@ -497,28 +498,36 @@ export default {
             last_name: this.activeDemo.settings.lastName
           })
         }
+        // Set email if present
         if (this.activeDemo.settings?.email) {
           drift.api.setUserAttributes({
             email: this.activeDemo.settings?.email
           })
         }
+        // Set account if present
         if (this.activeDemo.settings?.accountName) {
           drift.api.setUserAttributes({
             employment_name: this.activeDemo.settings?.accountName
           })
         }
+        // Set abmMessage if present
         if (this.activeDemo.settings?.abmMessage) {
           drift.api.setUserAttributes({
             abm_message: this.activeDemo.settings?.abmMessage
           })
         }
+        // Set first and last if present
         if (
           this.interactionId &&
           this.activeDemo.settings?.playbookType === 'Fastlane'
         ) {
           // Hide widget for Fastlane
           drift.api.widget.hide()
-        } else if (this.interactionId) {
+        } else if (
+          this.interactionId &&
+          this.activeDemo.settings?.playbookType !== 'Fastlane' &&
+          this.activeDemo.settings?.playbookType !== 'ABM Bot'
+        ) {
           // Start bot interaction for all bots aside from ABM and Fastlane
           drift.api.startInteraction({
             interactionId: this.interactionId,
