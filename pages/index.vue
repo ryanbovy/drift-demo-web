@@ -534,6 +534,7 @@ export default {
           // Start bot interaction for all bots aside from ABM and Fastlane
           console.log('Widget NOT hidden')
           setTimeout(() => {
+            drift.api.widget.show()
             drift.api.startInteraction({
               interactionId: this.interactionId,
               goToConversation: false,
