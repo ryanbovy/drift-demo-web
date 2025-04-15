@@ -98,7 +98,7 @@
             Support Bot
           </option>
           <option value="Skip the Form">
-            Skip the Form
+            Skip the Form (contains bionic)
           </option>
           <option value="Fastlane">
             Fastlane
@@ -109,10 +109,10 @@
           <option value="ROI Bot">
             Webhook ROI Bot
           </option>
+          <!--
           <option value="Bionic Bot">
             Bionic Bot
           </option>
-          <!--
                       <option value="Return Bot">
                         Return Bot
                       </option>
