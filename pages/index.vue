@@ -534,7 +534,7 @@ export default {
             goToConversation: false,
             replaceActiveConversation: true
           })
-        } else if (this.activeDemo.settings?.playbookType === 'ABM Bot') {
+        } else {
           /* Weird fluke in Drift where the widget is already loaded and the only way to
           load an ABM bot is through alternative targeting (not interactionId). Therefore,
           we have to set a cookie, then wait a MILLIsecond and refresh the "page" */
