@@ -449,9 +449,11 @@ export default {
           this.interactionId = null
           setTimeout(this.setCookie('playbook', 'abmBot', 1), 5000)
           break
+          /*
         case 'Bionic Bot':
           this.interactionId = 384687
           break
+          */
         case 'Custom Bot':
           this.interactionId = null
           setTimeout(
@@ -522,6 +524,7 @@ export default {
           this.activeDemo.settings?.playbookType === 'Fastlane'
         ) {
           // Hide widget for Fastlane
+          console.log('Widget hidden for Fastlane')
           drift.api.widget.hide()
         } else if (
           this.interactionId &&
@@ -529,6 +532,7 @@ export default {
           this.activeDemo.settings?.playbookType !== 'ABM Bot'
         ) {
           // Start bot interaction for all bots aside from ABM and Fastlane
+          console.log('Widget NOT hidden')
           setTimeout(() => {
             drift.api.startInteraction({
               interactionId: this.interactionId,
