@@ -524,7 +524,6 @@ export default {
           this.activeDemo.settings?.playbookType === 'Fastlane'
         ) {
           // Hide widget for Fastlane
-          console.log('Widget hidden for Fastlane')
           drift.api.widget.hide()
         } else if (
           this.interactionId &&
@@ -532,15 +531,12 @@ export default {
           this.activeDemo.settings?.playbookType !== 'ABM Bot'
         ) {
           // Start bot interaction for all bots aside from ABM and Fastlane
-          console.log('Widget NOT hidden')
-          setTimeout(() => {
-            drift.api.widget.show()
-            drift.api.startInteraction({
-              interactionId: this.interactionId,
-              goToConversation: false,
-              replaceActiveConversation: true
-            })
-          }, 500)
+          drift.api.widget.show()
+          drift.api.startInteraction({
+            interactionId: this.interactionId,
+            goToConversation: false,
+            replaceActiveConversation: true
+          })
         } else {
           /* Weird fluke in Drift where the widget is already loaded and the only way to
           load an ABM bot is through alternative targeting (not interactionId). Therefore,
