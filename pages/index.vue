@@ -516,7 +516,7 @@ export default {
             abm_message: this.activeDemo.settings?.abmMessage
           })
         }
-        // Set first and last if present
+        // Accomodations for Fastlane and ABM bots
         if (
           this.interactionId &&
           this.activeDemo.settings?.playbookType === 'Fastlane'
@@ -529,11 +529,13 @@ export default {
           this.activeDemo.settings?.playbookType !== 'ABM Bot'
         ) {
           // Start bot interaction for all bots aside from ABM and Fastlane
-          drift.api.startInteraction({
-            interactionId: this.interactionId,
-            goToConversation: false,
-            replaceActiveConversation: true
-          })
+          setTimeout(() => {
+            drift.api.startInteraction({
+              interactionId: this.interactionId,
+              goToConversation: false,
+              replaceActiveConversation: true
+            })
+          }, 500)
         } else {
           /* Weird fluke in Drift where the widget is already loaded and the only way to
           load an ABM bot is through alternative targeting (not interactionId). Therefore,
