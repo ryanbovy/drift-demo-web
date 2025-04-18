@@ -34,6 +34,7 @@
 </template>
 
 <script>
+/* Confirming commit from VS Code */
 export default {
   name: 'Home',
   data () {
